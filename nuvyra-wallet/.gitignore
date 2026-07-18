@@ -32,3 +32,12 @@ dist/
 .nuvyra/archive*/
 *.log
 
+
+# Nuvyra security
+.env
+.env.*
+.nuvyra/logs/
+.nuvyra/archive*/
+.nuvyra/reports/
+*.backup
+*.secret

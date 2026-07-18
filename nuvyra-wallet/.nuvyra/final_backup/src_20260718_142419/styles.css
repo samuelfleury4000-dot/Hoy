@@ -1,0 +1,242 @@
+:root {
+  --bg-main: #0b0e14;
+  --bg-panel: #151b23;
+  --bg-input: #010409;
+  --accent-green: #4ade80;
+  --accent-green-hover: #22c55e;
+  --text-main: #f0f6fc;
+  --text-muted: #8b949e;
+  --border: #30363d;
+  --error-bg: rgba(248, 81, 73, 0.1);
+  --error-text: #ff7b72;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #1f2937;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-green);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-green);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-green);
+}
+
+.network-badge {
+  background-color: #1f2937;
+  color: var(--text-muted);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+/* Layout */
+.main-container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h1 {
+  font-size: 2.2rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+p.description {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Info Box */
+.info-box {
+  background-color: rgba(74, 222, 128, 0.05);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  padding: 1.25rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.info-box strong {
+  color: var(--accent-green);
+  font-weight: 500;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--accent-green);
+  color: #000;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  font-family: "Space Grotesk", sans-serif;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-green-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: "Space Grotesk", sans-serif;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.back-link {
+  color: var(--text-muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.back-link:hover {
+  color: var(--text-main);
+}
+
+/* Form Elements */
+.error-box {
+  background-color: var(--error-bg);
+  border: 1px solid var(--error-text);
+  color: var(--error-text);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.9rem;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.input-field {
+  width: 100%;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--accent-green);
+}
+
+/* NUVYRA BRAND */
+.logo-container {
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.network-badge {
+  backdrop-filter: blur(10px);
+}
+
+.nuvyra-glow {
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.45);
+}
+
+/* NUVYRA BRAND */
+.logo-container {
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.network-badge {
+  backdrop-filter: blur(10px);
+}
+
+.nuvyra-glow {
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.45);
+}
+
+.balance-card {
+  background: linear-gradient(145deg, #151b23, #0b0e14);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.balance-header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.balance-card h2 {
+  font-size: 2.2rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.balance-card p {
+  color: var(--accent-green);
+  font-family: "IBM Plex Mono", monospace;
+}
