@@ -1,0 +1,27 @@
+grep: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/security.txt: No such file or directory
+grep: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/build.txt: No such file or directory
+./.nuvyra/core/collector.sh: line 4: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/system.json: No such file or directory
+./.nuvyra/core/analyzer.sh: line 10: ./.nuvyra/reports/checks.json: No such file or directory
+grep: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/security.txt: No such file or directory
+grep: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/build.txt: No such file or directory
+./.nuvyra/core/scorer.sh: line 9: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/score.txt: No such file or directory
+cat: ./.nuvyra/reports/score.txt: No such file or directory
+./.nuvyra/core/reporter.sh: line 18: ./.nuvyra/reports/latest.txt: No such file or directory
+./.nuvyra/core/collector.sh: line 4: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/system.json: No such file or directory
+./.nuvyra/core/analyzer.sh: line 10: ./.nuvyra/reports/checks.json: No such file or directory
+grep: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/security.txt: No such file or directory
+grep: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/build.txt: No such file or directory
+./.nuvyra/core/scorer.sh: line 9: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/score.txt: No such file or directory
+cat: ./.nuvyra/reports/score.txt: No such file or directory
+./.nuvyra/core/reporter.sh: line 18: ./.nuvyra/reports/latest.txt: No such file or directory
+./.nuvyra/core/collector.sh: line 4: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/system.json: No such file or directory
+./.nuvyra/core/analyzer.sh: line 10: ./.nuvyra/reports/checks.json: No such file or directory
+grep: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/security.txt: No such file or directory
+grep: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/build.txt: No such file or directory
+./.nuvyra/core/scorer.sh: line 9: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/score.txt: No such file or directory
+cat: ./.nuvyra/reports/score.txt: No such file or directory
+./.nuvyra/core/reporter.sh: line 18: ./.nuvyra/reports/latest.txt: No such file or directory
+grep: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/security.txt: No such file or directory
+grep: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/build.txt: No such file or directory
+grep: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/security.txt: No such file or directory
+grep: /workspaces/Hoy/nuvyra-wallet/.nuvyra/reports/build.txt: No such file or directory
