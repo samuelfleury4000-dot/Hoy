@@ -2,13 +2,24 @@ import { ethers } from "ethers";
 import { NETWORKS, DEFAULT_NETWORK, STORAGE_KEY } from "./config.js";
 
 export function getProvider(networkKey = DEFAULT_NETWORK) {
+
   const net = NETWORKS[networkKey];
 
   if (!net) {
     throw new Error("Réseau inconnu");
   }
 
-  return new ethers.JsonRpcProvider(net.rpcUrl);
+  for (const rpc of net.rpcUrls) {
+
+    try {
+      return new ethers.JsonRpcProvider(rpc);
+    } catch(e) {
+      console.warn("RPC indisponible:", rpc);
+    }
+
+  }
+
+  throw new Error("Aucun RPC disponible");
 }
 
 export async function createWallet(password) {

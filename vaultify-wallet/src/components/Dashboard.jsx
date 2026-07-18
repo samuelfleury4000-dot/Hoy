@@ -11,27 +11,27 @@ export default function Dashboard({ wallet, onLogout }) {
   const [prices, setPrices] = useState(null);
   const [updated, setUpdated] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [sendMode, setSendMode] = useState(false);
+  const [copied, setCopied] = useState(false);
+
 
   async function refresh() {
 
+    if (loading) return;
+
     try {
 
+      setLoading(true);
       setError("");
 
-      let balance = "0";
-
-      try {
-        balance = await getBalance(wallet.address);
-      } catch(e) {
-        console.error("Balance ETH erreur:", e);
-      }
+      const [balance, priceData] = await Promise.all([
+        getBalance(wallet.address),
+        getCryptoPrices()
+      ]);
 
       setEthBalance(balance);
-
-      const data = await getCryptoPrices();
-
-      setPrices(data);
+      setPrices(priceData);
 
       setUpdated(
         new Date().toLocaleTimeString("fr-CA")
@@ -39,17 +39,37 @@ export default function Dashboard({ wallet, onLogout }) {
 
     } catch (e) {
 
-      console.error(e);
+      console.error("Dashboard:", e);
+
       setError(
         "Impossible de charger les données réseau."
       );
+
+    } finally {
+
+      setLoading(false);
 
     }
 
   }
 
 
-  useEffect(() => {
+  async function copyAddress(){
+
+    await navigator.clipboard.writeText(
+      wallet.address
+    );
+
+    setCopied(true);
+
+    setTimeout(()=>{
+      setCopied(false);
+    },2000);
+
+  }
+
+
+  useEffect(()=>{
 
     refresh();
 
@@ -58,25 +78,29 @@ export default function Dashboard({ wallet, onLogout }) {
       60000
     );
 
-    return () => clearInterval(timer);
+    return ()=>clearInterval(timer);
 
-  }, []);
+  },[]);
 
 
-  if (sendMode) {
+
+  if(sendMode){
+
     return (
       <SendCrypto
         wallet={wallet}
-        onBack={() => setSendMode(false)}
+        onBack={()=>setSendMode(false)}
       />
     );
+
   }
 
 
-  const ethValue =
-    prices
-      ? Number(ethBalance) * Number(prices.ethereum.cad)
-      : 0;
+
+  const ethValue = prices
+    ? Number(ethBalance) * Number(prices.ethereum.cad)
+    : 0;
+
 
 
   return (
@@ -98,17 +122,32 @@ export default function Dashboard({ wallet, onLogout }) {
           {wallet.address}
         </p>
 
+        <button
+          className="btn-secondary"
+          onClick={copyAddress}
+        >
+          {copied ? "Copié !" : "Copier l'adresse"}
+        </button>
+
       </div>
 
 
-      
+      {error && (
+
+        <div className="error-box">
+          {error}
+        </div>
+
+      )}
+
 
 
       <div className="info-box">
 
         <h3>
-          Portfolio
+          Solde du wallet
         </h3>
+
 
         <p>
           ETH :
@@ -132,64 +171,75 @@ export default function Dashboard({ wallet, onLogout }) {
 
 
         <small>
-          Mise à jour : {updated || "en cours..."}
+          Dernière mise à jour :
+          {" "}
+          {updated || "en cours..."}
         </small>
+
 
       </div>
 
 
+
       {prices && (
+
         <>
-          <PriceCard
-            name="Ethereum"
-            amount={ethBalance}
-            price={prices.ethereum.cad}
-            change={prices.ethereum.change}
-          />
+
+        <PriceCard
+          name="Ethereum"
+          amount={ethBalance}
+          price={prices.ethereum.cad}
+          change={prices.ethereum.change}
+        />
 
 
-          <PriceCard
-            name="Bitcoin"
-            amount="0"
-            price={prices.bitcoin.cad}
-            change={prices.bitcoin.change}
-          />
+        <PriceCard
+          name="Bitcoin"
+          amount="0"
+          price={prices.bitcoin.cad}
+          change={prices.bitcoin.change}
+        />
 
 
-          <PriceCard
-            name="USDC"
-            amount="0"
-            price={prices.usdc.cad}
-            change={prices.usdc.change}
-          />
+        <PriceCard
+          name="USDC"
+          amount="0"
+          price={prices.usdc.cad}
+          change={prices.usdc.change}
+        />
+
         </>
+
       )}
+
 
 
       <button
         className="btn-primary"
-        onClick={() =>
-          openMoonPay(wallet.address,"ETH")
-        }
+        onClick={()=>openMoonPay(wallet.address,"ETH")}
       >
         Acheter crypto
       </button>
 
 
+
       <button
         className="btn-primary"
-        onClick={() => setSendMode(true)}
+        onClick={()=>setSendMode(true)}
       >
         Envoyer ETH
       </button>
 
 
+
       <button
         className="btn-secondary"
         onClick={refresh}
+        disabled={loading}
       >
-        Actualiser
+        {loading ? "Actualisation..." : "Actualiser"}
       </button>
+
 
 
       <button
