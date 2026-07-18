@@ -1,2 +1,0 @@
-STATUS: 200
-{"bitcoin":{"cad":89742,"cad_24h_change":1.7223167341370356},"ethereum":{"cad":2585.9,"cad_24h_change":0.7878155316962782},"usd-coin":{"cad":1.4,"cad_24h_change":-0.02272316328057623}}

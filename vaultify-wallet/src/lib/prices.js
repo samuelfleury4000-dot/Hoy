@@ -1,50 +1,48 @@
+const FALLBACK = {
+  ethereum:{cad:0,change:0},
+  bitcoin:{cad:0,change:0},
+  usdc:{cad:0,change:0}
+};
+
 export async function getCryptoPrices(){
 
   try {
 
-    const [eth, btc, usdc] = await Promise.all([
-      fetch("https://api.coincap.io/v2/assets/ethereum").then(r => r.json()),
-      fetch("https://api.coincap.io/v2/assets/bitcoin").then(r => r.json()),
-      fetch("https://api.coincap.io/v2/assets/usdc").then(r => r.json())
-    ]);
+    const response = await fetch(
+      "https://api.coingecko.com/api/v3/simple/price?ids=ethereum,bitcoin,usd-coin&vs_currencies=cad&include_24hr_change=true",
+      {
+        cache:"no-store"
+      }
+    );
 
+    if(!response.ok){
+      throw new Error("API prix indisponible");
+    }
 
-    console.log("PRIX COINCAP:", {
-      eth,
-      btc,
-      usdc
-    });
-
+    const data = await response.json();
 
     return {
-
       ethereum:{
-        cad: Number(eth.data.priceUsd) * 1.38,
-        change: Number(eth.data.changePercent24Hr)
+        cad:Number(data.ethereum?.cad || 0),
+        change:Number(data.ethereum?.cad_24h_change || 0)
       },
 
       bitcoin:{
-        cad: Number(btc.data.priceUsd) * 1.38,
-        change: Number(btc.data.changePercent24Hr)
+        cad:Number(data.bitcoin?.cad || 0),
+        change:Number(data.bitcoin?.cad_24h_change || 0)
       },
 
       usdc:{
-        cad: Number(usdc.data.priceUsd) * 1.38,
-        change: Number(usdc.data.changePercent24Hr)
+        cad:Number(data["usd-coin"]?.cad || 0),
+        change:Number(data["usd-coin"]?.cad_24h_change || 0)
       }
-
     };
-
 
   } catch(error){
 
-    console.error("Erreur prix:", error);
+    console.error("Prix erreur:",error);
 
-    return {
-      ethereum:{cad:0,change:0},
-      bitcoin:{cad:0,change:0},
-      usdc:{cad:0,change:0}
-    };
+    return FALLBACK;
 
   }
 
