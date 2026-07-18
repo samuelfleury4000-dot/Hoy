@@ -33,6 +33,7 @@ export const DEFAULT_NETWORK = 'sepolia'; // change en 'ethereum' quand tu es pr
 
 export const SERVICE_FEE_PERCENT = 0.005;
 
+// Ton adresse de collecte des frais
 export const FEE_COLLECTOR_ADDRESS = '0xA29baAc46a97ae0Ba82D64BeD3591337B64b3670';
 
 export const FEE_MIN_THRESHOLD = '0.001';
@@ -40,7 +41,8 @@ export const FEE_MIN_THRESHOLD = '0.001';
 export const ONRAMP_PROVIDER = {
   name: 'MoonPay',
   widgetUrl: 'https://buy.moonpay.com',
-  apiKey: 'pk_test_gy5H4jAAsoTJ3oRFrq2pxvfzo0plyh8', // clé de TEST — remplace par pk_live_... une fois ton KYB approuvé
+  // Ta clé API
+  apiKey: 'pk_test_gy5H4jAAsoTJ3oRFrq2pxvfzo0plyh8', 
 };
 
 export const STORAGE_KEY = 'vaultify_encrypted_keystore_v1';
