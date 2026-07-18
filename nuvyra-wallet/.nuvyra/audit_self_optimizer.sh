@@ -29,7 +29,7 @@ echo "Backup audit : $BACKUP" >> "$LOG"
 
 check_internal_errors(){
 
-grep -RInE \
+grep -RInE -- -- \
 "syntax error|>>>|MODULE MANQUANT|command not found" \
 .nuvyra/modules \
 --include="*.sh" \

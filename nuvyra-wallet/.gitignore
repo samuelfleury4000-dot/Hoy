@@ -14,3 +14,21 @@ node_modules/
 .env.local
 NUVYRA_*_REPORT.txt
 
+
+.env
+.nuvyra/logs/
+.nuvyra/archive*/
+dist/
+node_modules/
+
+
+# NUVYRA SECURITY
+.env
+.env.*
+node_modules/
+dist/
+.nuvyra/logs/
+.nuvyra/reports/
+.nuvyra/archive*/
+*.log
+
