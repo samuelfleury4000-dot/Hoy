@@ -5,8 +5,10 @@ import { openMoonPay } from "../lib/moonpay";
 import { getProvider } from "../lib/wallet";
 import { getTokenBalance } from "../lib/tokens";
 import { TOKENS } from "../lib/tokenList";
+import { getTransactionHistory } from "../lib/history";
 import PriceCard from "./PriceCard";
 import SendCrypto from "./SendCrypto";
+import { QRCodeSVG } from "qrcode.react";
 
 export default function Dashboard({ wallet, onLogout }) {
 
@@ -16,8 +18,9 @@ export default function Dashboard({ wallet, onLogout }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [sendMode, setSendMode] = useState(false);
-  const [tokens, setTokens] = useState([]);
   const [copied, setCopied] = useState(false);
+  const [tokens, setTokens] = useState([]);
+  const [transactions, setTransactions] = useState([]);
 
 
   async function refresh() {
@@ -51,6 +54,14 @@ export default function Dashboard({ wallet, onLogout }) {
       );
 
       setTokens(tokenResults);
+
+
+      const history =
+        await getTransactionHistory(
+          wallet.address
+        );
+
+      setTransactions(history);
 
       setUpdated(
         new Date().toLocaleTimeString("fr-CA")
@@ -135,7 +146,9 @@ export default function Dashboard({ wallet, onLogout }) {
       : 0;
 
 
-  const totalValue = ethValue + tokenValue;
+  const totalValue =
+    ethValue +
+    tokenValue;
 
 
 
@@ -144,8 +157,28 @@ export default function Dashboard({ wallet, onLogout }) {
     <div className="main-container">
 
       <h1>
-        Vaultify Wallet
+        Nuvyra Wallet
       </h1>
+
+
+      <div className="info-box">
+
+        <h3>
+          Valeur totale
+        </h3>
+
+        <p>
+          {totalValue.toLocaleString(
+            "fr-CA",
+            {
+              minimumFractionDigits:2,
+              maximumFractionDigits:2
+            }
+          )}
+          {" CAD"}
+        </p>
+
+      </div>
 
 
       <div className="info-box">
@@ -258,46 +291,7 @@ export default function Dashboard({ wallet, onLogout }) {
       )}
 
 
-      {tokens.length > 0 && (
-
-        <div className="info-box">
-
-          <h3>
-            Tokens
-          </h3>
-
-          {tokens.map((token,index)=>(
-
-            <p key={index}>
-              {token.symbol} :
-              {" "}
-              {Number(token.balance).toFixed(4)}
-
-              {" | "}
-
-              {token.symbol === "USDC"
-                ? (
-                    Number(token.balance) *
-                    Number(prices?.usdc?.cad || 0)
-                  ).toLocaleString(
-                    "fr-CA",
-                    {
-                      minimumFractionDigits:2,
-                      maximumFractionDigits:2
-                    }
-                  ) + " CAD"
-                : "0 CAD"
-              }
-
-            </p>
-
-          ))}
-
-        </div>
-
-      )}
-
-      {prices && (
+            {prices && (
 
         <>
 
@@ -328,6 +322,48 @@ export default function Dashboard({ wallet, onLogout }) {
 
       )}
 
+
+
+
+      {transactions.length > 0 && (
+
+        <div className="info-box">
+
+          <h3>
+            Activité récente
+          </h3>
+
+
+          {transactions.map((tx,index)=>(
+
+            <div key={index}>
+
+              <p>
+                {tx.from.toLowerCase() === wallet.address.toLowerCase()
+                  ? "Sortie"
+                  : "Entrée"}
+
+                {" : "}
+
+                {Number(tx.value).toFixed(6)}
+                {" ETH"}
+
+              </p>
+
+
+              <small>
+                {tx.date}
+              </small>
+
+              <hr />
+
+            </div>
+
+          ))}
+
+        </div>
+
+      )}
 
 
       <button

@@ -38,7 +38,7 @@ export default function App() {
       <header className="app-header">
         <div className="logo-container">
           <div className="status-dot"></div>
-          VAULTIFY
+          NUVYRA
         </div>
         <div className="network-badge">
           Sepolia (testnet)

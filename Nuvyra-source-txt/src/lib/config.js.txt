@@ -42,7 +42,7 @@ export const NETWORKS = {
 
 export const DEFAULT_NETWORK = "sepolia";
 
-export const STORAGE_KEY = "vaultify_wallet";
+export const STORAGE_KEY = "nuvyra_wallet";
 
 export const SERVICE_FEE_PERCENT = 0.5;
 

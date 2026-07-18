@@ -1,0 +1,147 @@
+import { useState } from 'react';
+import { createWallet, saveKeystore, importFromMnemonic } from '../lib/wallet';
+
+export default function WalletSetup({ onWalletCreated }) {
+  const [step, setStep] = useState('home'); // 'home' | 'password' | 'import'
+  const [action, setAction] = useState(null); // 'create' | 'import'
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [mnemonic, setMnemonic] = useState('');
+  const [error, setError] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleStartCreate = () => {
+    setAction('create');
+    setStep('password');
+    setError('');
+  };
+
+  const handleStartImport = () => {
+    setAction('import');
+    setStep('import');
+    setError('');
+  };
+
+  const handleSubmit = async () => {
+    setError('');
+    
+    if (action === 'create' || action === 'import') {
+      if (password !== confirmPassword) {
+        return setError("Les mots de passe ne correspondent pas.");
+      }
+      if (password.length < 8) {
+        return setError("Le mot de passe doit faire au moins 8 caractères.");
+      }
+    }
+
+    setIsProcessing(true);
+    try {
+      if (action === 'create') {
+        const { encryptedJson, mnemonic: m } = await createWallet(password);
+        saveKeystore(encryptedJson);
+        alert(`SAUVEGARDE REQUISE :\nVoici votre phrase secrète. Notez-la immédiatement.\n\n${m}`);
+        onWalletCreated();
+      } else if (action === 'import') {
+        if (!mnemonic) throw new Error("Veuillez entrer une phrase de récupération.");
+        const { encryptedJson } = await importFromMnemonic(mnemonic, password);
+        saveKeystore(encryptedJson);
+        onWalletCreated();
+      }
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  if (step === 'home') {
+    return (
+      <div className="main-container">
+        <h1>Ton coffre-fort crypto, sur ton appareil.</h1>
+        <p className="description">
+          Nuvyra ne détient jamais tes fonds ni tes clés. Tout le chiffrement se fait ici, localement — aucune donnée sensible ne part sur un serveur.
+        </p>
+
+        <div className="info-box">
+          <strong>Comment ça marche :</strong> on génère une phrase de 12 mots (ta sauvegarde maîtresse) et une adresse. Tu choisis un mot de passe qui chiffre tout ça sur cet appareil. Perds la phrase = fonds perdus, personne ne peut les récupérer pour toi — pas même nous.
+        </div>
+
+        <button className="btn-primary" onClick={handleStartCreate}>Créer un nouveau wallet</button>
+        <button className="btn-secondary" onClick={handleStartImport}>J'ai déjà une phrase de récupération</button>
+      </div>
+    );
+  }
+
+  if (step === 'import') {
+    return (
+      <div className="main-container">
+        <span className="back-link" onClick={() => setStep('home')}>&larr; retour</span>
+        <h1>Importer un wallet</h1>
+        <p className="description">Entre ta phrase secrète de 12 mots et choisis un nouveau mot de passe pour la chiffrer sur cet appareil.</p>
+        
+        {error && <div className="error-box">{error}</div>}
+
+        <div className="input-group">
+          <label className="input-label">PHRASE DE RÉCUPÉRATION (12 MOTS)</label>
+          <textarea 
+            className="input-field" 
+            style={{ minHeight: '100px', resize: 'vertical' }}
+            onChange={(e) => setMnemonic(e.target.value)} 
+            placeholder="mot1 mot2 mot3..."
+          />
+        </div>
+
+        <div className="input-group">
+          <label className="input-label">NOUVEAU MOT DE PASSE</label>
+          <input type="password" className="input-field" onChange={(e) => setPassword(e.target.value)} />
+        </div>
+
+        <div className="input-group">
+          <label className="input-label">CONFIRME LE MOT DE PASSE</label>
+          <input type="password" className="input-field" onChange={(e) => setConfirmPassword(e.target.value)} />
+        </div>
+
+        <button className="btn-primary" onClick={handleSubmit} disabled={isProcessing}>
+          {isProcessing ? 'Importation...' : 'Restaurer le wallet'}
+        </button>
+      </div>
+    );
+  }
+
+  // Step === 'password' (Création)
+  return (
+    <div className="main-container">
+      <span className="back-link" onClick={() => setStep('home')}>&larr; retour</span>
+      <h1>Choisis un mot de passe</h1>
+      <p className="description">
+        Ce mot de passe chiffre ta clé sur cet appareil. Il n'est jamais envoyé nulle part — s'il est perdu, la phrase de récupération reste ton seul recours.
+      </p>
+
+      {error && <div className="error-box">{error}</div>}
+
+      <div className="input-group">
+        <label className="input-label">MOT DE PASSE</label>
+        <input 
+          type="password" 
+          className="input-field" 
+          placeholder="••••••••••••"
+          onChange={(e) => setPassword(e.target.value)} 
+        />
+      </div>
+
+      <div className="input-group">
+        <label className="input-label">CONFIRME LE MOT DE PASSE</label>
+        <input 
+          type="password" 
+          className="input-field" 
+          placeholder="••••••••••••"
+          onChange={(e) => setConfirmPassword(e.target.value)} 
+        />
+      </div>
+
+      <button className="btn-primary" onClick={handleSubmit} disabled={isProcessing}>
+        {isProcessing ? 'Génération en cours...' : 'Continuer'}
+      </button>
+    </div>
+  );
+}

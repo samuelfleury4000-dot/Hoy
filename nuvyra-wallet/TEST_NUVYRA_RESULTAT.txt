@@ -1,0 +1,45 @@
+===== TEST NUVYRA =====
+
+1) Vérification fichiers...
+OK package.json
+OK src
+
+2) Installation dépendances...
+
+up to date, audited 77 packages in 684ms
+
+12 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+3) Build production...
+
+> nuvyra-wallet@1.0.0 build
+> vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 188 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   1.05 kB │ gzip:   0.56 kB
+dist/assets/index-D4GSwge5.css    2.84 kB │ gzip:   0.94 kB
+dist/assets/index-Y0VFe22S.js   523.57 kB │ gzip: 190.56 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 3.33s
+
+4) Recherche anciennes références Vaultify...
+grep: ./TEST_NUVYRA_RESULTAT.txt: input file is also the output
+./test_nuvyra.sh:echo "4) Recherche anciennes références Vaultify..."
+./test_nuvyra.sh:grep -R -E "Vaultify|VAULTIFY|vaultify" . --exclude-dir=node_modules --exclude-dir=.git || echo "OK Aucun Vaultify trouvé"
+OK Aucun Vaultify trouvé
+
+5) Vérification fichiers sensibles...
+./.env
+
+===== TEST TERMINE =====

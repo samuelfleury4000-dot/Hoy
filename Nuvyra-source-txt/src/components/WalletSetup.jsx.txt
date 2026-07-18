@@ -59,7 +59,7 @@ export default function WalletSetup({ onWalletCreated }) {
       <div className="main-container">
         <h1>Ton coffre-fort crypto, sur ton appareil.</h1>
         <p className="description">
-          Vaultify ne détient jamais tes fonds ni tes clés. Tout le chiffrement se fait ici, localement — aucune donnée sensible ne part sur un serveur.
+          Nuvyra ne détient jamais tes fonds ni tes clés. Tout le chiffrement se fait ici, localement — aucune donnée sensible ne part sur un serveur.
         </p>
 
         <div className="info-box">
