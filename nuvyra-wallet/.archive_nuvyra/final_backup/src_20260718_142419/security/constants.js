@@ -1,0 +1,4 @@
+export const SECURITY = {
+  AUTO_LOCK_MINUTES: 10,
+  MIN_PASSWORD_LENGTH: 12,
+};
