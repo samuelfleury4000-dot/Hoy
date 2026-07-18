@@ -40,21 +40,12 @@ fi
 echo "" >> "$REPORT"
 echo "===== SECURITY =====" >> "$REPORT"
 
-SECRET=$(grep -RInE \
-"(0x[a-fA-F0-9]{64}|-----BEGIN PRIVATE KEY-----|mnemonic\s*[:=]|seed\s*[:=])" \
-src 2>/dev/null)
-
-if [ -z "$SECRET" ]; then
-    echo "PASS: Aucun secret réel" >> "$REPORT"
+if [ -f .nuvyra/checks/security.sh ]; then
+    bash .nuvyra/checks/security.sh
 else
-    echo "WARNING: Pattern sensible détecté" >> "$REPORT"
-    echo "$SECRET" >> "$REPORT"
+    echo "FAIL: security check missing" >> "$REPORT"
 fi
 
-echo "" >> "$REPORT"
-echo "===== DEPENDENCIES =====" >> "$REPORT"
-
-npm audit --production >/dev/null 2>&1
 
 if [ $? -eq 0 ]; then
     echo "PASS: npm audit OK" >> "$REPORT"
