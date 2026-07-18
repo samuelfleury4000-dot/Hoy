@@ -108,3 +108,15 @@ export async function sendTransaction({ wallet, toAddress, amountEth, networkKey
 export function wipeWallet() {
   localStorage.removeItem(STORAGE_KEY);
 }
+
+// --- CAPACITÉ MULTI-TOKEN (AJOUTÉE) ---
+export async function getTokenBalance(tokenAddress, userAddress, provider) {
+  const erc20Abi = [
+    "function balanceOf(address) view returns (uint256)", 
+    "function decimals() view returns (uint8)"
+  ];
+  const contract = new ethers.Contract(tokenAddress, erc20Abi, provider);
+  const balance = await contract.balanceOf(userAddress);
+  const decimals = await contract.decimals();
+  return ethers.formatUnits(balance, decimals);
+}

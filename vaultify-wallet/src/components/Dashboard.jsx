@@ -1,40 +1,53 @@
 import { useState, useEffect } from 'react';
 import { getBalance, sendTransaction } from '../lib/wallet';
+import { ONRAMP_PROVIDER } from '../lib/config';
 
 export default function Dashboard({ wallet, onLogout }) {
   const [balance, setBalance] = useState('0');
-  const [toAddress, setToAddress] = useState('');
-  const [amount, setAmount] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (wallet) {
-      getBalance(wallet.address).then(setBalance);
-    }
-  }, [wallet]);
+    const fetchBalance = async () => {
+      try {
+        const bal = await getBalance(wallet.address);
+        setBalance(bal);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBalance();
+  }, [wallet.address]);
 
-  const handleSend = async () => {
-    try {
-      const result = await sendTransaction({ wallet, toAddress, amountEth: amount });
-      alert(`Transaction réussie !\nHash: ${result.mainTxHash}`);
-      getBalance(wallet.address).then(setBalance);
-    } catch (e) { 
-      alert(e.message); 
-    }
+  const openMoonPay = () => {
+    // Construit l'URL avec ta clé API et l'adresse du wallet
+    const url = `${ONRAMP_PROVIDER.widgetUrl}?apiKey=${ONRAMP_PROVIDER.apiKey}&walletAddress=${wallet.address}&currencyCode=ETH`;
+    window.open(url, '_blank', 'width=500,height=700');
   };
 
   return (
-    <div className="container">
-      <h2>Votre Portefeuille</h2>
-      <p className="mono" style={{ fontSize: '0.9rem', color: '#94a3b8' }}>{wallet.address}</p>
-      <h3 style={{ fontSize: '2rem', margin: '1rem 0' }}>{balance} ETH</h3>
+    <div className="main-container">
+      <h1>Ton Wallet</h1>
       
-      <div style={{ marginTop: '20px', borderTop: '1px solid #334155', paddingTop: '20px' }}>
-        <input placeholder="Adresse destinataire (0x...)" onChange={(e) => setToAddress(e.target.value)} />
-        <input type="number" placeholder="Montant ETH" onChange={(e) => setAmount(e.target.value)} />
-        <button onClick={handleSend} style={{ marginTop: '10px' }}>Envoyer (inclut frais de service)</button>
+      <div className="info-box">
+        <label className="input-label">ADRESSE</label>
+        <p style={{ wordBreak: 'break-all', fontFamily: 'monospace' }}>{wallet.address}</p>
+        
+        <label className="input-label" style={{ marginTop: '1rem', display: 'block' }}>SOLDE</label>
+        <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+          {loading ? '...' : `${balance} ETH`}
+        </p>
       </div>
-      
-      <button style={{ background: '#ef4444', marginTop: '20px' }} onClick={onLogout}>Verrouiller / Quitter</button>
+
+      {/* BOUTON MOONPAY - C'est ici que le point de vente est activé */}
+      <button className="btn-primary" onClick={openMoonPay}>
+        Acheter avec {ONRAMP_PROVIDER.name}
+      </button>
+
+      <button className="btn-secondary" onClick={onLogout} style={{ marginTop: '1rem' }}>
+        Déconnexion
+      </button>
     </div>
   );
 }
