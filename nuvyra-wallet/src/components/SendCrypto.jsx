@@ -1,203 +1,206 @@
 import { useState } from "react";
 import { ethers } from "ethers";
-import { sendETH } from "../lib/transaction";
+import { sendETH, estimateETHFee } from "../lib/transaction";
 
 
 export default function SendCrypto({wallet,onBack}){
 
-  const [address,setAddress]=useState("");
-  const [amount,setAmount]=useState("");
-  const [message,setMessage]=useState("");
-  const [confirm,setConfirm]=useState(false);
+const [address,setAddress]=useState("");
+const [amount,setAmount]=useState("");
+const [message,setMessage]=useState("");
+const [confirm,setConfirm]=useState(false);
+const [fee,setFee]=useState(null);
+const [sending,setSending]=useState(false);
+const [hash,setHash]=useState("");
+const [error,setError]=useState("");
 
 
-  async function send(){
 
-    try{
+async function preview(){
 
-      setMessage(
-        "Transaction en cours..."
-      );
+try{
 
+if(!ethers.isAddress(address)){
+throw new Error("Adresse invalide");
+}
 
-      await sendETH(
-        wallet,
-        address,
-        amount
-      );
+if(!amount || Number(amount)<=0){
+throw new Error("Montant invalide");
+}
 
 
-      setMessage(
-        "Transaction envoyée !"
-      );
+const estimated =
+await estimateETHFee(address,amount);
 
 
-    }catch(e){
+setFee(estimated);
+setConfirm(true);
 
-      setMessage(
-        e.message
-      );
 
-    }
+}catch(e){
 
-  }
+setMessage(e.message);
 
+}
 
-  function preview(){
+}
 
-    if(!ethers.isAddress(address)){
-      setMessage(
-        "Adresse invalide"
-      );
-      return;
-    }
 
 
-    if(!amount || Number(amount)<=0){
+async function send(){
 
-      setMessage(
-        "Montant invalide"
-      );
+if(sending) return;
 
-      return;
+try{
 
-    }
+setSending(true);
 
+setMessage("Transaction en cours...");
 
-    setConfirm(true);
 
-  }
+const result =
+await sendETH(
+wallet,
+address,
+amount
+);
 
 
+setHash(result.hash);
 
-  return (
+setMessage(
+"Transaction confirmée"
+);
 
-    <div className="main-container">
 
-      <h1>
-        Envoyer ETH
-      </h1>
+}catch(e){
 
+setMessage(e.message);
 
-      {!confirm ? (
+}finally{
 
-        <>
+setSending(false);
 
-        <div className="input-group">
+}
 
-          <label className="input-label">
-            ADRESSE DESTINATION
-          </label>
+}
 
-          <input
-            className="input-field"
-            value={address}
-            onChange={
-              e=>setAddress(e.target.value)
-            }
-            placeholder="0x..."
-          />
 
-        </div>
 
+return (
 
+<div className="main-container">
 
-        <div className="input-group">
+<h1>Envoyer ETH</h1>
 
-          <label className="input-label">
-            MONTANT ETH
-          </label>
 
-          <input
-            className="input-field"
-            value={amount}
-            onChange={
-              e=>setAmount(e.target.value)
-            }
-            placeholder="0.01"
-          />
+{!confirm ? (
 
-        </div>
+<>
 
+<input
+className="input-field"
+placeholder="0x..."
+value={address}
+onChange={e=>setAddress(e.target.value)}
+/>
 
-        <button
-          className="btn-primary"
-          onClick={preview}
-        >
-          Vérifier la transaction
-        </button>
 
+<input
+className="input-field"
+placeholder="0.01"
+value={amount}
+onChange={e=>setAmount(e.target.value)}
+/>
 
-        </>
 
-      ) : (
+<button
+className="btn-primary"
+onClick={preview}
+>
+Vérifier
+</button>
 
-        <div className="info-box">
+</>
 
-          <h3>
-            Confirmation
-          </h3>
+):(
 
 
-          <p>
-            Destination :
-          </p>
+<div className="info-box">
 
-          <p style={{
-            wordBreak:"break-all"
-          }}>
-            {address}
-          </p>
+<p>
+Destination :
+</p>
 
+<p style={{wordBreak:"break-all"}}>
+{address}
+</p>
 
-          <p>
-            Montant :
-            {" "}
-            {amount}
-            {" ETH"}
-          </p>
+<p>
+Montant : {amount} ETH
+</p>
 
 
-          <button
-            className="btn-primary"
-            onClick={send}
-          >
-            Confirmer l'envoi
-          </button>
+{fee && (
 
+<p>
+Frais estimés :
+{fee.feeETH} ETH
+</p>
 
-          <button
-            className="btn-secondary"
-            onClick={()=>{
-              setConfirm(false)
-            }}
-          >
-            Modifier
-          </button>
+)}
 
 
-        </div>
+<button
+className="btn-primary"
+disabled={sending}
+onClick={send}
+>
+{sending ? "Envoi..." : "Confirmer"}
+</button>
 
-      )}
 
+</div>
 
-      {message && (
-        <div className="info-box">
-          {message}
-        </div>
-      )}
+)}
 
 
-      <button
-        className="btn-secondary"
-        onClick={onBack}
-      >
-        Retour
-      </button>
+{hash && (
 
+<div className="info-box">
 
-    </div>
+Transaction :
 
-  );
+<a
+href={`https://sepolia.etherscan.io/tx/${hash}`}
+target="_blank"
+>
+Voir sur Etherscan
+</a>
+
+</div>
+
+)}
+
+
+{message &&
+
+<div className="info-box">
+{message}
+</div>
+}
+
+
+<button
+className="btn-secondary"
+onClick={onBack}
+>
+Retour
+</button>
+
+
+</div>
+
+);
 
 }

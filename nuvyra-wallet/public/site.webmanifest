@@ -1,0 +1,9 @@
+{
+  "name": "Nuvyra Wallet",
+  "short_name": "Nuvyra",
+  "description": "Secure self-custody crypto wallet.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0b0e14",
+  "background_color": "#0b0e14"
+}

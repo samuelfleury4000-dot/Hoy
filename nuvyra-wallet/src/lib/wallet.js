@@ -1,8 +1,10 @@
 import { ethers } from "ethers";
 import { NETWORKS, DEFAULT_NETWORK, STORAGE_KEY } from "./config.js";
+import { getSavedNetwork } from "./network.js";
 
-export function getProvider(networkKey = DEFAULT_NETWORK) {
+export function getProvider(networkKey = null) {
 
+  networkKey = networkKey || getSavedNetwork();
   const net = NETWORKS[networkKey];
 
   if (!net) {
@@ -10,13 +12,11 @@ export function getProvider(networkKey = DEFAULT_NETWORK) {
   }
 
   for (const rpc of net.rpcUrls) {
-
     try {
       return new ethers.JsonRpcProvider(rpc);
-    } catch(e) {
+    } catch (e) {
       console.warn("RPC indisponible:", rpc);
     }
-
   }
 
   throw new Error("Aucun RPC disponible");
@@ -34,7 +34,7 @@ export async function createWallet(password) {
   return {
     encryptedJson,
     mnemonic: wallet.mnemonic.phrase,
-    address: wallet.address
+    address: wallet.address,
   };
 }
 
@@ -49,7 +49,7 @@ export async function importFromMnemonic(mnemonic, password) {
 
   return {
     encryptedJson,
-    address: wallet.address
+    address: wallet.address,
   };
 }
 
@@ -68,10 +68,7 @@ export async function unlockWallet(password) {
     throw new Error("Aucun wallet trouvé");
   }
 
-  return await ethers.Wallet.fromEncryptedJson(
-    keystore,
-    password
-  );
+  return await ethers.Wallet.fromEncryptedJson(keystore, password);
 }
 
 export async function getBalance(address) {

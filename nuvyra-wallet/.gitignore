@@ -4,3 +4,13 @@ dist/
 *.log
 .DS_Store
 .vite/
+
+# Nuvyra generated files
+*.txt
+backups/
+dist/
+node_modules/
+.env
+.env.local
+NUVYRA_*_REPORT.txt
+

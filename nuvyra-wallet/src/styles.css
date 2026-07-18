@@ -13,7 +13,7 @@
 
 body {
   margin: 0;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   background-color: var(--bg-main);
   color: var(--text-main);
 }
@@ -51,7 +51,7 @@ body {
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   font-size: 0.75rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 /* Layout */
@@ -103,7 +103,7 @@ p.description {
   font-size: 1rem;
   cursor: pointer;
   margin-bottom: 1rem;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   transition: background-color 0.2s;
 }
 
@@ -121,7 +121,7 @@ p.description {
   font-weight: 500;
   font-size: 1rem;
   cursor: pointer;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   transition: background-color 0.2s;
 }
 
@@ -131,7 +131,7 @@ p.description {
 
 .back-link {
   color: var(--text-muted);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   font-size: 0.85rem;
   text-decoration: none;
   cursor: pointer;
@@ -151,7 +151,7 @@ p.description {
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1.5rem;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   font-size: 0.9rem;
 }
 
@@ -178,10 +178,65 @@ p.description {
   border-radius: 8px;
   font-size: 1rem;
   box-sizing: border-box;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 .input-field:focus {
   outline: none;
   border-color: var(--accent-green);
+}
+
+/* NUVYRA BRAND */
+.logo-container {
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.network-badge {
+  backdrop-filter: blur(10px);
+}
+
+.nuvyra-glow {
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.45);
+}
+
+/* NUVYRA BRAND */
+.logo-container {
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.network-badge {
+  backdrop-filter: blur(10px);
+}
+
+.nuvyra-glow {
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.45);
+}
+
+.balance-card {
+  background: linear-gradient(145deg, #151b23, #0b0e14);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.balance-header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.balance-card h2 {
+  font-size: 2.2rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.balance-card p {
+  color: var(--accent-green);
+  font-family: "IBM Plex Mono", monospace;
 }

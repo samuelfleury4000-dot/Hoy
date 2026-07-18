@@ -1,32 +1,68 @@
-import { useState } from 'react';
-import WalletSetup from './components/WalletSetup';
-import Dashboard from './components/Dashboard';
-import { hasStoredWallet, unlockWallet, wipeWallet } from './lib/wallet';
+import { useState, useEffect } from "react";
+import NetworkSelector from "./components/NetworkSelector";
+import { saveNetwork, getSavedNetwork } from "./lib/network";
+import { startSecurityTimer, resetSecurityTimer, clearSecurityTimer } from "./lib/security";
+import WalletSetup from "./components/WalletSetup";
+import Dashboard from "./components/Dashboard";
+import { hasStoredWallet, unlockWallet, wipeWallet } from "./lib/wallet";
 
 export default function App() {
+
+  useEffect(()=>{
+
+    const expire=()=>{
+
+      setWallet(null);
+      setIsLocked(true);
+
+    };
+
+    startSecurityTimer(expire);
+
+    const activity=()=>resetSecurityTimer(expire);
+
+    window.addEventListener("click",activity);
+    window.addEventListener("keydown",activity);
+
+    return ()=>{
+
+      window.removeEventListener("click",activity);
+      window.removeEventListener("keydown",activity);
+
+    };
+
+  },[]);
+  const [network, setNetworkState] = useState(getSavedNetwork());
+
+const setNetwork = (n)=>{
+setNetworkState(n);
+saveNetwork(n);
+};
+
   const [wallet, setWallet] = useState(null);
   const [isLocked, setIsLocked] = useState(hasStoredWallet());
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const attemptUnlock = async () => {
     try {
       const w = await unlockWallet(password);
       setWallet(w);
       setIsLocked(false);
-      setError('');
-    } catch (e) { 
-      setError('Mot de passe incorrect ou erreur de déchiffrement.'); 
+      setError("");
+    } catch (e) {
+      setError("Mot de passe incorrect ou erreur de déchiffrement.");
     }
   };
 
   const handleLogout = () => {
+    clearSecurityTimer();
     setWallet(null);
     setIsLocked(true);
   };
 
   const handleDeleteWallet = () => {
-    if(confirm("Supprimer définitivement ce wallet local ?")) {
+    if (confirm("Supprimer définitivement ce wallet local ?")) {
       wipeWallet();
       window.location.reload();
     }
@@ -40,26 +76,42 @@ export default function App() {
           <div className="status-dot"></div>
           NUVYRA
         </div>
-        <div className="network-badge">
-          Sepolia (testnet)
-        </div>
+        <NetworkSelector network={network} setNetwork={setNetwork} />
       </header>
 
       {/* LOGIQUE DE ROUTAGE */}
       {hasStoredWallet() && isLocked ? (
         <div className="main-container">
           <h1>Bon retour</h1>
-          <p className="description">Entre ton mot de passe pour déverrouiller ton portefeuille local.</p>
-          
+          <p className="description">
+            Entre ton mot de passe pour déverrouiller ton portefeuille local.
+          </p>
+
           {error && <div className="error-box">{error}</div>}
-          
+
           <div className="input-group">
             <label className="input-label">MOT DE PASSE</label>
-            <input type="password" className="input-field" onChange={(e) => setPassword(e.target.value)} />
+            <input
+              type="password"
+              className="input-field"
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
-          
-          <button className="btn-primary" onClick={attemptUnlock}>Déverrouiller</button>
-          <button className="btn-secondary" style={{ marginTop: '1rem', borderColor: '#ef4444', color: '#ef4444' }} onClick={handleDeleteWallet}>Effacer le wallet de cet appareil</button>
+
+          <button className="btn-primary" onClick={attemptUnlock}>
+            Déverrouiller
+          </button>
+          <button
+            className="btn-secondary"
+            style={{
+              marginTop: "1rem",
+              borderColor: "#ef4444",
+              color: "#ef4444",
+            }}
+            onClick={handleDeleteWallet}
+          >
+            Effacer le wallet de cet appareil
+          </button>
         </div>
       ) : !wallet ? (
         <WalletSetup onWalletCreated={() => window.location.reload()} />

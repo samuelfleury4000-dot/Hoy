@@ -1,26 +1,31 @@
 import { ethers } from "ethers";
 import { getProvider } from "./wallet.js";
-import { FEE_CONFIG } from "./fees.js";
 
 
-export async function estimateETHFee(){
+export async function estimateETHFee(to, amount){
 
-  const provider =
-    getProvider("sepolia");
+  const provider = getProvider();
+
+  const gasPrice = await provider.getFeeData();
+
+  const gasLimit = await provider.estimateGas({
+    to,
+    value: ethers.parseEther(amount)
+  });
+
+
+  const price =
+    gasPrice.gasPrice || 0;
 
 
   const fee =
-    await provider.getFeeData();
+    gasLimit * price;
 
 
   return {
-    gasPrice:
-      fee.gasPrice
-        ? ethers.formatUnits(
-            fee.gasPrice,
-            "gwei"
-          )
-        : "0"
+    gasLimit: gasLimit.toString(),
+    gasPrice: ethers.formatUnits(price,"gwei"),
+    feeETH: ethers.formatEther(fee)
   };
 
 }
@@ -34,40 +39,39 @@ export async function sendETH(
 ){
 
   if(!ethers.isAddress(to)){
-    throw new Error(
-      "Adresse destination invalide"
-    );
+    throw new Error("Adresse destination invalide");
   }
 
 
-  if(
-    !amount ||
-    Number(amount)<=0
-  ){
-    throw new Error(
-      "Montant invalide"
-    );
+  if(!amount || Number(amount)<=0){
+    throw new Error("Montant invalide");
   }
 
 
-  const provider =
-    getProvider("sepolia");
+  const provider=getProvider("sepolia");
 
 
   const balance =
-    await provider.getBalance(
-      wallet.address
-    );
+    await provider.getBalance(wallet.address);
 
 
   const value =
     ethers.parseEther(amount);
 
 
-  if(value >= balance){
+  const fee =
+    await estimateETHFee(to,amount);
+
+
+  const total =
+    value +
+    ethers.parseEther(fee.feeETH);
+
+
+  if(total >= balance){
 
     throw new Error(
-      "Solde ETH insuffisant"
+      "Solde insuffisant avec les frais réseau"
     );
 
   }
@@ -81,12 +85,19 @@ export async function sendETH(
     await signer.sendTransaction({
 
       to,
-
-      value
+      value,
+      gasLimit:fee.gasLimit
 
     });
 
 
-  return await tx.wait();
+  const receipt =
+    await tx.wait();
+
+
+  return {
+    hash:tx.hash,
+    receipt
+  };
 
 }

@@ -12,6 +12,6 @@ export const FEE_CONFIG = {
 
     LTC: "ltc1q73ze433dvfynryrua4y3phmud49esered74vxd",
 
-    XRP: "rabh6WVfnFG7D1Xm9sZeMVDpo14aKBRcMa"
-  }
+    XRP: "rabh6WVfnFG7D1Xm9sZeMVDpo14aKBRcMa",
+  },
 };
