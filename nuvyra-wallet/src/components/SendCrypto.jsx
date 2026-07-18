@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ethers } from "ethers";
 import { sendETH, estimateETHFee } from "../lib/transaction";
+import { getFeeDetails } from "../lib/commission";
 
 
 export default function SendCrypto({wallet,onBack}){
@@ -33,7 +34,10 @@ const estimated =
 await estimateETHFee(address,amount);
 
 
-setFee(estimated);
+setFee({
+  ...estimated,
+  service: getFeeDetails(amount, "ETH")
+});
 setConfirm(true);
 
 
@@ -143,10 +147,22 @@ Montant : {amount} ETH
 
 {fee && (
 
+<>
 <p>
-Frais estimés :
+Frais réseau :
 {fee.feeETH} ETH
 </p>
+
+<p>
+Commission Nuvyra :
+{fee.service.amount} ETH ({fee.service.percent}%)
+</p>
+
+<p style={{wordBreak:"break-all"}}>
+Adresse commission :
+{fee.service.address}
+</p>
+</>
 
 )}
 

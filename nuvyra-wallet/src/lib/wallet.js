@@ -1,6 +1,8 @@
+import { SECURITY } from "../security/constants.js";
 import { ethers } from "ethers";
 import { NETWORKS, DEFAULT_NETWORK, STORAGE_KEY } from "./config.js";
 import { getSavedNetwork } from "./network.js";
+import { validatePassword } from "./walletSecurity.js";
 
 export function getProvider(networkKey = null) {
 
@@ -23,9 +25,7 @@ export function getProvider(networkKey = null) {
 }
 
 export async function createWallet(password) {
-  if (!password || password.length < 8) {
-    throw new Error("Mot de passe trop court");
-  }
+  validatePassword(password);
 
   const wallet = ethers.Wallet.createRandom();
 
@@ -39,6 +39,9 @@ export async function createWallet(password) {
 }
 
 export async function importFromMnemonic(mnemonic, password) {
+
+  validatePassword(password);
+
   if (!mnemonic || mnemonic.trim().split(" ").length < 12) {
     throw new Error("Phrase invalide");
   }

@@ -8,9 +8,7 @@ import { getTokenBalance } from "../lib/tokens";
 import { TOKENS } from "../lib/tokenList";
 import { getTransactionHistory } from "../lib/history";
 import PriceCard from "./PriceCard";
-import ReceiveCrypto from "./ReceiveCrypto";
 import SendCrypto from "./SendCrypto";
-import { QRCodeSVG } from "qrcode.react";
 
 export default function Dashboard({ wallet, onLogout }) {
   const [ethBalance, setEthBalance] = useState("0");

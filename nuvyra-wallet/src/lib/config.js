@@ -35,7 +35,6 @@ export const DEFAULT_NETWORK = "sepolia";
 
 export const STORAGE_KEY = "nuvyra_wallet";
 
-export const SERVICE_FEE_PERCENT = 0.5;
 
 export const ONRAMP_PROVIDER = {
   name: "MoonPay",

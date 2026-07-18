@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createWallet, saveKeystore, importFromMnemonic } from "../lib/wallet";
+import SeedBackup from "./SeedBackup";
 
 export default function WalletSetup({ onWalletCreated }) {
   const [step, setStep] = useState("home"); // 'home' | 'password' | 'import'
@@ -10,6 +11,18 @@ export default function WalletSetup({ onWalletCreated }) {
   const [error, setError] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [generatedSeed,setGeneratedSeed] = useState(null);
+
+  if (generatedSeed) {
+    return (
+      <SeedBackup
+        seed={generatedSeed}
+        onConfirm={() => {
+          setGeneratedSeed(null);
+          onWalletCreated();
+        }}
+      />
+    );
+  }
 
   const handleStartCreate = () => {
     setAction("create");
@@ -30,8 +43,8 @@ export default function WalletSetup({ onWalletCreated }) {
       if (password !== confirmPassword) {
         return setError("Les mots de passe ne correspondent pas.");
       }
-      if (password.length < 12) {
-        return setError("Le mot de passe doit faire au moins 12 caractères.");
+      if (!/[A-Z]/.test(password) || !/[0-9]/.test(password)) {
+        return setError("Le mot de passe doit contenir une majuscule et un chiffre.");
       }
     }
 
@@ -40,10 +53,7 @@ export default function WalletSetup({ onWalletCreated }) {
       if (action === "create") {
         const { encryptedJson, mnemonic: m } = await createWallet(password);
         saveKeystore(encryptedJson);
-        alert(
-          `SAUVEGARDE REQUISE :\nVoici votre phrase secrète. Notez-la immédiatement.\n\n${m}`,
-        );
-        onWalletCreated();
+        setGeneratedSeed(m);
       } else if (action === "import") {
         if (!mnemonic)
           throw new Error("Veuillez entrer une phrase de récupération.");
