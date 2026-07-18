@@ -1,0 +1,15 @@
+================================
+ NUVYRA CLEAN REPORT
+================================
+Sat Jul 18 16:34:55 UTC 2026
+
+Suppression de node_modules...
+OK
+
+Suppression des caches...
+OK
+
+Suppression des logs...
+OK
+
+Nettoyage terminé avec succès.

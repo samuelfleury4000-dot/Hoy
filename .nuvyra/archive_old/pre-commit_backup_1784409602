@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "===== NUVYRA PRE-COMMIT GUARD ====="
+
+bash .nuvyra/checks/precommit.sh
+
+if [ $? -ne 0 ]; then
+    echo "BLOCKED: Audit Nuvyra échoué"
+    exit 1
+fi
+
+echo "PASS: Commit autorisé"

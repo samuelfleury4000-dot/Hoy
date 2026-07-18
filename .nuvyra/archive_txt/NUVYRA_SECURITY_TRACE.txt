@@ -1,0 +1,26 @@
+===== NUVYRA SECURITY TRACE =====
+Sat Jul 18 20:11:55 UTC 2026
+
+===== WARNING SOURCES =====
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:66:grep -RInE "encrypt|fromEncryptedJson|createRandom|mnemonic" src/lib src/components >> $REPORT
+.nuvyra/engine.sh:44:"(0x[a-fA-F0-9]{64}|-----BEGIN PRIVATE KEY-----|mnemonic\s*[:=]|seed\s*[:=])" \
+.nuvyra/engine.sh:50:    echo "WARNING: Pattern sensible détecté" >> "$REPORT"
+.nuvyra/checks/security.sh:8:"(0x[a-fA-F0-9]{64}|-----BEGIN PRIVATE KEY-----|AKIA[0-9A-Z]{16}|sk_live_[a-zA-Z0-9]+|mnemonic[[:space:]]*=[[:space:]]*['\"][a-zA-Z0-9 ]{20,}['\"]|seed[[:space:]]*=[[:space:]]*['\"][a-zA-Z0-9 ]{20,}['\"])" \
+.nuvyra/checks/security.sh:19:"localStorage.*(private|seed|mnemonic)|sessionStorage.*(private|seed|mnemonic)" \
+.nuvyra/security_upgrade.sh:31:"wallet\.mnemonic\.phrase|fromPhrase|mnemonic" \
+.nuvyra/security_upgrade.sh:35:echo "🟢 INFO : gestion seed détectée"
+.nuvyra/MASTER_AUDIT.sh:50:"(0x[a-fA-F0-9]{64}|-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----|mnemonic[[:space:]]*[:=][[:space:]]*['"'"']?[a-zA-Z0-9]{20,}|seed[[:space:]]*[:=][[:space:]]*['"'"']?[a-zA-Z0-9]{20,})" \
+.nuvyra/MASTER_AUDIT.sh:56:    echo "WARNING: Pattern sensible trouvé"
+.nuvyra/share_security_report.sh:22:grep -R -nE "mnemonic|seed|fromPhrase|wallet\.mnemonic" src \
+.nuvyra/security_clean.sh:12:"(PRIVATE_KEY|SECRET_KEY|API_KEY|MNEMONIC|seed|privateKey)" \
+.nuvyra/security_clean.sh:20:"mnemonic|encrypt|fromPhrase|sendTransaction" \
+.nuvyra/modules/security.sh:4:"(PRIVATE_KEY|SECRET|API_KEY|MNEMONIC|PASSWORD|seed|privateKey)" \
+.nuvyra/modules/crypto_security.sh:16:"mnemonic\|privateKey\|seed\|encrypt\|localStorage" \
+.nuvyra/archive_old/modules/security_scan.sh:6:"privateKey|seed|mnemonic|apikey|apiKey|secret|password" \
+
+===== ENGINE CALLS =====
+.nuvyra/core/analyzer.sh:12:"security":"$SECURITY",
+.nuvyra/core/report.sh:21:$(cat $BASE/reports/security.txt)
+.nuvyra/core/security.sh:12:echo $SECURITY > "$BASE/reports/security.txt"
+
+===== END =====

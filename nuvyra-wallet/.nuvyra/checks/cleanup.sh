@@ -1,31 +1,19 @@
 #!/bin/bash
 
-ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-ARCHIVE="$ROOT/.nuvyra/archive_txt"
-REPORT="$ROOT/.nuvyra/reports/ENGINE_REPORT.txt"
+REPORTS=".nuvyra/reports"
 
-mkdir -p "$ARCHIVE"
+mkdir -p "$REPORTS"
 
-echo "" >> "$REPORT"
-echo "===== CLEANUP =====" >> "$REPORT"
+cp "$REPORTS/ENGINE_REPORT.txt" "$REPORTS/latest.txt" 2>/dev/null || true
 
-COUNT=$(find "$ROOT" -type f -name "*.txt" \
--not -path "*/node_modules/*" \
--not -path "*/dist/*" \
--not -path "*/.git/*" \
--not -path "*/.nuvyra/reports/*" \
--not -path "*/.nuvyra/archive_txt/*" | wc -l)
+find "$REPORTS" -maxdepth 1 -type f -name "*.txt" ! -name "latest.txt" \
+| xargs -r ls -1t \
+| tail -n +11 \
+| xargs -r rm -f
 
-if [ "$COUNT" -gt 0 ]; then
-    find "$ROOT" -type f -name "*.txt" \
-    -not -path "*/node_modules/*" \
-    -not -path "*/dist/*" \
-    -not -path "*/.git/*" \
-    -not -path "*/.nuvyra/reports/*" \
-    -not -path "*/.nuvyra/archive_txt/*" \
-    -exec mv {} "$ARCHIVE/" \;
+find . -maxdepth 1 -type f -name "*.txt" \
+! -name "README.txt" \
+! -name "LICENSE.txt" \
+-delete
 
-    echo "PASS: $COUNT fichiers TXT archivés" >> "$REPORT"
-else
-    echo "PASS: Aucun TXT inutile trouvé" >> "$REPORT"
-fi
+echo "PASS: Reports rotated"

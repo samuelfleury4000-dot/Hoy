@@ -1,0 +1,2 @@
+src/lib/fees.js:11:export const SERVICE_FEE_PERCENT = 1.0;
+src/lib/config.js:38:export const SERVICE_FEE_PERCENT = 0.5;

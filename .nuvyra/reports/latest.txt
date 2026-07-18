@@ -1,0 +1,32 @@
+=================================
+       NUVYRA ENGINE AUDIT
+=================================
+Sat Jul 18 20:33:12 UTC 2026
+
+===== STRUCTURE =====
+FAIL: src manquant
+FAIL: package.json manquant
+PASS: package-lock.json
+FAIL: vite.config.js manquant
+FAIL: public manquant
+
+===== BUILD =====
+WARNING: /workspaces/Hoy/.nuvyra/checks/build.sh absent
+
+===== DEPENDENCIES =====
+WARNING: /workspaces/Hoy/.nuvyra/checks/dependencies.sh absent
+
+===== REACT QUALITY =====
+WARNING: /workspaces/Hoy/.nuvyra/checks/react.sh absent
+
+===== SECURITY =====
+===== SECURITY =====
+PASS: Aucun secret réel exposé
+PASS: Pas de stockage direct sensible
+
+===== CLEANUP CHECK =====
+PASS: cleanup disponible
+PASS: script cleanup disponible
+
+===== FINAL =====
+NUVYRA ENGINE COMPLETE

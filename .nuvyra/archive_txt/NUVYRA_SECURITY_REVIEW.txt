@@ -1,0 +1,334 @@
+=== WALLET ===
+import { SECURITY } from "../security/constants.js";
+import { ethers } from "ethers";
+import { NETWORKS, DEFAULT_NETWORK, STORAGE_KEY } from "./config.js";
+import { getSavedNetwork } from "./network.js";
+
+export function getProvider(networkKey = null) {
+
+  networkKey = networkKey || getSavedNetwork();
+  const net = NETWORKS[networkKey];
+
+  if (!net) {
+    throw new Error("Réseau inconnu");
+  }
+
+  for (const rpc of net.rpcUrls) {
+    try {
+      return new ethers.JsonRpcProvider(rpc);
+    } catch (e) {
+      console.warn("RPC indisponible:", rpc);
+    }
+  }
+
+  throw new Error("Aucun RPC disponible");
+}
+
+export async function createWallet(password) {
+  if (!password || password.length < SECURITY.MIN_PASSWORD_LENGTH) {
+    throw new Error(`Mot de passe trop court (minimum ${SECURITY.MIN_PASSWORD_LENGTH} caractères)`);
+  }
+
+  const wallet = ethers.Wallet.createRandom();
+
+  const encryptedJson = await wallet.encrypt(password);
+
+  return {
+    encryptedJson,
+    mnemonic: wallet.mnemonic.phrase,
+    address: wallet.address,
+  };
+}
+
+export async function importFromMnemonic(mnemonic, password) {
+  if (!mnemonic || mnemonic.trim().split(" ").length < 12) {
+    throw new Error("Phrase invalide");
+  }
+
+  const wallet = ethers.Wallet.fromPhrase(mnemonic.trim());
+
+  const encryptedJson = await wallet.encrypt(password);
+
+  return {
+    encryptedJson,
+    address: wallet.address,
+  };
+}
+
+export function saveKeystore(keystore) {
+  localStorage.setItem(STORAGE_KEY, keystore);
+}
+
+export function hasStoredWallet() {
+  return Boolean(localStorage.getItem(STORAGE_KEY));
+}
+
+export async function unlockWallet(password) {
+  const keystore = localStorage.getItem(STORAGE_KEY);
+
+  if (!keystore) {
+    throw new Error("Aucun wallet trouvé");
+  }
+
+  return await ethers.Wallet.fromEncryptedJson(keystore, password);
+}
+
+export async function getBalance(address) {
+  const provider = getProvider();
+
+  const balance = await provider.getBalance(address);
+
+  return ethers.formatEther(balance);
+}
+
+export function wipeWallet() {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+
+=== STORAGE ===
+const KEY="nuvyra_wallet";
+
+export function saveWallet(data){
+ localStorage.setItem(
+  KEY,
+  JSON.stringify(data)
+ );
+}
+
+
+export function loadWallet(){
+
+ const data=
+ localStorage.getItem(KEY);
+
+ return data ? JSON.parse(data):null;
+
+}
+
+
+export function deleteWallet(){
+
+ localStorage.removeItem(KEY);
+
+}
+
+
+export function walletExists(){
+
+ return !!localStorage.getItem(KEY);
+
+}
+
+
+=== SECURITY ===
+let timer = null;
+
+const TIMEOUT = 5 * 60 * 1000;
+
+export function startSecurityTimer(callback) {
+  clearSecurityTimer();
+  timer = setTimeout(callback, TIMEOUT);
+}
+
+export function resetSecurityTimer(callback) {
+  startSecurityTimer(callback);
+}
+
+export function clearSecurityTimer() {
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
+}
+
+export function stopSecurityTimer() {
+  clearSecurityTimer();
+}
+
+export function wipeSensitive(value) {
+  return typeof value === "string"
+    ? "\0".repeat(value.length)
+    : null;
+}
+
+export function secureClipboardClear() {
+  if (navigator.clipboard) {
+    setTimeout(() => {
+      navigator.clipboard.writeText("");
+    }, 15000);
+  }
+}
+
+export function preventSeedCapture() {
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      console.warn("NUVYRA: écran masqué");
+    }
+  });
+}
+
+
+=== TRANSACTION ===
+import { ethers } from "ethers";
+import { getProvider } from "./wallet.js";
+
+
+export async function estimateETHFee(to, amount){
+
+  const provider = getProvider();
+
+  const gasPrice = await provider.getFeeData();
+
+  const gasLimit = await provider.estimateGas({
+    to,
+    value: ethers.parseEther(amount)
+  });
+
+
+  const price =
+    gasPrice.gasPrice || 0;
+
+
+  const fee =
+    gasLimit * price;
+
+
+  return {
+    gasLimit: gasLimit.toString(),
+    gasPrice: ethers.formatUnits(price,"gwei"),
+    feeETH: ethers.formatEther(fee)
+  };
+
+}
+
+
+
+export async function sendETH(
+  wallet,
+  to,
+  amount
+){
+
+  if(!ethers.isAddress(to)){
+    throw new Error("Adresse destination invalide");
+  }
+
+
+  if(!amount || Number(amount)<=0){
+    throw new Error("Montant invalide");
+  }
+
+
+  const provider=getProvider("sepolia");
+
+
+  const balance =
+    await provider.getBalance(wallet.address);
+
+
+  const value =
+    ethers.parseEther(amount);
+
+
+  const fee =
+    await estimateETHFee(to,amount);
+
+
+  const total =
+    value +
+    ethers.parseEther(fee.feeETH);
+
+
+  if(total >= balance){
+
+    throw new Error(
+      "Solde insuffisant avec les frais réseau"
+    );
+
+  }
+
+
+  const signer =
+    wallet.connect(provider);
+
+
+  const tx =
+    await signer.sendTransaction({
+
+      to,
+      value,
+      gasLimit:fee.gasLimit
+
+    });
+
+
+  const receipt =
+    await tx.wait();
+
+
+  return {
+    hash:tx.hash,
+    receipt
+  };
+
+}
+
+
+=== GUARD ===
+export function validateTransaction(to,amount){
+
+ if(!to.startsWith("0x")){
+   throw new Error(
+    "Adresse Ethereum invalide"
+   );
+ }
+
+
+ if(Number(amount)<=0){
+   throw new Error(
+    "Montant invalide"
+   );
+ }
+
+
+ return true;
+
+}
+
+
+=== WALLET SECURITY ===
+const MIN_PASSWORD = 12;
+
+export function validatePassword(password){
+
+ if(!password || password.length < MIN_PASSWORD){
+   throw new Error(
+    "Mot de passe minimum 12 caractères"
+   );
+ }
+
+ if(!/[A-Z]/.test(password)){
+   throw new Error(
+    "Ajoute une majuscule"
+   );
+ }
+
+ if(!/[0-9]/.test(password)){
+   throw new Error(
+    "Ajoute un chiffre"
+   );
+ }
+
+ return true;
+}
+
+
+export function clearSensitive(){
+
+ if(window.gc){
+   window.gc();
+ }
+
+}
+FIN REVIEW

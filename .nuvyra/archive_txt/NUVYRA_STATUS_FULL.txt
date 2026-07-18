@@ -1,0 +1,127 @@
+=================================
+       NUVYRA STATUS FULL
+=================================
+Sat Jul 18 20:02:29 UTC 2026
+
+===== GIT STATUS =====
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .gitignore
+	modified:   .nuvyra/dashboard/data.json
+	deleted:    .nuvyra/disk_guardian.sh
+	deleted:    .nuvyra/guardian.sh
+	deleted:    .nuvyra/health_score.sh
+	deleted:    .nuvyra/health_score_pro.sh
+	modified:   .nuvyra/history/audits.csv
+	deleted:    .nuvyra/modules/build.sh
+	deleted:    .nuvyra/modules/dependencies.sh
+	deleted:    .nuvyra/modules/health_score.sh
+	deleted:    .nuvyra/modules/predeploy_guardian.sh
+	deleted:    .nuvyra/modules/react_quality.sh
+	deleted:    .nuvyra/modules/security_pro.sh
+	deleted:    .nuvyra/modules/security_scan.sh
+	deleted:    .nuvyra/nuvyra_complete_guardian.sh
+	deleted:    .nuvyra/nuvyra_guardian_daemon_v2.sh
+	deleted:    .nuvyra/run_guardian.sh
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.nuvyra/checks/
+	.nuvyra/engine.sh
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+===== IGNORED FILES =====
+ M .gitignore
+ M .nuvyra/dashboard/data.json
+ D .nuvyra/disk_guardian.sh
+ D .nuvyra/guardian.sh
+ D .nuvyra/health_score.sh
+ D .nuvyra/health_score_pro.sh
+ M .nuvyra/history/audits.csv
+ D .nuvyra/modules/build.sh
+ D .nuvyra/modules/dependencies.sh
+ D .nuvyra/modules/health_score.sh
+ D .nuvyra/modules/predeploy_guardian.sh
+ D .nuvyra/modules/react_quality.sh
+ D .nuvyra/modules/security_pro.sh
+ D .nuvyra/modules/security_scan.sh
+ D .nuvyra/nuvyra_complete_guardian.sh
+ D .nuvyra/nuvyra_guardian_daemon_v2.sh
+ D .nuvyra/run_guardian.sh
+?? .nuvyra/checks/
+?? .nuvyra/engine.sh
+!! .archive_nuvyra/.backup/
+!! .env
+!! .nuvyra/archive_old/
+!! .nuvyra/reports/
+!! ACTIVE_AUDITS.txt
+!! ALL_AUDITS.txt
+!! ALL_PROJECT_AUDITS.txt
+!! ALL_SOURCE_AUDIT.txt
+!! BUILD_AFTER_FEE.txt
+!! CLEAN_REPORT.txt
+!! COMMISSION_AUDIT.txt
+!! COMMISSION_CHECK.txt
+!! FEES_REVIEW.txt
+!! FEE_FINAL_CHECK.txt
+!! FEE_REVIEW.txt
+!! NUVYRA_COMMISSION_API_AUDIT.txt
+!! NUVYRA_FINAL_AUDIT.txt
+!! NUVYRA_MODULE_DEEP_AUDIT.txt
+!! NUVYRA_ORCHESTRATOR_CHECK.txt
+!! NUVYRA_SECURITY_REVIEW.txt
+!! NUVYRA_SETUP_REVIEW.txt
+!! NUVYRA_STATUS_FULL.txt
+!! NUVYRA_SYSTEM_CHECK.txt
+!! SEND_REVIEW.txt
+!! TRANSACTION_REVIEW.txt
+!! dist/
+!! git_status_ignored.txt
+!! node_modules/
+!! nuvyra_check.txt
+!! nuvyra_files.txt
+!! nuvyra_source_txt/files_part_aa.txt
+!! nuvyra_status.txt
+
+===== NUVYRA ENGINE =====
+PASS: engine.sh present
+
+===== NUVYRA CHECKS =====
+total 24
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 18 19:46 .
+drwxrwxrwx+ 9 codespace codespace 4096 Jul 18 19:52 ..
+-rwxrwxrwx  1 codespace codespace   33 Jul 18 17:06 build.sh
+-rwxrwxrwx  1 codespace codespace  112 Jul 18 17:06 dependencies.sh
+-rwxrwxrwx  1 codespace codespace  960 Jul 18 17:06 react.sh
+-rwxrwxrwx  1 codespace codespace 2552 Jul 18 17:06 security.sh
+
+===== ARCHIVE OLD =====
+total 40
+drwxrwxrwx+ 3 codespace codespace 4096 Jul 18 19:52 .
+drwxrwxrwx+ 9 codespace codespace 4096 Jul 18 19:52 ..
+-rwxrwxrwx  1 codespace codespace  340 Jul 18 17:06 disk_guardian.sh
+-rwxrwxrwx  1 codespace codespace 1400 Jul 18 17:06 guardian.sh
+-rwxrwxrwx  1 codespace codespace  607 Jul 18 17:06 health_score.sh
+-rwxrwxrwx  1 codespace codespace 2182 Jul 18 17:06 health_score_pro.sh
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 18 19:50 modules
+-rwxrwxrwx  1 codespace codespace 2659 Jul 18 17:06 nuvyra_complete_guardian.sh
+-rwxrwxrwx  1 codespace codespace  960 Jul 18 17:06 nuvyra_guardian_daemon_v2.sh
+-rwxrwxrwx  1 codespace codespace   75 Jul 18 17:06 run_guardian.sh
+
+===== REPORTS =====
+PASS: ENGINE_REPORT exists
+PASS: MASTER_AUDIT exists
+
+===== OLD DUPLICATE CHECK =====
+PASS: cleaned guardian.sh
+PASS: cleaned health_score.sh
+PASS: cleaned security_scan.sh
+PASS: cleaned predeploy_guardian.sh
+
+===== FINAL =====
+NUVYRA STATUS EXPORT COMPLETE

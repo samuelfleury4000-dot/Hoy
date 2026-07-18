@@ -1,0 +1,178 @@
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/NUVYRA_FINAL_CLEANUP.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/NUVYRA_ONE_CLICK_AUDIT.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/NUVYRA_REALITY_CHECK.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/alert.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/alert_monitor.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/api_check_fix.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive/cleanup_reports.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive/master_audit.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive/read_only_guardian.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive_cleanup_20260718_141855/audit.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive_cleanup_20260718_141855/scripts/audit.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive_cleanup_20260718_141855/scripts/cleanup.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive_old_audits/audit_guardian.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive_old_audits/auto_audit_daemon.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive_old_audits/compact_audit.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive_old_audits/fix_audit_system.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive_old_audits/full_audit.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/audit_cleaner.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/audit_self_optimizer.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/audit_stability_check.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/auto_monitor.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/cleanup.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/disk_guardian.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/App.jsx
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/components/Dashboard.jsx
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/components/NetworkSelector.jsx
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/components/PriceCard.jsx
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/components/ReceiveCrypto.jsx
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/components/SeedBackup.jsx
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/components/SendCrypto.jsx
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/components/WalletSetup.jsx
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/lib/config.js
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/lib/fees.js
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/lib/history.js
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/lib/moonpay.js
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/lib/network.js
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/lib/prices.js
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/lib/security.js
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/lib/tokenList.js
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/lib/tokens.js
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/lib/transaction.js
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/lib/wallet.js
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/main.jsx
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/security/constants.js
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/styles.css
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_complete_test.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_hardening.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_nuvyra_hardening.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_report_cleaner.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/full_health_check.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/git_final_clean.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/guardian.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/health_score.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/health_score_pro.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/inspector.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/logs/GUARDIAN_BLOCKED
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/logs/alert.status
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/logs/audit_perfect_state
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/logs/audit_status
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/logs/guardian.status
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/logs/guardian_v2.status
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/market_intelligence.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/merge_all_audits.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/auto_fix.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/blockchain_monitor.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/build.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/cleanup.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/code_doctor.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/crypto_security.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/dependencies.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/error_analyzer.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/git.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/health_score.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/performance.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/predeploy_guardian.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/react_quality.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/security.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/security_pro.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/security_scan.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/size.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules/system.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/nuvyra_24_7.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/nuvyra_cleanup_fix.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/nuvyra_cleanup_system.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/nuvyra_complete_guardian.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/nuvyra_daemon.lock
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/nuvyra_daemon.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/nuvyra_guardian_daemon_v2.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/nuvyra_master_audit.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/run_guardian.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/runner.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/security_clean.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/security_upgrade.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/share_security_report.sh
+	deleted:    .nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/system_full_test.sh
+	modified:   .nuvyra/dashboard/data.json
+	deleted:    .nuvyra/final_backup/src_20260718_142419/App.jsx
+	deleted:    .nuvyra/final_backup/src_20260718_142419/components/Dashboard.jsx
+	deleted:    .nuvyra/final_backup/src_20260718_142419/components/NetworkSelector.jsx
+	deleted:    .nuvyra/final_backup/src_20260718_142419/components/PriceCard.jsx
+	deleted:    .nuvyra/final_backup/src_20260718_142419/components/ReceiveCrypto.jsx
+	deleted:    .nuvyra/final_backup/src_20260718_142419/components/SeedBackup.jsx
+	deleted:    .nuvyra/final_backup/src_20260718_142419/components/SendCrypto.jsx
+	deleted:    .nuvyra/final_backup/src_20260718_142419/components/WalletSetup.jsx
+	deleted:    .nuvyra/final_backup/src_20260718_142419/lib/config.js
+	deleted:    .nuvyra/final_backup/src_20260718_142419/lib/fees.js
+	deleted:    .nuvyra/final_backup/src_20260718_142419/lib/history.js
+	deleted:    .nuvyra/final_backup/src_20260718_142419/lib/moonpay.js
+	deleted:    .nuvyra/final_backup/src_20260718_142419/lib/network.js
+	deleted:    .nuvyra/final_backup/src_20260718_142419/lib/prices.js
+	deleted:    .nuvyra/final_backup/src_20260718_142419/lib/security.js
+	deleted:    .nuvyra/final_backup/src_20260718_142419/lib/tokenList.js
+	deleted:    .nuvyra/final_backup/src_20260718_142419/lib/tokens.js
+	deleted:    .nuvyra/final_backup/src_20260718_142419/lib/transaction.js
+	deleted:    .nuvyra/final_backup/src_20260718_142419/lib/wallet.js
+	deleted:    .nuvyra/final_backup/src_20260718_142419/main.jsx
+	deleted:    .nuvyra/final_backup/src_20260718_142419/security/constants.js
+	deleted:    .nuvyra/final_backup/src_20260718_142419/styles.css
+	modified:   .nuvyra/history/audits.csv
+	modified:   src/components/Dashboard.jsx
+	modified:   src/components/SendCrypto.jsx
+	modified:   src/components/WalletSetup.jsx
+	modified:   src/lib/config.js
+	modified:   src/lib/fees.js
+	modified:   src/lib/transaction.js
+	modified:   src/lib/wallet.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	../NUVYRA_AUDIT.txt
+	../NUVYRA_FORENSIC_FULL_AUDIT.txt
+	../audit.sh
+	../backup_files.txt
+	../current_files.txt
+	../nuvyra-backup-forensic.tar.gz
+	.archive_nuvyra/
+	.nuvyra/MASTER_AUDIT.sh
+	src/lib/commission.js
+	../nuvyra_full_audit.sh
+
+Ignored files:
+  (use "git add -f <file>..." to include in what will be committed)
+	.archive_nuvyra/.backup/
+	.env
+	.nuvyra/reports/
+	ACTIVE_AUDITS.txt
+	ALL_AUDITS.txt
+	ALL_PROJECT_AUDITS.txt
+	ALL_SOURCE_AUDIT.txt
+	BUILD_AFTER_FEE.txt
+	CLEAN_REPORT.txt
+	COMMISSION_AUDIT.txt
+	COMMISSION_CHECK.txt
+	FEES_REVIEW.txt
+	FEE_FINAL_CHECK.txt
+	FEE_REVIEW.txt
+	NUVYRA_COMMISSION_API_AUDIT.txt
+	NUVYRA_FINAL_AUDIT.txt
+	NUVYRA_MODULE_DEEP_AUDIT.txt
+	NUVYRA_ORCHESTRATOR_CHECK.txt
+	NUVYRA_SECURITY_REVIEW.txt
+	NUVYRA_SETUP_REVIEW.txt
+	NUVYRA_SYSTEM_CHECK.txt
+	SEND_REVIEW.txt
+	TRANSACTION_REVIEW.txt
+	dist/
+	git_status_ignored.txt
+	node_modules/
+	nuvyra_files.txt
+	nuvyra_source_txt/files_part_aa.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")

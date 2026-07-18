@@ -1,0 +1,97 @@
+]633;E;echo "===============================";73e1e959-d653-46da-89b2-e85ebd1b1096]633;C===============================
+      NUVYRA SYSTEM CHECK
+===============================
+Sat Jul 18 13:26:45 UTC 2026
+
+===== GUARDIAN PROCESS =====
+codespa+  158122  0.0  0.0   7876  3176 pts/0    S    12:37   0:00 bash .nuvyra/audit_guardian.sh
+codespa+  158927  0.0  0.0   7744  3132 pts/0    S    12:38   0:00 bash .nuvyra/run_guardian.sh
+codespa+  161458  0.0  0.0   7744  3084 pts/0    S    12:41   0:00 bash .nuvyra/run_guardian.sh
+codespa+  168790  0.0  0.0   7744  3476 pts/0    S    12:53   0:00 bash .nuvyra/run_guardian.sh
+
+===== AUDIT PROCESS =====
+codespa+   99298  0.0  0.0   7744  3016 ?        S    11:17   0:00 /bin/bash ./scripts/auto-audit-clean.sh
+codespa+  157273  0.0  0.0   7876  3240 pts/0    S    12:35   0:00 bash .nuvyra/auto_audit_daemon.sh
+codespa+  158122  0.0  0.0   7876  3176 pts/0    S    12:37   0:00 bash .nuvyra/audit_guardian.sh
+
+===== CRONTAB =====
+Aucun crontab disponible
+
+===== DISK SPACE =====
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          32G   11G   20G  34% /
+tmpfs            64M     0   64M   0% /dev
+shm              64M     0   64M   0% /dev/shm
+/dev/root        29G   25G  4.3G  86% /vscode
+/dev/loop4       32G   11G   20G  34% /workspaces
+/dev/sdb1        44G  2.9G   39G   7% /tmp
+
+===== NUVYRA REPORTS =====
+.nuvyra/reports/report_20260718_132244.txt
+.nuvyra/reports/report_20260718_130825.txt
+.nuvyra/reports/report_20260718_132339.txt
+.nuvyra/reports/report_20260718_131330.txt
+.nuvyra/reports/report_20260718_131834.txt
+.nuvyra/reports/report_20260718_130322.txt
+.nuvyra/reports/audit_2026-07-18_13-16-51.txt
+.nuvyra/reports/audit_2026-07-18_13-01-34.txt
+.nuvyra/reports/audit_2026-07-18_13-21-55.txt
+.nuvyra/reports/NUVYRA_AUTO_FINAL.txt
+.nuvyra/reports/report_20260718_131735.txt
+.nuvyra/reports/report_20260718_130717.txt
+.nuvyra/reports/audit_2026-07-18_13-11-46.txt
+.nuvyra/reports/audit_2026-07-18_13-06-39.txt
+.nuvyra/reports/report_20260718_131227.txt
+.nuvyra/reports/report_20260718_130209.txt
+
+===== LAST GUARDIAN LOG =====
+.nuvyra/reports/report_20260718_131227.txt
+[2026-07-18 13:13:30] Etat: erreurs=0 taille=1MB
+================================
+NUVYRA GUARDIAN
+Sat Jul 18 13:13:30 UTC 2026
+SYSTEM STABLE
+.nuvyra/reports/report_20260718_131330.txt
+[2026-07-18 13:14:30] Etat: erreurs=0 taille=1MB
+[2026-07-18 13:15:30] Etat: erreurs=0 taille=1MB
+[2026-07-18 13:16:30] Etat: erreurs=0 taille=1MB
+[2026-07-18 13:17:30] Etat: erreurs=0 taille=1MB
+================================
+NUVYRA GUARDIAN
+Sat Jul 18 13:17:35 UTC 2026
+================================
+NUVYRA GUARDIAN
+Sat Jul 18 13:17:35 UTC 2026
+SYSTEM STABLE
+.nuvyra/reports/report_20260718_131735.txt
+SYSTEM STABLE
+.nuvyra/reports/report_20260718_131735.txt
+[2026-07-18 13:18:30] Etat: erreurs=0 taille=1MB
+================================
+NUVYRA GUARDIAN
+Sat Jul 18 13:18:35 UTC 2026
+SYSTEM STABLE
+.nuvyra/reports/report_20260718_131834.txt
+[2026-07-18 13:19:30] Etat: erreurs=0 taille=1MB
+[2026-07-18 13:20:30] Etat: erreurs=0 taille=1MB
+[2026-07-18 13:21:30] Etat: erreurs=0 taille=1MB
+[2026-07-18 13:22:30] Etat: erreurs=0 taille=1MB
+================================
+NUVYRA GUARDIAN
+Sat Jul 18 13:22:44 UTC 2026
+================================
+NUVYRA GUARDIAN
+Sat Jul 18 13:22:44 UTC 2026
+SYSTEM STABLE
+.nuvyra/reports/report_20260718_132244.txt
+SYSTEM STABLE
+.nuvyra/reports/report_20260718_132244.txt
+[2026-07-18 13:23:30] Etat: erreurs=0 taille=1MB
+================================
+NUVYRA GUARDIAN
+Sat Jul 18 13:23:39 UTC 2026
+SYSTEM STABLE
+.nuvyra/reports/report_20260718_132339.txt
+[2026-07-18 13:24:30] Etat: erreurs=0 taille=1MB
+[2026-07-18 13:25:30] Etat: erreurs=0 taille=1MB
+[2026-07-18 13:26:30] Etat: erreurs=0 taille=1MB

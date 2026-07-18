@@ -1,0 +1,49 @@
+M  .gitignore
+R  .nuvyra/modules/build.sh -> .nuvyra/checks/build.sh
+R  .nuvyra/modules/dependencies.sh -> .nuvyra/checks/dependencies.sh
+R  .nuvyra/modules/react_quality.sh -> .nuvyra/checks/react.sh
+R  .nuvyra/modules/security_pro.sh -> .nuvyra/checks/security.sh
+M  .nuvyra/dashboard/data.json
+D  .nuvyra/disk_guardian.sh
+A  .nuvyra/engine.sh
+D  .nuvyra/guardian.sh
+D  .nuvyra/health_score.sh
+D  .nuvyra/health_score_pro.sh
+M  .nuvyra/history/audits.csv
+D  .nuvyra/modules/health_score.sh
+D  .nuvyra/modules/predeploy_guardian.sh
+D  .nuvyra/modules/security_scan.sh
+D  .nuvyra/nuvyra_complete_guardian.sh
+D  .nuvyra/nuvyra_guardian_daemon_v2.sh
+D  .nuvyra/run_guardian.sh
+===== NUVYRA PRE COMMIT CHECK =====
+
+ nuvyra-wallet/.gitignore                           |   2 +
+ nuvyra-wallet/.nuvyra/{modules => checks}/build.sh |   0
+ .../.nuvyra/{modules => checks}/dependencies.sh    |   0
+ .../{modules/react_quality.sh => checks/react.sh}  |   0
+ .../security_pro.sh => checks/security.sh}         |   0
+ nuvyra-wallet/.nuvyra/dashboard/data.json          |   4 +-
+ nuvyra-wallet/.nuvyra/disk_guardian.sh             |  13 --
+ nuvyra-wallet/.nuvyra/engine.sh                    |  69 ++++++++
+ nuvyra-wallet/.nuvyra/guardian.sh                  |  89 ----------
+ nuvyra-wallet/.nuvyra/health_score.sh              |  37 ----
+ nuvyra-wallet/.nuvyra/health_score_pro.sh          |  90 ----------
+ nuvyra-wallet/.nuvyra/history/audits.csv           |   5 +
+ nuvyra-wallet/.nuvyra/modules/health_score.sh      | 109 ------------
+ .../.nuvyra/modules/predeploy_guardian.sh          | 123 -------------
+ nuvyra-wallet/.nuvyra/modules/security_scan.sh     |  12 --
+ nuvyra-wallet/.nuvyra/nuvyra_complete_guardian.sh  | 196 ---------------------
+ nuvyra-wallet/.nuvyra/nuvyra_guardian_daemon_v2.sh |  42 -----
+ nuvyra-wallet/.nuvyra/run_guardian.sh              |   7 -
+ 18 files changed, 78 insertions(+), 720 deletions(-)
+
+ENGINE:
+PASS engine.sh
+CHECKS:
+build.sh
+dependencies.sh
+react.sh
+security.sh
+
+READY

@@ -1,0 +1,121 @@
+]633;E;echo "=== ENV API ===";b75fefa1-49c8-4a06-9dc9-79a3c7e78430]633;C=== ENV API ===
+.env:VITE_MOONPAY_API_KEY=pk_test_gy5H4jAAsoTJ3oRFrq2pxvfzo0plyh8
+.env.example:VITE_API_URL=
+.env.example:VITE_MOONPAY_KEY=
+.env.example:VITE_ETHERSCAN_KEY=
+
+=== SEARCH COMMISSION FEE WALLET ===
+src/App.jsx:import { hasStoredWallet, unlockWallet, wipeWallet } from "./lib/wallet";
+src/App.jsx:  const [wallet, setWallet] = useState(null);
+src/App.jsx:    if (confirm("Supprimer définitivement ce wallet local ?")) {
+src/App.jsx:            Effacer le wallet de cet appareil
+src/App.jsx:      ) : !wallet ? (
+src/App.jsx:        <Dashboard wallet={wallet} onLogout={handleLogout} />
+src/context/WalletContext.jsx:} from "../lib/wallet";
+src/context/WalletContext.jsx:  const [wallet, setWallet] = useState(null);
+src/context/WalletContext.jsx:  const [address, setAddress] = useState("");
+src/context/WalletContext.jsx:      setAddress(w.address);
+src/context/WalletContext.jsx:        wallet,
+src/context/WalletContext.jsx:        address,
+src/lib/moonpay.js:export function openMoonPay(walletAddress, currency = "ETH") {
+src/lib/moonpay.js:    `&walletAddress=${walletAddress}` +
+src/lib/tokens.js:const ERC20_ABI = ["function balanceOf(address owner) view returns(uint256)"];
+src/lib/tokens.js:export async function getTokenBalance(token, walletAddress, provider) {
+src/lib/tokens.js:    if (!ethers.isAddress(token.address)) {
+src/lib/tokens.js:    const contract = new ethers.Contract(token.address, ERC20_ABI, provider);
+src/lib/tokens.js:    const balance = await contract.balanceOf(walletAddress);
+src/lib/wallet.js:import { validatePassword } from "./walletSecurity.js";
+src/lib/wallet.js:  const wallet = ethers.Wallet.createRandom();
+src/lib/wallet.js:  const encryptedJson = await wallet.encrypt(password);
+src/lib/wallet.js:    mnemonic: wallet.mnemonic.phrase,
+src/lib/wallet.js:    address: wallet.address,
+src/lib/wallet.js:  const wallet = ethers.Wallet.fromPhrase(mnemonic.trim());
+src/lib/wallet.js:  const encryptedJson = await wallet.encrypt(password);
+src/lib/wallet.js:    address: wallet.address,
+src/lib/wallet.js:    throw new Error("Aucun wallet trouvé");
+src/lib/wallet.js:export async function getBalance(address) {
+src/lib/wallet.js:  const balance = await provider.getBalance(address);
+src/lib/tokenList.js:address:"0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+src/lib/tokenList.js:address:"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+src/lib/tokenList.js:address:"0xdAC17F958D2ee523a2206206994597C13D831ec7",
+src/lib/tokenList.js:address:"0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+src/lib/tokenList.js:address:"0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca",
+src/lib/fees.js:    ETH: "0xA29baAc46a97ae0Ba82D64BeD3591337B64b3670",
+src/lib/transaction.js:import { getProvider } from "./wallet.js";
+src/lib/transaction.js:  const fee =
+src/lib/transaction.js:    feeETH: ethers.formatEther(fee)
+src/lib/transaction.js:  wallet,
+src/lib/transaction.js:    await provider.getBalance(wallet.address);
+src/lib/transaction.js:  const fee =
+src/lib/transaction.js:    ethers.parseEther(fee.feeETH);
+src/lib/transaction.js:    wallet.connect(provider);
+src/lib/transaction.js:      gasLimit:fee.gasLimit
+src/lib/config.js:export const STORAGE_KEY = "nuvyra_wallet";
+src/lib/transactionGuard.js: if(!to.startsWith("0x")){
+src/lib/history.js:export async function getTransactionHistory(address) {
+src/lib/history.js:      `&address=${address}` +
+src/lib/storage.js:const KEY="nuvyra_wallet";
+src/lib/storage.js:export function walletExists(){
+src/lib/walletStatus.js:export function walletStatus(){
+src/components/ReceiveCrypto.jsx:export default function ReceiveCrypto({address,onBack}){
+src/components/ReceiveCrypto.jsx:value={address}
+src/components/ReceiveCrypto.jsx:{address}
+src/components/ReceiveCrypto.jsx:navigator.clipboard.writeText(address)
+src/components/UnlockWallet.jsx:    <div className="wallet-box">
+src/components/WalletSetup.backup.jsx:import { createWallet, saveKeystore, importFromMnemonic } from "../lib/wallet";
+src/components/WalletSetup.backup.jsx:          Créer un nouveau wallet
+src/components/WalletSetup.backup.jsx:        <h1>Importer un wallet</h1>
+src/components/WalletSetup.backup.jsx:          {isProcessing ? "Importation..." : "Restaurer le wallet"}
+src/components/SeedBackup.jsx:        Cette phrase est la seule sauvegarde de ton wallet.
+src/components/SendCrypto.jsx:export default function SendCrypto({wallet,onBack}){
+src/components/SendCrypto.jsx:const [address,setAddress]=useState("");
+src/components/SendCrypto.jsx:const [fee,setFee]=useState(null);
+src/components/SendCrypto.jsx:if(!ethers.isAddress(address)){
+src/components/SendCrypto.jsx:await estimateETHFee(address,amount);
+src/components/SendCrypto.jsx:wallet,
+src/components/SendCrypto.jsx:address,
+src/components/SendCrypto.jsx:placeholder="0x..."
+src/components/SendCrypto.jsx:value={address}
+src/components/SendCrypto.jsx:{address}
+src/components/SendCrypto.jsx:{fee && (
+src/components/SendCrypto.jsx:{fee.feeETH} ETH
+src/components/WalletSetup.jsx:import { createWallet, saveKeystore, importFromMnemonic } from "../lib/wallet";
+src/components/WalletSetup.jsx:          Créer un nouveau wallet
+src/components/WalletSetup.jsx:        <h1>Importer un wallet</h1>
+src/components/WalletSetup.jsx:          {isProcessing ? "Importation..." : "Restaurer le wallet"}
+src/components/Dashboard.jsx:import { getBalance } from "../lib/wallet";
+src/components/Dashboard.jsx:import { getProvider } from "../lib/wallet";
+src/components/Dashboard.jsx:export default function Dashboard({ wallet, onLogout }) {
+src/components/Dashboard.jsx:        getBalance(wallet.address),
+src/components/Dashboard.jsx:          getTokenBalance(token, wallet.address, provider),
+src/components/Dashboard.jsx:      const history = await getTransactionHistory(wallet.address);
+src/components/Dashboard.jsx:    await navigator.clipboard.writeText(wallet.address);
+src/components/Dashboard.jsx:    return <SendCrypto wallet={wallet} onBack={() => setSendMode(false)} />;
+src/components/Dashboard.jsx:        <p style={{ wordBreak: "break-all" }}>{wallet.address}</p>
+src/components/Dashboard.jsx:        <h3>Solde du wallet</h3>
+src/components/Dashboard.jsx:                {tx.from.toLowerCase() === wallet.address.toLowerCase()
+src/components/Dashboard.jsx:        onClick={() => openMoonPay(wallet.address, "ETH")}
+
+=== FULL ADDRESS SEARCH ===
+src/lib/tokenList.js:7:address:"0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+src/lib/tokenList.js:16:address:"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+src/lib/tokenList.js:22:address:"0xdAC17F958D2ee523a2206206994597C13D831ec7",
+src/lib/tokenList.js:31:address:"0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+src/lib/tokenList.js:40:address:"0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca",
+src/lib/fees.js:1:export const FEE_CONFIG = {
+src/lib/fees.js:5:    ETH: "0xA29baAc46a97ae0Ba82D64BeD3591337B64b3670",
+src/lib/transaction.js:5:export async function estimateETHFee(to, amount){
+src/lib/transaction.js:9:  const gasPrice = await provider.getFeeData();
+src/lib/transaction.js:21:  const fee =
+src/lib/transaction.js:28:    feeETH: ethers.formatEther(fee)
+src/lib/transaction.js:62:  const fee =
+src/lib/transaction.js:63:    await estimateETHFee(to,amount);
+src/lib/transaction.js:68:    ethers.parseEther(fee.feeETH);
+src/lib/transaction.js:89:      gasLimit:fee.gasLimit
+src/lib/config.js:38:export const SERVICE_FEE_PERCENT = 0.5;
+src/components/SendCrypto.jsx:3:import { sendETH, estimateETHFee } from "../lib/transaction";
+src/components/SendCrypto.jsx:12:const [fee,setFee]=useState(null);
+src/components/SendCrypto.jsx:33:await estimateETHFee(address,amount);
+src/components/SendCrypto.jsx:36:setFee(estimated);
+src/components/SendCrypto.jsx:144:{fee && (
+src/components/SendCrypto.jsx:148:{fee.feeETH} ETH

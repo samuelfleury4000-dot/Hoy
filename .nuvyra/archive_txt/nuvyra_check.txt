@@ -1,0 +1,18 @@
+-rwxrwxrwx   1 codespace codespace  340 Jul 18 17:06 disk_guardian.sh
+-rwxrwxrwx   1 codespace codespace 2182 Jul 18 17:06 health_score_pro.sh
+-rwxrwxrwx   1 codespace codespace 2659 Jul 18 17:06 nuvyra_complete_guardian.sh
+-rwxrwxrwx   1 codespace codespace  960 Jul 18 17:06 nuvyra_guardian_daemon_v2.sh
+-rwxrwxrwx   1 codespace codespace   75 Jul 18 17:06 run_guardian.sh
+-rwxrwxrwx   1 codespace codespace  496 Jul 18 17:06 security_clean.sh
+-rwxrwxrwx   1 codespace codespace 1724 Jul 18 17:06 security_upgrade.sh
+-rwxrwxrwx   1 codespace codespace  979 Jul 18 17:06 share_security_report.sh
+.nuvyra/nuvyra_complete_guardian.sh
+.nuvyra/nuvyra_guardian_daemon_v2.sh
+.nuvyra/health_score_pro.sh
+.nuvyra/disk_guardian.sh
+.nuvyra/modules/security_scan.sh
+.nuvyra/modules/health_score.sh
+.nuvyra/modules/predeploy_guardian.sh
+.nuvyra/archive_old/health_score.sh
+.nuvyra/archive_old/guardian.sh
+.nuvyra/run_guardian.sh

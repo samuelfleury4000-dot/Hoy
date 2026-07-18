@@ -1,0 +1,87 @@
+]633;E;for f in .nuvyra/modules/*.sh .nuvyra/core/*.sh;b75fefa1-49c8-4a06-9dc9-79a3c7e78430]633;C===== .nuvyra/modules/auto_fix.sh =====
+# Détection TODO
+TODO=$(grep -RIn \
+"TODO\|FIXME" \
+echo "TODO détectés : $TODO" >> "$REPORT"
+===== .nuvyra/modules/blockchain_monitor.sh =====
+echo "STATUS : FAILED" >> "$REPORT"
+===== .nuvyra/modules/build.sh =====
+===== .nuvyra/modules/cleanup.sh =====
+===== .nuvyra/modules/code_doctor.sh =====
+===== .nuvyra/modules/crypto_security.sh =====
+===== .nuvyra/modules/dependencies.sh =====
+===== .nuvyra/modules/error_analyzer.sh =====
+echo "NUVYRA ERROR ANALYZER" >> "$REPORT"
+echo "===== BUILD ERROR SCAN =====" >> "$REPORT"
+echo "===== TODO / FIXME =====" >> "$REPORT"
+"TODO\|FIXME" \
+===== .nuvyra/modules/git.sh =====
+===== .nuvyra/modules/health_score.sh =====
+echo "BUILD .............. -20 FAIL" >> "$REPORT"
+echo "SECURITY ........... -20 WARNING" >> "$REPORT"
+# SECRETS
+SECRET=$(grep -RInE \
+"PRIVATE_KEY|API_KEY|SECRET|MNEMONIC" \
+if [ "$SECRET" -eq 0 ]
+echo "SECRETS ............ +15 OK" >> "$REPORT"
+echo "SECRETS ............ -15 REVIEW" >> "$REPORT"
+# TODO
+TODO=$(grep -RIn \
+"TODO\|FIXME" \
+if [ "$TODO" -lt 5 ]
+echo "CODE QUALITY ....... -10 TODO" >> "$REPORT"
+===== .nuvyra/modules/performance.sh =====
+===== .nuvyra/modules/predeploy_guardian.sh =====
+FAIL=0
+echo "BACKUP FAILED" >> "$REPORT"
+FAIL=1
+echo "BUILD FAILED" >> "$REPORT"
+FAIL=1
+echo "===== SECRET CHECK =====" >> "$REPORT"
+SECRET=$(grep -RInE \
+"PRIVATE_KEY|API_KEY|SECRET_KEY" \
+if [ "$SECRET" -eq 0 ]
+echo "NO SECRET FOUND" >> "$REPORT"
+echo "WARNING SECRET PATTERN FOUND" >> "$REPORT"
+FAIL=1
+FAIL=1
+if [ "$FAIL" -eq 0 ]
+===== .nuvyra/modules/react_quality.sh =====
+===== .nuvyra/modules/security.sh =====
+echo "SEARCH SECRET PATTERNS"
+"(PRIVATE_KEY|SECRET|API_KEY|MNEMONIC|PASSWORD|seed|privateKey)" \
+===== .nuvyra/modules/security_pro.sh =====
+WARNING=0
+echo "[SECRETS]" >> "$REPORT"
+SECRET=$(grep -RInE \
+"(0x[a-fA-F0-9]{64}|-----BEGIN PRIVATE KEY-----|AKIA[0-9A-Z]{16}|sk_live_|api[_-]?key\s*=|private[_-]?key\s*=)" \
+if [ -n "$SECRET" ]
+echo "$SECRET" >> "$REPORT"
+WARNING=$((WARNING+1))
+WARNING=$((WARNING+1))
+WARNING=$((WARNING+1))
+SEC_SCORE=$((100-(CRITICAL*25)-(WARNING*5)))
+echo "Alertes : $WARNING" >> "$REPORT"
+===== .nuvyra/modules/security_scan.sh =====
+===== .nuvyra/modules/size.sh =====
+===== .nuvyra/modules/system.sh =====
+===== .nuvyra/core/analyzer.sh =====
+grep -R -E "PRIVATE_KEY|BEGIN PRIVATE|0x[a-fA-F0-9]{64}" src >/dev/null 2>&1 \
+&& SECURITY="FAIL" || SECURITY="PASS"
+&& BUILD="PASS" || BUILD="FAIL"
+===== .nuvyra/core/build.sh =====
+echo FAIL > "$BASE/reports/build.txt"
+===== .nuvyra/core/collector.sh =====
+===== .nuvyra/core/engine.sh =====
+|| echo "BUILD FAIL"
+echo "PRIVATE KEY WARNING"
+echo "PRIVATE KEY CLEAN"
+===== .nuvyra/core/report.sh =====
+$( [ $SCORE -ge 90 ] && echo READY || echo WARNING )
+===== .nuvyra/core/reporter.sh =====
+===== .nuvyra/core/scorer.sh =====
+grep FAIL "$BASE/reports/security.txt" >/dev/null && SCORE=$((SCORE-50))
+grep FAIL "$BASE/reports/build.txt" >/dev/null && SCORE=$((SCORE-30))
+===== .nuvyra/core/security.sh =====
+grep -R -E "PRIVATE_KEY|BEGIN PRIVATE|0x[a-fA-F0-9]{64}" src >/dev/null 2>&1
+SECURITY="FAIL"

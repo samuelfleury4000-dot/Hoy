@@ -14,18 +14,30 @@ echo "===== BUILD =====" >> "$REPORT"
 
 npm run build >> "$REPORT" 2>&1
 
-if [ $? -eq 0 ]; then
-    echo "PASS: BUILD OK" >> "$REPORT"
-else
+if [ $? -ne 0 ]; then
     echo "FAIL: BUILD FAILED" >> "$REPORT"
+    cat "$REPORT"
+    exit 1
 fi
+
+echo "PASS: BUILD OK" >> "$REPORT"
 
 echo "" >> "$REPORT"
 echo "===== ENGINE =====" >> "$REPORT"
 
 bash "$ROOT/.nuvyra/engine.sh" >> "$REPORT" 2>&1
 
+if [ $? -ne 0 ]; then
+    echo "FAIL: ENGINE FAILED" >> "$REPORT"
+    cat "$REPORT"
+    exit 1
+fi
+
+echo "PASS: ENGINE OK" >> "$REPORT"
+
 echo "" >> "$REPORT"
 echo "===== END =====" >> "$REPORT"
 
 cat "$REPORT"
+
+exit 0

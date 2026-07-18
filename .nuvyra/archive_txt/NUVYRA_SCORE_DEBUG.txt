@@ -1,0 +1,74 @@
+===== NUVYRA SCORE DEBUG =====
+Sat Jul 18 20:13:45 UTC 2026
+
+===== ENGINE SECURITY SECTION =====
+    30	cd "$ROOT"
+    31	
+    32	npm run build >/dev/null 2>&1
+    33	
+    34	if [ $? -eq 0 ]; then
+    35	    echo "PASS: BUILD OK" >> "$REPORT"
+    36	else
+    37	    echo "FAIL: BUILD FAILED" >> "$REPORT"
+    38	fi
+    39	
+    40	echo "" >> "$REPORT"
+    41	echo "===== SECURITY =====" >> "$REPORT"
+    42	
+    43	SECRET=$(grep -RInE \
+    44	"(0x[a-fA-F0-9]{64}|-----BEGIN PRIVATE KEY-----|mnemonic\s*[:=]|seed\s*[:=])" \
+    45	src 2>/dev/null)
+    46	
+    47	if [ -z "$SECRET" ]; then
+    48	    echo "PASS: Aucun secret réel" >> "$REPORT"
+    49	else
+    50	    echo "WARNING: Pattern sensible détecté" >> "$REPORT"
+    51	    echo "$SECRET" >> "$REPORT"
+    52	fi
+    53	
+    54	echo "" >> "$REPORT"
+    55	echo "===== DEPENDENCIES =====" >> "$REPORT"
+    56	
+    57	npm audit --production >/dev/null 2>&1
+    58	
+    59	if [ $? -eq 0 ]; then
+    60	    echo "PASS: npm audit OK" >> "$REPORT"
+    61	else
+    62	    echo "WARNING: npm audit problèmes" >> "$REPORT"
+    63	fi
+    64	
+    65	echo "" >> "$REPORT"
+
+===== REPORT WARNINGS =====
+17:WARNING: Pattern sensible détecté
+
+===== SECURITY CHECK FILE =====
+#!/bin/bash
+
+REPORT=".nuvyra/reports/ENGINE_REPORT.txt"
+
+echo "===== SECURITY =====" >> "$REPORT"
+
+SECRET=$(grep -RInE \
+"(0x[a-fA-F0-9]{64}|-----BEGIN PRIVATE KEY-----|AKIA[0-9A-Z]{16}|sk_live_[a-zA-Z0-9]+|mnemonic[[:space:]]*=[[:space:]]*['\"][a-zA-Z0-9 ]{20,}['\"]|seed[[:space:]]*=[[:space:]]*['\"][a-zA-Z0-9 ]{20,}['\"])" \
+src 2>/dev/null)
+
+if [ -z "$SECRET" ]; then
+    echo "PASS: Aucun secret réel exposé" >> "$REPORT"
+else
+    echo "WARNING: Secret potentiel détecté" >> "$REPORT"
+    echo "$SECRET" >> "$REPORT"
+fi
+
+STORAGE=$(grep -RInE \
+"localStorage.*(private|seed|mnemonic)|sessionStorage.*(private|seed|mnemonic)" \
+src 2>/dev/null)
+
+if [ -z "$STORAGE" ]; then
+    echo "PASS: Pas de stockage direct sensible" >> "$REPORT"
+else
+    echo "WARNING: Stockage sensible détecté" >> "$REPORT"
+    echo "$STORAGE" >> "$REPORT"
+fi
+
+===== END =====

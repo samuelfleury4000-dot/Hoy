@@ -1,0 +1,16 @@
+src/lib/fees.js:1:export const FEE_CONFIG = {
+src/lib/fees.js:11:export const SERVICE_FEE_PERCENT = 1.0;
+src/lib/transaction.js:5:export async function estimateETHFee(to, amount){
+src/lib/transaction.js:9:  const gasPrice = await provider.getFeeData();
+src/lib/transaction.js:21:  const fee =
+src/lib/transaction.js:28:    feeETH: ethers.formatEther(fee)
+src/lib/transaction.js:62:  const fee =
+src/lib/transaction.js:63:    await estimateETHFee(to,amount);
+src/lib/transaction.js:68:    ethers.parseEther(fee.feeETH);
+src/lib/transaction.js:89:      gasLimit:fee.gasLimit
+src/components/SendCrypto.jsx:3:import { sendETH, estimateETHFee } from "../lib/transaction";
+src/components/SendCrypto.jsx:12:const [fee,setFee]=useState(null);
+src/components/SendCrypto.jsx:33:await estimateETHFee(address,amount);
+src/components/SendCrypto.jsx:36:setFee(estimated);
+src/components/SendCrypto.jsx:144:{fee && (
+src/components/SendCrypto.jsx:148:{fee.feeETH} ETH

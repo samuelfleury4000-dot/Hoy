@@ -1,0 +1,279 @@
+.nuvyra/NUVYRA_COMMAND_CENTER_V2.sh:5:OUT="$BASE/reports/NUVYRA_COMMAND_CENTER_V2.html"
+.nuvyra/NUVYRA_COMMAND_CENTER_V2.sh:7:mkdir -p "$BASE/reports"
+.nuvyra/NUVYRA_COMMAND_CENTER_V2.sh:91:$SCORE/100
+.nuvyra/NUVYRA_FINAL_CLEANUP.sh:37:find .nuvyra/reports -type f \
+.nuvyra/NUVYRA_FINAL_CLEANUP.sh:40:! -name "NUVYRA_MASTER_REPORT.txt" \
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:3:REPORT=".nuvyra/reports/NUVYRA_FINAL_MASTER_REPORT.txt"
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:4:mkdir -p .nuvyra/reports
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:6:echo "================================" > $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:7:echo "     NUVYRA GRAND FINAL TEST" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:8:echo "================================" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:9:date >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:11:echo "" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:12:echo "===== CLEANUP CHECK =====" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:14:find .nuvyra/reports -type f \
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:15:! -name "NUVYRA_FINAL_MASTER_REPORT.txt" \
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:18:echo "OLD REPORTS CLEANED" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:21:echo "" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:22:echo "===== SYSTEM =====" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:24:node -v >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:25:npm -v >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:28:echo "" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:29:echo "===== STRUCTURE =====" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:31:find src -type f | sort >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:34:echo "" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:35:echo "===== BUILD =====" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:37:npm run build >> $REPORT 2>&1
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:40:echo "BUILD STATUS: PASS" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:42:echo "BUILD STATUS: FAIL" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:46:echo "" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:47:echo "===== DEPENDENCIES =====" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:49:npm audit --omit=dev >> $REPORT 2>&1
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:52:echo "" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:53:echo "===== SECURITY =====" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:57:echo "WARNING SECRET PATTERN FOUND" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:59:echo "PRIVATE KEY CLEAN" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:63:echo "" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:64:echo "===== WALLET =====" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:66:grep -RInE "encrypt|fromEncryptedJson|createRandom|mnemonic" src/lib src/components >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:69:echo "" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:70:echo "===== PERFORMANCE =====" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:72:du -sh src >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:73:du -sh dist >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:76:echo "" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:77:echo "===== DISK =====" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:79:df -h >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:82:echo "" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:83:echo "===== SERVICES =====" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:87:echo "24/7 DAEMON ACTIVE" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:89:echo "DAEMON NOT ACTIVE" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:93:echo "" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:94:echo "===== FINAL STATUS =====" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:95:echo "NUVYRA AUDIT ENGINE SYNCHRONIZED" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:96:echo "REPORT: $REPORT" >> $REPORT
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh:101:cat $REPORT
+.nuvyra/NUVYRA_INTELLIGENCE_ENGINE.sh:6:REPORT="$BASE/reports/NUVYRA_INTELLIGENCE_REPORT.txt"
+.nuvyra/NUVYRA_INTELLIGENCE_ENGINE.sh:9:mkdir -p "$BASE/reports"
+.nuvyra/NUVYRA_INTELLIGENCE_ENGINE.sh:64:echo " NUVYRA INTELLIGENCE REPORT"
+.nuvyra/NUVYRA_INTELLIGENCE_ENGINE.sh:114:} | tee "$REPORT"
+.nuvyra/NUVYRA_INTELLIGENCE_ENGINE.sh:117:echo "REPORT:"
+.nuvyra/NUVYRA_INTELLIGENCE_ENGINE.sh:118:echo "$REPORT"
+.nuvyra/NUVYRA_LAUNCH_READINESS.sh:3:REPORT=".nuvyra/reports/NUVYRA_LAUNCH_READINESS.txt"
+.nuvyra/NUVYRA_LAUNCH_READINESS.sh:4:mkdir -p .nuvyra/reports
+.nuvyra/NUVYRA_LAUNCH_READINESS.sh:132:} | tee "$REPORT"
+.nuvyra/NUVYRA_LIVE_AUDIT_FINAL.sh:6:REPORT="$BASE/reports/NUVYRA_LIVE_FINAL_REPORT.txt"
+.nuvyra/NUVYRA_LIVE_AUDIT_FINAL.sh:9:mkdir -p "$BASE/reports"
+.nuvyra/NUVYRA_LIVE_AUDIT_FINAL.sh:90:echo " NUVYRA LIVE FINAL REPORT"
+.nuvyra/NUVYRA_LIVE_AUDIT_FINAL.sh:99:echo "$SCORE/100"
+.nuvyra/NUVYRA_LIVE_AUDIT_FINAL.sh:134:} | tee "$REPORT"
+.nuvyra/NUVYRA_LIVE_AUDIT_FINAL.sh:138:echo "REPORT SAVED:"
+.nuvyra/NUVYRA_LIVE_AUDIT_FINAL.sh:139:echo "$REPORT"
+.nuvyra/NUVYRA_LIVE_DASHBOARD.sh:5:OUT="$BASE/reports/NUVYRA_LIVE_DASHBOARD.html"
+.nuvyra/NUVYRA_LIVE_DASHBOARD.sh:7:mkdir -p "$BASE/reports"
+.nuvyra/NUVYRA_ONE_CLICK_AUDIT.sh:5:REPORT=".nuvyra/reports/NUVYRA_COMPLETE_AUDIT_$DATE.txt"
+.nuvyra/NUVYRA_ONE_CLICK_AUDIT.sh:7:mkdir -p .nuvyra/reports
+.nuvyra/NUVYRA_ONE_CLICK_AUDIT.sh:14:exec > >(tee "$REPORT") 2>&1
+.nuvyra/NUVYRA_ONE_CLICK_AUDIT.sh:127:echo "SCORE: $SCORE/100"
+.nuvyra/NUVYRA_ONE_CLICK_AUDIT.sh:141:echo "REPORT:"
+.nuvyra/NUVYRA_ONE_CLICK_AUDIT.sh:142:echo "$REPORT"
+.nuvyra/NUVYRA_ONE_COMMAND.sh:7:bash .nuvyra/core/engine.sh
+.nuvyra/NUVYRA_ONE_COMMAND.sh:11:echo ".nuvyra/reports/NUVYRA_MASTER_SYSTEM_REPORT.txt"
+.nuvyra/NUVYRA_REALITY_CHECK.sh:3:REPORT=".nuvyra/reports/NUVYRA_REALITY_CHECK.txt"
+.nuvyra/NUVYRA_REALITY_CHECK.sh:4:mkdir -p .nuvyra/reports
+.nuvyra/NUVYRA_REALITY_CHECK.sh:35:for f in .nuvyra/*.sh .nuvyra/modules/*.sh; do
+.nuvyra/NUVYRA_REALITY_CHECK.sh:45:check "npm install state" "[ -d node_modules ]"
+.nuvyra/NUVYRA_REALITY_CHECK.sh:135:} | tee "$REPORT"
+.nuvyra/NUVYRA_SYSTEM_UNIFIER.sh:13:mkdir -p $ROOT/reports
+.nuvyra/NUVYRA_SYSTEM_UNIFIER.sh:40:cat > $ROOT/core/engine.sh <<'ENGINE'
+.nuvyra/NUVYRA_SYSTEM_UNIFIER.sh:43:REPORT=".nuvyra/reports/NUVYRA_MASTER_SYSTEM_REPORT.txt"
+.nuvyra/NUVYRA_SYSTEM_UNIFIER.sh:47:echo " NUVYRA MASTER SYSTEM REPORT"
+.nuvyra/NUVYRA_SYSTEM_UNIFIER.sh:101:} | tee "$REPORT"
+.nuvyra/NUVYRA_SYSTEM_UNIFIER.sh:106:chmod 700 $ROOT/core/engine.sh
+.nuvyra/NUVYRA_SYSTEM_UNIFIER.sh:120:bash .nuvyra/core/engine.sh
+.nuvyra/NUVYRA_SYSTEM_UNIFIER.sh:124:echo ".nuvyra/reports/NUVYRA_MASTER_SYSTEM_REPORT.txt"
+.nuvyra/alert.sh:2:if grep -Ei "FAILED|ERROR|erreur|vulnerability" .nuvyra/reports/latest.txt >/dev/null; then
+.nuvyra/alert_monitor.sh:14:LATEST=$(ls -t "$BASE/reports"/*.txt 2>/dev/null | head -1)
+.nuvyra/auto_monitor.sh:3:REPORT=".nuvyra/reports/NUVYRA_AUDIT_FINAL.txt"
+.nuvyra/auto_monitor.sh:10:STATUS=$(grep "SCORE FINAL" "$REPORT" 2>/dev/null)
+.nuvyra/cleanup.sh:2:find .nuvyra/reports -type f -name "*.txt" -mtime +7 -delete
+.nuvyra/final_hardening.sh:12:find .nuvyra/reports -type f -mtime +7 -delete 2>/dev/null
+.nuvyra/final_hardening.sh:38:node_modules/
+.nuvyra/final_nuvyra_hardening.sh:16:find .nuvyra/reports -type f ! -name "FINAL_COMPLETE_TEST*" -exec mv {} .nuvyra/archive_final/ \; 2>/dev/null || true
+.nuvyra/final_nuvyra_hardening.sh:35:.nuvyra/reports/
+.nuvyra/final_nuvyra_hardening.sh:55:mkdir -p .nuvyra/reports
+.nuvyra/final_nuvyra_hardening.sh:57:cat > .nuvyra/reports/FINAL_HARDENING_STATUS.txt <<REPORT
+.nuvyra/final_nuvyra_hardening.sh:77:REPORT
+.nuvyra/final_report_cleaner.sh:3:REPORT_DIR=".nuvyra/reports"
+.nuvyra/final_report_cleaner.sh:4:FINAL="$REPORT_DIR/NUVYRA_AUDIT_FINAL.txt"
+.nuvyra/final_report_cleaner.sh:6:mkdir -p "$REPORT_DIR"
+.nuvyra/final_report_cleaner.sh:22:for FILE in "$REPORT_DIR"/*.txt
+.nuvyra/final_report_cleaner.sh:49:find "$REPORT_DIR" \
+.nuvyra/final_report_cleaner.sh:58:rm -rf "$REPORT_DIR/archive"
+.nuvyra/git_final_clean.sh:11:node_modules/
+.nuvyra/git_final_clean.sh:14:.nuvyra/reports/
+.nuvyra/git_final_clean.sh:22:git rm -r --cached .nuvyra/reports 2>/dev/null || true
+.nuvyra/guardian.sh:6:REPORT="$BASE/reports/report_$(date +%Y%m%d_%H%M%S).txt"
+.nuvyra/guardian.sh:9:mkdir -p "$BASE/logs" "$BASE/reports" "$BASE/backups"
+.nuvyra/guardian.sh:25:echo "===== SYSTEM =====" >> "$REPORT"
+.nuvyra/guardian.sh:26:node -v >> "$REPORT"
+.nuvyra/guardian.sh:27:npm -v >> "$REPORT"
+.nuvyra/guardian.sh:30:echo "" >> "$REPORT"
+.nuvyra/guardian.sh:31:echo "===== BUILD =====" >> "$REPORT"
+.nuvyra/guardian.sh:33:npm run build >> "$REPORT" 2>&1 || ERRORS=$((ERRORS+1))
+.nuvyra/guardian.sh:36:echo "" >> "$REPORT"
+.nuvyra/guardian.sh:37:echo "===== DEPENDENCIES =====" >> "$REPORT"
+.nuvyra/guardian.sh:39:npm audit --omit=dev >> "$REPORT" 2>&1 || ERRORS=$((ERRORS+1))
+.nuvyra/guardian.sh:42:echo "" >> "$REPORT"
+.nuvyra/guardian.sh:43:echo "===== SECURITY =====" >> "$REPORT"
+.nuvyra/guardian.sh:45:bash .nuvyra/modules/security_scan.sh >> "$REPORT"
+.nuvyra/guardian.sh:48:echo "" >> "$REPORT"
+.nuvyra/guardian.sh:49:echo "===== DISK =====" >> "$REPORT"
+.nuvyra/guardian.sh:51:df -h >> "$REPORT"
+.nuvyra/guardian.sh:88:echo "$REPORT" >> "$LOG"
+.nuvyra/health_score.sh:31:echo "FINAL SCORE: $SCORE/100"
+.nuvyra/health_score_pro.sh:3:REPORT=".nuvyra/reports/NUVYRA_HEALTH_SCORE.txt"
+.nuvyra/health_score_pro.sh:5:mkdir -p .nuvyra/reports
+.nuvyra/health_score_pro.sh:12:echo "================================" > $REPORT
+.nuvyra/health_score_pro.sh:13:echo "       NUVYRA HEALTH SCORE" >> $REPORT
+.nuvyra/health_score_pro.sh:14:echo "================================" >> $REPORT
+.nuvyra/health_score_pro.sh:15:echo "DATE: $(date)" >> $REPORT
+.nuvyra/health_score_pro.sh:16:echo "" >> $REPORT
+.nuvyra/health_score_pro.sh:18:echo "===== SECURITY =====" >> $REPORT
+.nuvyra/health_score_pro.sh:23:    echo "CRITICAL: Secret potentiel détecté" >> $REPORT
+.nuvyra/health_score_pro.sh:25:    echo "PASS: Aucun secret privé trouvé" >> $REPORT
+.nuvyra/health_score_pro.sh:28:echo "" >> $REPORT
+.nuvyra/health_score_pro.sh:29:echo "===== ENVIRONMENT =====" >> $REPORT
+.nuvyra/health_score_pro.sh:32:    echo "INFO: fichier .env présent" >> $REPORT
+.nuvyra/health_score_pro.sh:35:    echo "PASS: aucun .env local" >> $REPORT
+.nuvyra/health_score_pro.sh:38:echo "" >> $REPORT
+.nuvyra/health_score_pro.sh:39:echo "===== DEPENDENCIES =====" >> $REPORT
+.nuvyra/health_score_pro.sh:42:    echo "PASS: Dépendances propres" >> $REPORT
+.nuvyra/health_score_pro.sh:46:    echo "WARNING: Vulnérabilités npm détectées" >> $REPORT
+.nuvyra/health_score_pro.sh:49:echo "" >> $REPORT
+.nuvyra/health_score_pro.sh:50:echo "===== BUILD =====" >> $REPORT
+.nuvyra/health_score_pro.sh:53:    echo "PASS: Build réussi" >> $REPORT
+.nuvyra/health_score_pro.sh:57:    echo "CRITICAL: Build échoué" >> $REPORT
+.nuvyra/health_score_pro.sh:60:echo "" >> $REPORT
+.nuvyra/health_score_pro.sh:61:echo "===== STORAGE =====" >> $REPORT
+.nuvyra/health_score_pro.sh:68:    echo "WARNING: Disque presque plein ($DISK%)" >> $REPORT
+.nuvyra/health_score_pro.sh:70:    echo "PASS: Stockage normal ($DISK%)" >> $REPORT
+.nuvyra/health_score_pro.sh:73:echo "" >> $REPORT
+.nuvyra/health_score_pro.sh:74:echo "================================" >> $REPORT
+.nuvyra/health_score_pro.sh:75:echo " SCORE FINAL: $SCORE/100" >> $REPORT
+.nuvyra/health_score_pro.sh:76:echo " CRITICAL: $CRITICAL" >> $REPORT
+.nuvyra/health_score_pro.sh:77:echo " WARNING: $WARNING" >> $REPORT
+.nuvyra/health_score_pro.sh:78:echo " INFO: $INFO" >> $REPORT
+.nuvyra/health_score_pro.sh:81:    echo "STATUS: 🟢 EXCELLENT" >> $REPORT
+.nuvyra/health_score_pro.sh:83:    echo "STATUS: 🟡 GOOD" >> $REPORT
+.nuvyra/health_score_pro.sh:85:    echo "STATUS: 🔴 NEEDS FIX" >> $REPORT
+.nuvyra/health_score_pro.sh:88:echo "================================" >> $REPORT
+.nuvyra/health_score_pro.sh:90:cat $REPORT
+.nuvyra/inspector.sh:9:REPORT="$ROOT/.nuvyra/reports/NUVYRA_AUDIT_$DATE.txt"
+.nuvyra/inspector.sh:11:mkdir -p .nuvyra/reports
+.nuvyra/inspector.sh:15:echo "=====================================" > "$REPORT"
+.nuvyra/inspector.sh:16:echo "          NUVYRA FULL AUDIT" >> "$REPORT"
+.nuvyra/inspector.sh:17:echo "=====================================" >> "$REPORT"
+.nuvyra/inspector.sh:19:echo "Date : $(date)" >> "$REPORT"
+.nuvyra/inspector.sh:20:echo "" >> "$REPORT"
+.nuvyra/inspector.sh:30:echo "" >> "$REPORT"
+.nuvyra/inspector.sh:31:echo "=====================================" >> "$REPORT"
+.nuvyra/inspector.sh:32:echo " $NAME" >> "$REPORT"
+.nuvyra/inspector.sh:33:echo "=====================================" >> "$REPORT"
+.nuvyra/inspector.sh:36:if [ -f ".nuvyra/modules/$FILE" ]
+.nuvyra/inspector.sh:39:bash ".nuvyra/modules/$FILE" >> "$REPORT" 2>&1
+.nuvyra/inspector.sh:44:echo "" >> "$REPORT"
+.nuvyra/inspector.sh:45:echo "STATUS : OK" >> "$REPORT"
+.nuvyra/inspector.sh:47:echo "" >> "$REPORT"
+.nuvyra/inspector.sh:48:echo "STATUS : WARNING" >> "$REPORT"
+.nuvyra/inspector.sh:54:echo "MODULE MANQUANT : $FILE" >> "$REPORT"
+.nuvyra/inspector.sh:81:echo "" >> "$REPORT"
+.nuvyra/inspector.sh:82:echo "=====================================" >> "$REPORT"
+.nuvyra/inspector.sh:83:echo " FIN AUDIT NUVYRA" >> "$REPORT"
+.nuvyra/inspector.sh:84:echo "=====================================" >> "$REPORT"
+.nuvyra/inspector.sh:91:echo "$REPORT"
+.nuvyra/inspector.sh:93:bash .nuvyra/final_report_cleaner.sh
+.nuvyra/market_intelligence.sh:3:REPORT=".nuvyra/reports/NUVYRA_MARKET_ANALYSIS.txt"
+.nuvyra/market_intelligence.sh:4:GRAPH=".nuvyra/reports/NUVYRA_MARKET_GRAPH.html"
+.nuvyra/market_intelligence.sh:6:mkdir -p .nuvyra/reports
+.nuvyra/market_intelligence.sh:49:cat > "$REPORT" <<REPORT
+.nuvyra/market_intelligence.sh:101:REPORT ENGINE:
+.nuvyra/nuvyra.sh:3:bash "$BASE/core/collector.sh"
+.nuvyra/nuvyra.sh:4:bash "$BASE/core/analyzer.sh"
+.nuvyra/nuvyra.sh:5:bash "$BASE/core/scorer.sh"
+.nuvyra/nuvyra.sh:6:bash "$BASE/core/reporter.sh"
+.nuvyra/nuvyra_24_7.sh:5:REPORT="$BASE/.nuvyra/reports"
+.nuvyra/nuvyra_24_7.sh:7:mkdir -p "$REPORT"
+.nuvyra/nuvyra_24_7.sh:14:FILE="$REPORT/NUVYRA_REPORT_$TIME.txt"
+.nuvyra/nuvyra_24_7.sh:18:echo " NUVYRA AUTOMATED 24/7 REPORT"
+.nuvyra/nuvyra_24_7.sh:43:echo "REPORT COMPLETE"
+.nuvyra/nuvyra_24_7.sh:47:echo "REPORT CREATED $FILE" >> "$LOG"
+.nuvyra/nuvyra_cleanup_fix.sh:25:mkdir -p $BASE/reports
+.nuvyra/nuvyra_cleanup_fix.sh:26:find $BASE/reports -type f -name "*.txt" -mtime +2 -delete
+.nuvyra/nuvyra_cleanup_fix.sh:31:find $BASE/reports -type f -exec chmod 644 {} \;
+.nuvyra/nuvyra_cleanup_fix.sh:47:echo "REPORTS: MANAGED" >> $BASE/logs/guardian.status
+.nuvyra/nuvyra_cleanup_system.sh:39:cleanup_reports.sh
+.nuvyra/nuvyra_cleanup_system.sh:48:find "$BASE/reports" -type f \
+.nuvyra/nuvyra_complete_guardian.sh:6:REPORT="$BASE/reports/NUVYRA_FINAL_REPORT.txt"
+.nuvyra/nuvyra_complete_guardian.sh:10:mkdir -p "$BASE/reports" "$BASE/logs"
+.nuvyra/nuvyra_complete_guardian.sh:30:rm -f "$BASE/reports/"*.txt
+.nuvyra/nuvyra_complete_guardian.sh:36:exec > >(tee "$REPORT") 2>&1
+.nuvyra/nuvyra_complete_guardian.sh:96:--exclude-dir=node_modules \
+.nuvyra/nuvyra_core.sh:5:bash $BASE/core/collector.sh
+.nuvyra/nuvyra_core.sh:6:bash $BASE/core/security.sh
+.nuvyra/nuvyra_core.sh:7:bash $BASE/core/build.sh
+.nuvyra/nuvyra_core.sh:8:bash $BASE/core/scorer.sh
+.nuvyra/nuvyra_core.sh:9:bash $BASE/core/report.sh
+.nuvyra/nuvyra_core.sh:11:cat $BASE/reports/final_report.txt
+.nuvyra/report_rotation.sh:2:REPORT=".nuvyra/reports"
+.nuvyra/report_rotation.sh:3:ARCHIVE="$REPORT/archive"
+.nuvyra/report_rotation.sh:7:ls -1t "$REPORT"/*.txt 2>/dev/null | tail -n +11 | while read f; do
+.nuvyra/report_rotation.sh:14:echo "NUVYRA REPORT ROTATION CLEAN"
+.nuvyra/runner.sh:5:export NUVYRA_REPORT=".nuvyra/reports/NUVYRA_MASTER_$DATE.txt"
+.nuvyra/runner.sh:7:mkdir -p .nuvyra/reports
+.nuvyra/runner.sh:10:echo "==================================" > "$NUVYRA_REPORT"
+.nuvyra/runner.sh:11:echo "        NUVYRA MASTER AUDIT" >> "$NUVYRA_REPORT"
+.nuvyra/runner.sh:12:echo "==================================" >> "$NUVYRA_REPORT"
+.nuvyra/runner.sh:13:echo "Date: $(date)" >> "$NUVYRA_REPORT"
+.nuvyra/runner.sh:14:echo "" >> "$NUVYRA_REPORT"
+.nuvyra/runner.sh:24:echo "" >> "$NUVYRA_REPORT"
+.nuvyra/runner.sh:25:echo "========== $NAME ==========" >> "$NUVYRA_REPORT"
+.nuvyra/runner.sh:29:if [ -f ".nuvyra/modules/$FILE" ]
+.nuvyra/runner.sh:32:REPORT="$NUVYRA_REPORT" \
+.nuvyra/runner.sh:33:bash ".nuvyra/modules/$FILE" >> "$NUVYRA_REPORT" 2>&1
+.nuvyra/runner.sh:37:echo "MODULE MANQUANT" >> "$NUVYRA_REPORT"
+.nuvyra/runner.sh:45:for module in .nuvyra/modules/*.sh
+.nuvyra/runner.sh:56:echo "" >> "$NUVYRA_REPORT"
+.nuvyra/runner.sh:57:echo "==================================" >> "$NUVYRA_REPORT"
+.nuvyra/runner.sh:58:echo "AUDIT TERMINE" >> "$NUVYRA_REPORT"
+.nuvyra/runner.sh:59:echo "==================================" >> "$NUVYRA_REPORT"
+.nuvyra/runner.sh:64:echo "$NUVYRA_REPORT"
+.nuvyra/security_clean.sh:9:--exclude-dir=node_modules \
+.nuvyra/security_upgrade.sh:3:REPORT=".nuvyra/reports/security_report.txt"
+.nuvyra/security_upgrade.sh:4:mkdir -p .nuvyra/reports .nuvyra/logs
+.nuvyra/security_upgrade.sh:74:echo "===== REPORT STATUS ====="
+.nuvyra/security_upgrade.sh:87:} | tee "$REPORT"
+.nuvyra/share_security_report.sh:3:OUT=".nuvyra/reports/security_share_report.txt"
+.nuvyra/share_security_report.sh:5:mkdir -p .nuvyra/reports
+.nuvyra/share_security_report.sh:9:echo " NUVYRA SECURITY SHARE REPORT"
+.nuvyra/share_security_report.sh:16:--exclude-dir=node_modules \
+.nuvyra/share_security_report.sh:37:echo "END REPORT"
+.nuvyra/core/analyzer.sh:10:cat > "$BASE/reports/checks.json" <<JSON
+.nuvyra/core/build.sh:7:echo PASS > "$BASE/reports/build.txt"
+.nuvyra/core/build.sh:9:echo FAIL > "$BASE/reports/build.txt"
+.nuvyra/core/collector.sh:4:cat > "$BASE/reports/system.json" <<JSON
+.nuvyra/core/engine.sh:3:REPORT=".nuvyra/reports/NUVYRA_MASTER_SYSTEM_REPORT.txt"
+.nuvyra/core/engine.sh:7:echo " NUVYRA MASTER SYSTEM REPORT"
+.nuvyra/core/engine.sh:61:} | tee "$REPORT"
+.nuvyra/core/report.sh:5:SCORE="$(cat $BASE/reports/score.txt)"
+.nuvyra/core/report.sh:9:cat > "$BASE/reports/final_report.txt" <<REPORT
+.nuvyra/core/report.sh:11: NUVYRA CORE REPORT
+.nuvyra/core/report.sh:18:$SCORE/100
+.nuvyra/core/report.sh:21:$(cat $BASE/reports/security.txt)
+.nuvyra/core/report.sh:24:$(cat $BASE/reports/build.txt)
+.nuvyra/core/report.sh:30:REPORT
+.nuvyra/core/reporter.sh:4:SCORE=$(cat "$BASE/reports/score.txt")
+.nuvyra/core/reporter.sh:18:echo "NUVYRA SCORE: $SCORE/100" > "$BASE/reports/latest.txt"
+.nuvyra/core/scorer.sh:6:grep FAIL "$BASE/reports/security.txt" >/dev/null && SCORE=$((SCORE-50))
+.nuvyra/core/scorer.sh:7:grep FAIL "$BASE/reports/build.txt" >/dev/null && SCORE=$((SCORE-30))
+.nuvyra/core/scorer.sh:9:echo $SCORE > "$BASE/reports/score.txt"
+.nuvyra/core/security.sh:12:echo $SECURITY > "$BASE/reports/security.txt"

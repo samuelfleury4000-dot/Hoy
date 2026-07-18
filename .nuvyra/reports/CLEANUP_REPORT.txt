@@ -1,0 +1,53 @@
+===== NUVYRA TXT CLEANUP =====
+Sat Jul 18 20:26:09 UTC 2026
+
+Recherche fichiers txt à la racine du projet...
+/workspaces/Hoy/.nuvyra/archive_txt/FEE_REVIEW.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_SECURITY_TRACE.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_SCORE_DEBUG.txt
+/workspaces/Hoy/.nuvyra/archive_txt/latest.txt
+/workspaces/Hoy/.nuvyra/archive_txt/COMMISSION_AUDIT.txt
+/workspaces/Hoy/.nuvyra/archive_txt/LICENSE.txt
+/workspaces/Hoy/.nuvyra/archive_txt/ENGINE_REPORT.txt
+/workspaces/Hoy/.nuvyra/archive_txt/COMMISSION_CHECK.txt
+/workspaces/Hoy/.nuvyra/archive_txt/files_part_aa.txt
+/workspaces/Hoy/.nuvyra/archive_txt/ACTIVE_AUDITS.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_ORCHESTRATOR_CHECK.txt
+/workspaces/Hoy/.nuvyra/archive_txt/TRANSACTION_REVIEW.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_STATUS_FULL.txt
+/workspaces/Hoy/.nuvyra/archive_txt/CLEAN_REPORT.txt
+/workspaces/Hoy/.nuvyra/archive_txt/nuvyra_files.txt
+/workspaces/Hoy/.nuvyra/archive_txt/score.txt
+/workspaces/Hoy/.nuvyra/archive_txt/FEES_REVIEW.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_MASTER_FORENSIC.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_REPORT_20260718_163529.txt
+/workspaces/Hoy/.nuvyra/archive_txt/nuvyra_check.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_DEEP_AUDIT.txt
+/workspaces/Hoy/.nuvyra/archive_txt/ALL_PROJECT_AUDITS.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_COMMISSION_API_AUDIT.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_SECURITY_REVIEW.txt
+/workspaces/Hoy/.nuvyra/archive_txt/LICENSE-MIT.txt
+/workspaces/Hoy/.nuvyra/archive_txt/SEND_REVIEW.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_MODULE_DEEP_AUDIT.txt
+/workspaces/Hoy/.nuvyra/archive_txt/test.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_SETUP_REVIEW.txt
+/workspaces/Hoy/.nuvyra/archive_txt/FEE_FINAL_CHECK.txt
+/workspaces/Hoy/.nuvyra/archive_txt/MASTER_AUDIT.txt
+/workspaces/Hoy/.nuvyra/archive_txt/git_status_ignored.txt
+/workspaces/Hoy/.nuvyra/archive_txt/nuvyra_status.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_SYSTEM_CHECK.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_FINAL_AUDIT.txt
+/workspaces/Hoy/.nuvyra/archive_txt/ALL_SOURCE_AUDIT.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_FULL_AUDIT.txt
+/workspaces/Hoy/.nuvyra/archive_txt/CLEANUP_REPORT.txt
+/workspaces/Hoy/.nuvyra/archive_txt/BUILD_AFTER_FEE.txt
+/workspaces/Hoy/.nuvyra/archive_txt/ALL_AUDITS.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_REPORT_20260718_173529.txt
+/workspaces/Hoy/.nuvyra/archive_txt/CopyrightNotice.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_REPORT_20260718_193538.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_REPORT_20260718_183534.txt
+/workspaces/Hoy/.nuvyra/archive_txt/NUVYRA_READY_COMMIT.txt
+/workspaces/Hoy/.nuvyra/archive_txt/STEP1_CLEAN_REPORT.txt
+
+Archivage...
+PASS: TXT archivés

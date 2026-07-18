@@ -1,0 +1,98 @@
+ M .gitignore
+ M .nuvyra/dashboard/data.json
+ D .nuvyra/disk_guardian.sh
+ D .nuvyra/guardian.sh
+ D .nuvyra/health_score.sh
+ D .nuvyra/health_score_pro.sh
+ M .nuvyra/history/audits.csv
+ D .nuvyra/modules/build.sh
+ D .nuvyra/modules/dependencies.sh
+ D .nuvyra/modules/health_score.sh
+ D .nuvyra/modules/predeploy_guardian.sh
+ D .nuvyra/modules/react_quality.sh
+ D .nuvyra/modules/security_pro.sh
+ D .nuvyra/modules/security_scan.sh
+ D .nuvyra/nuvyra_complete_guardian.sh
+ D .nuvyra/nuvyra_guardian_daemon_v2.sh
+ D .nuvyra/run_guardian.sh
+?? .nuvyra/checks/
+?? .nuvyra/engine.sh
+.nuvyra/MASTER_AUDIT.sh
+.nuvyra/NUVYRA_COMMAND_CENTER_V2.sh
+.nuvyra/NUVYRA_FINAL_CLEANUP.sh
+.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh
+.nuvyra/NUVYRA_INTELLIGENCE_ENGINE.sh
+.nuvyra/NUVYRA_LAUNCH_READINESS.sh
+.nuvyra/NUVYRA_LIVE_AUDIT_FINAL.sh
+.nuvyra/NUVYRA_LIVE_DASHBOARD.sh
+.nuvyra/NUVYRA_ONE_CLICK_AUDIT.sh
+.nuvyra/NUVYRA_ONE_COMMAND.sh
+.nuvyra/NUVYRA_REALITY_CHECK.sh
+.nuvyra/NUVYRA_SYSTEM_UNIFIER.sh
+.nuvyra/alert.sh
+.nuvyra/alert_monitor.sh
+.nuvyra/archive_old/disk_guardian.sh
+.nuvyra/archive_old/guardian.sh
+.nuvyra/archive_old/health_score.sh
+.nuvyra/archive_old/health_score_pro.sh
+.nuvyra/archive_old/nuvyra_complete_guardian.sh
+.nuvyra/archive_old/nuvyra_guardian_daemon_v2.sh
+.nuvyra/archive_old/run_guardian.sh
+.nuvyra/auto_monitor.sh
+.nuvyra/checks/build.sh
+.nuvyra/checks/dependencies.sh
+.nuvyra/checks/react.sh
+.nuvyra/checks/security.sh
+.nuvyra/cleanup.sh
+.nuvyra/core/analyzer.sh
+.nuvyra/core/build.sh
+.nuvyra/core/collector.sh
+.nuvyra/core/engine.sh
+.nuvyra/core/report.sh
+.nuvyra/core/reporter.sh
+.nuvyra/core/scorer.sh
+.nuvyra/core/security.sh
+.nuvyra/daemon.sh
+.nuvyra/dashboard/data.json
+.nuvyra/engine.sh
+.nuvyra/final_hardening.sh
+.nuvyra/final_nuvyra_hardening.sh
+.nuvyra/final_report_cleaner.sh
+.nuvyra/git_final_clean.sh
+.nuvyra/history/audits.csv
+.nuvyra/inspector.sh
+.nuvyra/market_intelligence.sh
+.nuvyra/modules/auto_fix.sh
+.nuvyra/modules/blockchain_monitor.sh
+.nuvyra/modules/cleanup.sh
+.nuvyra/modules/code_doctor.sh
+.nuvyra/modules/crypto_security.sh
+.nuvyra/modules/error_analyzer.sh
+.nuvyra/modules/git.sh
+.nuvyra/modules/performance.sh
+.nuvyra/modules/security.sh
+.nuvyra/modules/size.sh
+.nuvyra/modules/system.sh
+.nuvyra/nuvyra.sh
+.nuvyra/nuvyra_24_7.sh
+.nuvyra/nuvyra_cleanup_fix.sh
+.nuvyra/nuvyra_cleanup_system.sh
+.nuvyra/nuvyra_core.sh
+.nuvyra/nuvyra_daemon.lock
+.nuvyra/nuvyra_daemon.sh
+.nuvyra/report_rotation.sh
+.nuvyra/reports/ENGINE_REPORT.txt
+.nuvyra/reports/MASTER_AUDIT.txt
+.nuvyra/reports/NUVYRA_REPORT_20260718_163529.txt
+.nuvyra/reports/NUVYRA_REPORT_20260718_173529.txt
+.nuvyra/reports/NUVYRA_REPORT_20260718_183534.txt
+.nuvyra/reports/NUVYRA_REPORT_20260718_193538.txt
+.nuvyra/reports/STEP1_CLEAN_REPORT.txt
+.nuvyra/reports/checks.json
+.nuvyra/reports/latest.txt
+.nuvyra/reports/score.txt
+.nuvyra/reports/system.json
+.nuvyra/runner.sh
+.nuvyra/security_clean.sh
+.nuvyra/security_upgrade.sh
+.nuvyra/share_security_report.sh

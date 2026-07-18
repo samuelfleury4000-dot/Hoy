@@ -1,0 +1,138 @@
+NUVYRA FINAL AUDIT Sat Jul 18 18:02:30 UTC 2026
+
+[FILES]
+src/App.jsx
+src/components/Dashboard.jsx
+src/components/NetworkSelector.jsx
+src/components/PriceCard.jsx
+src/components/ReceiveCrypto.jsx
+src/components/SeedBackup.jsx
+src/components/SendCrypto.jsx
+src/components/UnlockWallet.jsx
+src/components/WalletSetup.jsx
+src/context/WalletContext.jsx
+src/lib/config.js
+src/lib/fees.js
+src/lib/history.js
+src/lib/moonpay.js
+src/lib/network.js
+src/lib/prices.js
+src/lib/security.js
+src/lib/storage.js
+src/lib/tokenList.js
+src/lib/tokens.js
+src/lib/transaction.js
+src/lib/transactionGuard.js
+src/lib/wallet.js
+src/lib/walletSecurity.js
+src/lib/walletStatus.js
+src/main.jsx
+src/security/constants.js
+src/styles.css
+
+[SIZE]
+84M	.
+
+[BUILD]
+
+> nuvyra-wallet@1.0.0 build
+> vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 193 modules transformed.
+✗ Build failed in 1.40s
+error during build:
+src/lib/wallet.js (1:9): "MIN_PASSWORD_LENGTH" is not exported by "src/security/constants.js", imported by "src/lib/wallet.js".
+file: /workspaces/Hoy/nuvyra-wallet/src/lib/wallet.js:1:9
+
+1: import { MIN_PASSWORD_LENGTH } from "../security/constants.js";
+            ^
+2: import { ethers } from "ethers";
+3: import { NETWORKS, DEFAULT_NETWORK, STORAGE_KEY } from "./config.js";
+
+    at getRollupError (file:///workspaces/Hoy/nuvyra-wallet/node_modules/rollup/dist/es/shared/parseAst.js:317:41)
+    at error (file:///workspaces/Hoy/nuvyra-wallet/node_modules/rollup/dist/es/shared/parseAst.js:313:42)
+    at Module.error (file:///workspaces/Hoy/nuvyra-wallet/node_modules/rollup/dist/es/shared/node-entry.js:17396:16)
+    at Module.traceVariable (file:///workspaces/Hoy/nuvyra-wallet/node_modules/rollup/dist/es/shared/node-entry.js:17829:29)
+    at ModuleScope.findVariable (file:///workspaces/Hoy/nuvyra-wallet/node_modules/rollup/dist/es/shared/node-entry.js:15419:39)
+    at FunctionScope.findVariable (file:///workspaces/Hoy/nuvyra-wallet/node_modules/rollup/dist/es/shared/node-entry.js:5684:38)
+    at FunctionBodyScope.findVariable (file:///workspaces/Hoy/nuvyra-wallet/node_modules/rollup/dist/es/shared/node-entry.js:5684:38)
+    at Identifier.bind (file:///workspaces/Hoy/nuvyra-wallet/node_modules/rollup/dist/es/shared/node-entry.js:5451:40)
+    at BinaryExpression.bind (file:///workspaces/Hoy/nuvyra-wallet/node_modules/rollup/dist/es/shared/node-entry.js:2833:23)
+    at LogicalExpression.bind (file:///workspaces/Hoy/nuvyra-wallet/node_modules/rollup/dist/es/shared/node-entry.js:2833:23)
+
+[GIT]
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .nuvyra/dashboard/data.json
+	modified:   .nuvyra/history/audits.csv
+	modified:   src/lib/wallet.js
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	../NUVYRA_AUDIT.txt
+	../NUVYRA_FORENSIC_FULL_AUDIT.txt
+	../audit.sh
+	../backup_files.txt
+	../current_files.txt
+	../nuvyra-backup-forensic.tar.gz
+	nuvyra_audit.sh
+	../nuvyra_full_audit.sh
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+[ENV]
+./.env
+./.env.example
+
+[IMPORTS]
+src/App.jsx:import { useState, useEffect } from "react";
+src/App.jsx:import NetworkSelector from "./components/NetworkSelector";
+src/App.jsx:import { saveNetwork, getSavedNetwork } from "./lib/network";
+src/App.jsx:import { startSecurityTimer, resetSecurityTimer, clearSecurityTimer } from "./lib/security";
+src/App.jsx:import WalletSetup from "./components/WalletSetup";
+src/App.jsx:import Dashboard from "./components/Dashboard";
+src/App.jsx:import { hasStoredWallet, unlockWallet, wipeWallet } from "./lib/wallet";
+src/context/WalletContext.jsx:import { createContext, useContext, useEffect, useState } from "react";
+src/context/WalletContext.jsx:import {
+src/main.jsx:import React from "react";
+src/main.jsx:import ReactDOM from "react-dom/client";
+src/main.jsx:import App from "./App.jsx";
+src/main.jsx:import { WalletProvider } from "./context/WalletContext.jsx";
+src/main.jsx:import "./styles.css";
+src/lib/moonpay.js:import { ONRAMP_PROVIDER } from "./config.js";
+src/lib/tokens.js:import { ethers } from "ethers";
+src/lib/wallet.js:import { MIN_PASSWORD_LENGTH } from "../security/constants.js";
+src/lib/wallet.js:import { ethers } from "ethers";
+src/lib/wallet.js:import { NETWORKS, DEFAULT_NETWORK, STORAGE_KEY } from "./config.js";
+src/lib/wallet.js:import { getSavedNetwork } from "./network.js";
+src/lib/transaction.js:import { ethers } from "ethers";
+src/lib/transaction.js:import { getProvider } from "./wallet.js";
+src/components/ReceiveCrypto.jsx:import { QRCodeSVG } from "qrcode.react";
+src/components/UnlockWallet.jsx:import { useState } from "react";
+src/components/UnlockWallet.jsx:import { useWallet } from "../context/WalletContext";
+src/components/SeedBackup.jsx:import { useState } from "react";
+src/components/NetworkSelector.jsx:import { NETWORKS } from "../lib/config";
+src/components/SendCrypto.jsx:import { useState } from "react";
+src/components/SendCrypto.jsx:import { ethers } from "ethers";
+src/components/SendCrypto.jsx:import { sendETH, estimateETHFee } from "../lib/transaction";
+src/components/WalletSetup.jsx:import { useState } from "react";
+src/components/WalletSetup.jsx:import { createWallet, saveKeystore, importFromMnemonic } from "../lib/wallet";
+src/components/Dashboard.jsx:import { useState, useEffect } from "react";
+src/components/Dashboard.jsx:import { getBalance } from "../lib/wallet";
+src/components/Dashboard.jsx:import { getCryptoPrices } from "../lib/prices";
+src/components/Dashboard.jsx:import { openMoonPay } from "../lib/moonpay";
+src/components/Dashboard.jsx:import { getProvider } from "../lib/wallet";
+src/components/Dashboard.jsx:import { getSavedNetwork } from "../lib/network";
+src/components/Dashboard.jsx:import { getTokenBalance } from "../lib/tokens";
+src/components/Dashboard.jsx:import { TOKENS } from "../lib/tokenList";
+src/components/Dashboard.jsx:import { getTransactionHistory } from "../lib/history";
+src/components/Dashboard.jsx:import PriceCard from "./PriceCard";
+src/components/Dashboard.jsx:import ReceiveCrypto from "./ReceiveCrypto";
+src/components/Dashboard.jsx:import SendCrypto from "./SendCrypto";
+src/components/Dashboard.jsx:import { QRCodeSVG } from "qrcode.react";
