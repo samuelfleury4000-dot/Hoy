@@ -1,103 +1,76 @@
 import { ethers } from "ethers";
 import { NETWORKS, DEFAULT_NETWORK, STORAGE_KEY } from "./config.js";
 
-export function getProvider(networkKey){
+export function getProvider(networkKey = DEFAULT_NETWORK) {
+  const net = NETWORKS[networkKey];
 
-const net = NETWORKS[networkKey];
+  if (!net) {
+    throw new Error("Réseau inconnu");
+  }
 
-return new ethers.JsonRpcProvider(net.rpcUrl);
-
+  return new ethers.JsonRpcProvider(net.rpcUrl);
 }
 
+export async function createWallet(password) {
+  if (!password || password.length < 8) {
+    throw new Error("Mot de passe trop court");
+  }
 
-export async function createWallet(password){
+  const wallet = ethers.Wallet.createRandom();
 
-const wallet = ethers.Wallet.createRandom();
+  const encryptedJson = await wallet.encrypt(password);
 
-const encryptedJson = await wallet.encrypt(password);
-
-return {
-encryptedJson,
-mnemonic:wallet.mnemonic.phrase,
-address:wallet.address
-};
-
+  return {
+    encryptedJson,
+    mnemonic: wallet.mnemonic.phrase,
+    address: wallet.address
+  };
 }
 
+export async function importFromMnemonic(mnemonic, password) {
+  if (!mnemonic || mnemonic.trim().split(" ").length < 12) {
+    throw new Error("Phrase invalide");
+  }
 
-export function saveKeystore(data){
+  const wallet = ethers.Wallet.fromPhrase(mnemonic.trim());
 
-localStorage.setItem(
-STORAGE_KEY,
-data
-);
+  const encryptedJson = await wallet.encrypt(password);
 
+  return {
+    encryptedJson,
+    address: wallet.address
+  };
 }
 
-
-export async function importFromMnemonic(mnemonic, password){
-
-const wallet = ethers.Wallet.fromPhrase(mnemonic);
-
-const encryptedJson = await wallet.encrypt(password);
-
-return {
-  encryptedJson,
-  address: wallet.address
-};
-
+export function saveKeystore(keystore) {
+  localStorage.setItem(STORAGE_KEY, keystore);
 }
 
-
-export function hasStoredWallet(){
-
-return Boolean(
-localStorage.getItem(STORAGE_KEY)
-);
-
+export function hasStoredWallet() {
+  return Boolean(localStorage.getItem(STORAGE_KEY));
 }
 
+export async function unlockWallet(password) {
+  const keystore = localStorage.getItem(STORAGE_KEY);
 
-export async function unlockWallet(password){
+  if (!keystore) {
+    throw new Error("Aucun wallet trouvé");
+  }
 
-const encrypted =
-localStorage.getItem(STORAGE_KEY);
-
-if(!encrypted)
-throw new Error("Wallet absent");
-
-return await ethers.Wallet.fromEncryptedJson(
-encrypted,
-password
-);
-
+  return await ethers.Wallet.fromEncryptedJson(
+    keystore,
+    password
+  );
 }
 
+export async function getBalance(address) {
+  const provider = getProvider();
 
-export async function getBalance(address){
+  const balance = await provider.getBalance(address);
 
-try{
-
-const provider=getProvider(DEFAULT_NETWORK);
-
-const balance =
-await provider.getBalance(address);
-
-return ethers.formatEther(balance);
-
-}catch(e){
-
-console.error("Balance erreur",e);
-
-return "0";
-
+  return ethers.formatEther(balance);
 }
 
-}
-
-
-export function wipeWallet(){
-
-localStorage.removeItem(STORAGE_KEY);
-
+export function wipeWallet() {
+  localStorage.removeItem(STORAGE_KEY);
 }

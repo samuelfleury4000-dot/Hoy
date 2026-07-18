@@ -5,207 +5,203 @@ import { openMoonPay } from "../lib/moonpay";
 import PriceCard from "./PriceCard";
 import SendCrypto from "./SendCrypto";
 
-export default function Dashboard({wallet,onLogout}){
+export default function Dashboard({ wallet, onLogout }) {
 
-const [ethBalance,setEthBalance]=useState("0");
+  const [ethBalance, setEthBalance] = useState("0");
+  const [prices, setPrices] = useState(null);
+  const [updated, setUpdated] = useState("");
+  const [error, setError] = useState("");
+  const [sendMode, setSendMode] = useState(false);
 
-const [prices,setPrices]=useState({
- ethereum:{cad:0,change:0},
- bitcoin:{cad:0,change:0},
- usdc:{cad:0,change:0}
-});
+  async function refresh() {
 
-const [updated,setUpdated]=useState("");
-const [sendMode,setSendMode]=useState(false);
+    try {
 
+      setError("");
 
-async function refresh(){
+      let balance = "0";
 
-try{
+      try {
+        balance = await getBalance(wallet.address);
+      } catch(e) {
+        console.error("Balance ETH erreur:", e);
+      }
 
-const balance = await getBalance(wallet.address);
-setEthBalance(balance);
+      setEthBalance(balance);
 
+      const data = await getCryptoPrices();
 
-const data = await getCryptoPrices();
+      setPrices(data);
 
-console.log("PRIX RECUS:",data);
+      setUpdated(
+        new Date().toLocaleTimeString("fr-CA")
+      );
 
-setPrices(data);
+    } catch (e) {
 
+      console.error(e);
+      setError(
+        "Impossible de charger les données réseau."
+      );
 
-setUpdated(
-new Date().toLocaleTimeString()
-);
+    }
 
+  }
 
-}catch(e){
 
-console.error("Erreur dashboard:",e);
+  useEffect(() => {
 
-}
+    refresh();
 
-}
+    const timer = setInterval(
+      refresh,
+      60000
+    );
 
+    return () => clearInterval(timer);
 
-useEffect(()=>{
+  }, []);
 
-refresh();
 
-const timer=setInterval(
-refresh,
-60000
-);
+  if (sendMode) {
+    return (
+      <SendCrypto
+        wallet={wallet}
+        onBack={() => setSendMode(false)}
+      />
+    );
+  }
 
-return()=>clearInterval(timer);
 
-},[]);
+  const ethValue =
+    prices
+      ? Number(ethBalance) * Number(prices.ethereum.cad)
+      : 0;
 
 
+  return (
 
-if(sendMode){
+    <div className="main-container">
 
-return(
-<SendCrypto
-wallet={wallet}
-onBack={()=>setSendMode(false)}
-/>
-);
+      <h1>
+        Vaultify Wallet
+      </h1>
 
-}
 
+      <div className="info-box">
 
+        <strong>
+          Adresse du wallet
+        </strong>
 
-return(
+        <p style={{wordBreak:"break-all"}}>
+          {wallet.address}
+        </p>
 
-<div className="main-container">
+      </div>
 
 
-<h1>
-Vaultify Wallet
-</h1>
+      
 
-<div className="info-box">
-<h3>DEBUG PRIX</h3>
-<p>ETH: {prices.ethereum.cad}</p>
-<p>BTC: {prices.bitcoin.cad}</p>
-<p>USDC: {prices.usdc.cad}</p>
-</div>
 
+      <div className="info-box">
 
-
-<div className="info-box">
-
-<strong>
-Adresse du wallet
-</strong>
-
-<p style={{wordBreak:"break-all"}}>
-{wallet.address}
-</p>
-
-</div>
-
-
-
-<div className="info-box">
-
-<h3>
-Portfolio ETH
-</h3>
-
-
-<p>
-Balance:
-{" "}
-{Number(ethBalance).toFixed(6)}
-ETH
-</p>
-
-
-<p>
-Valeur:
-{" "}
-{(
-Number(ethBalance) *
-Number(prices.ethereum.cad)
-).toLocaleString("fr-CA",
-{
-minimumFractionDigits:2,
-maximumFractionDigits:2
-})}
-CAD
-</p>
-
-
-<small>
-Mise à jour: {updated}
-</small>
-
-
-</div>
-
-
-
-<PriceCard
-name="Ethereum"
-amount={ethBalance}
-price={prices.ethereum.cad}
-change={prices.ethereum.change}
-/>
-
-
-<PriceCard
-name="Bitcoin"
-amount="0"
-price={prices.bitcoin.cad}
-change={prices.bitcoin.change}
-/>
-
-
-<PriceCard
-name="USDC"
-amount="0"
-price={prices.usdc.cad}
-change={prices.usdc.change}
-/>
-
-
-
-<button
-className="btn-primary"
-onClick={()=>openMoonPay(wallet.address,"ETH")}
->
-Acheter crypto
-</button>
-
-
-<button
-className="btn-primary"
-onClick={()=>setSendMode(true)}
->
-Envoyer ETH
-</button>
-
-
-<button
-className="btn-secondary"
-onClick={refresh}
->
-Actualiser prix
-</button>
-
-
-<button
-className="btn-secondary"
-onClick={onLogout}
->
-Déconnexion
-</button>
-
-
-</div>
-
-);
+        <h3>
+          Portfolio
+        </h3>
+
+        <p>
+          ETH :
+          {" "}
+          {Number(ethBalance).toFixed(6)}
+        </p>
+
+
+        <p>
+          Valeur estimée :
+          {" "}
+          {ethValue.toLocaleString(
+            "fr-CA",
+            {
+              minimumFractionDigits:2,
+              maximumFractionDigits:2
+            }
+          )}
+          CAD
+        </p>
+
+
+        <small>
+          Mise à jour : {updated || "en cours..."}
+        </small>
+
+      </div>
+
+
+      {prices && (
+        <>
+          <PriceCard
+            name="Ethereum"
+            amount={ethBalance}
+            price={prices.ethereum.cad}
+            change={prices.ethereum.change}
+          />
+
+
+          <PriceCard
+            name="Bitcoin"
+            amount="0"
+            price={prices.bitcoin.cad}
+            change={prices.bitcoin.change}
+          />
+
+
+          <PriceCard
+            name="USDC"
+            amount="0"
+            price={prices.usdc.cad}
+            change={prices.usdc.change}
+          />
+        </>
+      )}
+
+
+      <button
+        className="btn-primary"
+        onClick={() =>
+          openMoonPay(wallet.address,"ETH")
+        }
+      >
+        Acheter crypto
+      </button>
+
+
+      <button
+        className="btn-primary"
+        onClick={() => setSendMode(true)}
+      >
+        Envoyer ETH
+      </button>
+
+
+      <button
+        className="btn-secondary"
+        onClick={refresh}
+      >
+        Actualiser
+      </button>
+
+
+      <button
+        className="btn-secondary"
+        onClick={onLogout}
+      >
+        Déconnexion
+      </button>
+
+
+    </div>
+
+  );
 
 }
