@@ -2,26 +2,25 @@
 
 REPORT=".nuvyra/reports/ENGINE_REPORT.txt"
 
-echo "===== SECURITY =====" >> "$REPORT"
 
-REAL_SECRET=$(grep -RInE \
-"(0x[a-fA-F0-9]{64}|-----BEGIN PRIVATE KEY-----|mnemonic\s*=\s*['\"][^'\"]{20,}|seed\s*=\s*['\"][^'\"]{20,})" \
+SECRET=$(grep -RInE \
+"(0x[a-fA-F0-9]{64}|-----BEGIN PRIVATE KEY-----|AKIA[0-9A-Z]{16}|sk_live_[a-zA-Z0-9]+|mnemonic[[:space:]]*=[[:space:]]*['\"][a-zA-Z0-9 ]{20,}['\"]|seed[[:space:]]*=[[:space:]]*['\"][a-zA-Z0-9 ]{20,}['\"])" \
 src 2>/dev/null)
 
-if [ -z "$REAL_SECRET" ]; then
+if [ -z "$SECRET" ]; then
     echo "PASS: Aucun secret réel exposé" >> "$REPORT"
 else
     echo "WARNING: Secret potentiel détecté" >> "$REPORT"
-    echo "$REAL_SECRET" >> "$REPORT"
+    echo "$SECRET" >> "$REPORT"
 fi
 
-PRIVATE_STORAGE=$(grep -RInE \
+STORAGE=$(grep -RInE \
 "localStorage.*(private|seed|mnemonic)|sessionStorage.*(private|seed|mnemonic)" \
 src 2>/dev/null)
 
-if [ -z "$PRIVATE_STORAGE" ]; then
-    echo "PASS: Pas de stockage direct seed/private key" >> "$REPORT"
+if [ -z "$STORAGE" ]; then
+    echo "PASS: Pas de stockage direct sensible" >> "$REPORT"
 else
     echo "WARNING: Stockage sensible détecté" >> "$REPORT"
-    echo "$PRIVATE_STORAGE" >> "$REPORT"
+    echo "$STORAGE" >> "$REPORT"
 fi
