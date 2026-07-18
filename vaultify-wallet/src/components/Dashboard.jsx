@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { getBalance } from "../lib/wallet";
 import { getCryptoPrices } from "../lib/prices";
 import { openMoonPay } from "../lib/moonpay";
+import { getProvider } from "../lib/wallet";
+import { getTokenBalance } from "../lib/tokens";
+import { TOKENS } from "../lib/tokenList";
 import PriceCard from "./PriceCard";
 import SendCrypto from "./SendCrypto";
 
@@ -13,6 +16,7 @@ export default function Dashboard({ wallet, onLogout }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [sendMode, setSendMode] = useState(false);
+  const [tokens, setTokens] = useState([]);
   const [copied, setCopied] = useState(false);
 
 
@@ -32,6 +36,21 @@ export default function Dashboard({ wallet, onLogout }) {
 
       setEthBalance(balance);
       setPrices(priceData);
+
+
+      const provider = getProvider();
+
+      const tokenResults = await Promise.all(
+        (TOKENS.sepolia || []).map(token =>
+          getTokenBalance(
+            token,
+            wallet.address,
+            provider
+          )
+        )
+      );
+
+      setTokens(tokenResults);
 
       setUpdated(
         new Date().toLocaleTimeString("fr-CA")
@@ -102,6 +121,23 @@ export default function Dashboard({ wallet, onLogout }) {
     : 0;
 
 
+  const tokenValue =
+    prices
+      ? tokens.reduce((total, token) => {
+
+          if(token.symbol === "USDC"){
+            return total + Number(token.balance) * Number(prices.usdc.cad);
+          }
+
+          return total;
+
+        },0)
+      : 0;
+
+
+  const totalValue = ethValue + tokenValue;
+
+
 
   return (
 
@@ -157,9 +193,9 @@ export default function Dashboard({ wallet, onLogout }) {
 
 
         <p>
-          Valeur estimée :
+          Valeur totale :
           {" "}
-          {ethValue.toLocaleString(
+          {totalValue.toLocaleString(
             "fr-CA",
             {
               minimumFractionDigits:2,
@@ -180,6 +216,86 @@ export default function Dashboard({ wallet, onLogout }) {
       </div>
 
 
+
+
+      {tokens.length > 0 && (
+
+        <div className="info-box">
+
+          <h3>
+            Tokens
+          </h3>
+
+          {tokens.map((token,index)=>(
+
+            <p key={index}>
+              {token.symbol} :
+              {" "}
+              {Number(token.balance).toFixed(4)}
+
+              {" | "}
+
+              {token.symbol === "USDC"
+                ? (
+                    Number(token.balance) *
+                    Number(prices?.usdc?.cad || 0)
+                  ).toLocaleString(
+                    "fr-CA",
+                    {
+                      minimumFractionDigits:2,
+                      maximumFractionDigits:2
+                    }
+                  ) + " CAD"
+                : "0 CAD"
+              }
+
+            </p>
+
+          ))}
+
+        </div>
+
+      )}
+
+
+      {tokens.length > 0 && (
+
+        <div className="info-box">
+
+          <h3>
+            Tokens
+          </h3>
+
+          {tokens.map((token,index)=>(
+
+            <p key={index}>
+              {token.symbol} :
+              {" "}
+              {Number(token.balance).toFixed(4)}
+
+              {" | "}
+
+              {token.symbol === "USDC"
+                ? (
+                    Number(token.balance) *
+                    Number(prices?.usdc?.cad || 0)
+                  ).toLocaleString(
+                    "fr-CA",
+                    {
+                      minimumFractionDigits:2,
+                      maximumFractionDigits:2
+                    }
+                  ) + " CAD"
+                : "0 CAD"
+              }
+
+            </p>
+
+          ))}
+
+        </div>
+
+      )}
 
       {prices && (
 

@@ -1,55 +1,75 @@
 import { ethers } from "ethers";
 
 const ERC20_ABI = [
-  "function balanceOf(address owner) view returns (uint256)",
-  "function decimals() view returns (uint8)",
-  "function symbol() view returns (string)"
+  "function balanceOf(address owner) view returns(uint256)"
 ];
 
-export async function getERC20Balance(
-  tokenAddress,
+
+export async function getTokenBalance(
+  token,
   walletAddress,
   provider
-) {
+){
+
   try {
 
-    const token = new ethers.Contract(
-      tokenAddress,
-      ERC20_ABI,
-      provider
-    );
+    if(
+      !ethers.isAddress(token.address)
+    ){
+      throw new Error(
+        "Adresse token invalide"
+      );
+    }
 
-    const [
-      balance,
-      decimals,
-      symbol
-    ] = await Promise.all([
-      token.balanceOf(walletAddress),
-      token.decimals(),
-      token.symbol()
-    ]);
+
+    const contract =
+      new ethers.Contract(
+        token.address,
+        ERC20_ABI,
+        provider
+      );
+
+
+    const balance =
+      await contract.balanceOf(
+        walletAddress
+      );
 
 
     return {
-      symbol,
-      balance: ethers.formatUnits(
-        balance,
-        decimals
-      )
+
+      symbol: token.symbol,
+
+      name: token.name,
+
+      balance:
+        ethers.formatUnits(
+          balance,
+          token.decimals
+        )
+
     };
 
 
-  } catch (error) {
+  } catch(error){
 
     console.error(
       "Erreur token:",
+      token.symbol,
       error
     );
 
+
     return {
-      symbol: "UNKNOWN",
-      balance: "0"
+
+      symbol: token.symbol,
+
+      name: token.name,
+
+      balance:"0"
+
     };
 
   }
+
 }
