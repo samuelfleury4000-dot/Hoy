@@ -1,0 +1,910 @@
+
+===== src/App.jsx =====
+
+import { useState } from 'react';
+import WalletSetup from './components/WalletSetup';
+import Dashboard from './components/Dashboard';
+import { hasStoredWallet, unlockWallet, wipeWallet } from './lib/wallet';
+
+export default function App() {
+  const [wallet, setWallet] = useState(null);
+  const [isLocked, setIsLocked] = useState(hasStoredWallet());
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const attemptUnlock = async () => {
+    try {
+      const w = await unlockWallet(password);
+      setWallet(w);
+      setIsLocked(false);
+      setError('');
+    } catch (e) { 
+      setError('Mot de passe incorrect ou erreur de déchiffrement.'); 
+    }
+  };
+
+  const handleLogout = () => {
+    setWallet(null);
+    setIsLocked(true);
+  };
+
+  const handleDeleteWallet = () => {
+    if(confirm("Supprimer définitivement ce wallet local ?")) {
+      wipeWallet();
+      window.location.reload();
+    }
+  };
+
+  return (
+    <div>
+      {/* HEADER GLOBAL COMPRIS SUR TOUTES LES PAGES */}
+      <header className="app-header">
+        <div className="logo-container">
+          <div className="status-dot"></div>
+          VAULTIFY
+        </div>
+        <div className="network-badge">
+          Sepolia (testnet)
+        </div>
+      </header>
+
+      {/* LOGIQUE DE ROUTAGE */}
+      {hasStoredWallet() && isLocked ? (
+        <div className="main-container">
+          <h1>Bon retour</h1>
+          <p className="description">Entre ton mot de passe pour déverrouiller ton portefeuille local.</p>
+          
+          {error && <div className="error-box">{error}</div>}
+          
+          <div className="input-group">
+            <label className="input-label">MOT DE PASSE</label>
+            <input type="password" className="input-field" onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          
+          <button className="btn-primary" onClick={attemptUnlock}>Déverrouiller</button>
+          <button className="btn-secondary" style={{ marginTop: '1rem', borderColor: '#ef4444', color: '#ef4444' }} onClick={handleDeleteWallet}>Effacer le wallet de cet appareil</button>
+        </div>
+      ) : !wallet ? (
+        <WalletSetup onWalletCreated={() => window.location.reload()} />
+      ) : (
+        <Dashboard wallet={wallet} onLogout={handleLogout} />
+      )}
+    </div>
+  );
+}
+
+===== src/main.jsx =====
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import './styles.css';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+===== src/lib/moonpay.js =====
+
+import { ONRAMP_PROVIDER } from "./config.js";
+
+export function openMoonPay(walletAddress, currency="ETH") {
+
+  const url =
+    `${ONRAMP_PROVIDER.widgetUrl}` +
+    `?apiKey=${ONRAMP_PROVIDER.apiKey}` +
+    `&walletAddress=${walletAddress}` +
+    `&currencyCode=${currency}`;
+
+  window.open(
+    url,
+    "_blank",
+    "width=500,height=700"
+  );
+}
+
+===== src/lib/prices.js =====
+
+export async function getCryptoPrices(){
+
+  try {
+
+    const res = await fetch(
+      "https://api.coingecko.com/api/v3/simple/price?ids=ethereum,bitcoin,usd-coin&vs_currencies=cad&include_24hr_change=true"
+    );
+
+    const data = await res.json();
+
+    console.log("PRIX API:", data);
+
+
+    return {
+      ethereum:{
+        cad: data.ethereum?.cad ?? 0,
+        change: data.ethereum?.cad_24h_change ?? 0
+      },
+
+      bitcoin:{
+        cad: data.bitcoin?.cad ?? 0,
+        change: data.bitcoin?.cad_24h_change ?? 0
+      },
+
+      usdc:{
+        cad: data["usd-coin"]?.cad ?? 0,
+        change: data["usd-coin"]?.cad_24h_change ?? 0
+      }
+    };
+
+
+  } catch(error){
+
+    console.error("Erreur prix:", error);
+
+    return {
+      ethereum:{cad:0,change:0},
+      bitcoin:{cad:0,change:0},
+      usdc:{cad:0,change:0}
+    };
+
+  }
+
+}
+
+===== src/lib/wallet.js =====
+
+import { ethers } from 'ethers';
+import { NETWORKS, DEFAULT_NETWORK, STORAGE_KEY } from './config.js';
+
+export function getProvider(networkKey) {
+  const net = NETWORKS[networkKey];
+  return new ethers.JsonRpcProvider(net.rpcUrl);
+}
+
+export async function createWallet(password) {
+  const wallet = ethers.Wallet.createRandom();
+  const keystore = await wallet.encrypt(password);
+
+  return {
+    encryptedJson: keystore,
+    mnemonic: wallet.mnemonic.phrase,
+    address: wallet.address
+  };
+}
+
+export function saveKeystore(keystore) {
+  localStorage.setItem(STORAGE_KEY, keystore);
+}
+
+export async function importFromMnemonic(mnemonic, password) {
+  const wallet = ethers.Wallet.fromPhrase(mnemonic);
+  const keystore = await wallet.encrypt(password);
+
+  return {
+    encryptedJson: keystore,
+    address: wallet.address
+  };
+}
+
+export async function getTokenBalance(tokenAddress, userAddress, provider) {
+  const erc20Abi = ["function balanceOf(address) view returns (uint256)", "function decimals() view returns (uint8)"];
+  const contract = new ethers.Contract(tokenAddress, erc20Abi, provider);
+  const balance = await contract.balanceOf(userAddress);
+  const decimals = await contract.decimals();
+  return ethers.formatUnits(balance, decimals);
+}
+
+export async function getBalance(address) {
+  const provider = getProvider(DEFAULT_NETWORK);
+  const balance = await provider.getBalance(address);
+  return ethers.formatEther(balance);
+}
+
+export function hasStoredWallet() {
+  return !!localStorage.getItem(STORAGE_KEY);
+}
+
+export async function unlockWallet(password) {
+  const keystore = localStorage.getItem(STORAGE_KEY);
+  if (!keystore) throw new Error("Aucun wallet trouvé.");
+  const wallet = await ethers.Wallet.fromEncryptedJson(keystore, password);
+  return wallet;
+}
+
+export function wipeWallet() {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+===== src/lib/fees.js =====
+
+export const FEE_CONFIG = {
+  percentage: 0.5,
+
+  collectors: {
+    ETH: "0xA29baAc46a97ae0Ba82D64BeD3591337B64b3670",
+
+    BTC: "bc1qw5rrqxruhdfrlmthapyctwmhzlwpxf8wje4md0",
+
+    BCH: "bitcoincash:qqpwwcuzhr0vqe2d6tezx0rwaaky9kzfyg06t39duq",
+
+    DASH: "DT3qzbQrZJvguSvQiqGu8PwMtbF1oik3jJ",
+
+    LTC: "ltc1q73ze433dvfynryrua4y3phmud49esered74vxd",
+
+    XRP: "rabh6WVfnFG7D1Xm9sZeMVDpo14aKBRcMa"
+  }
+};
+
+===== src/lib/transaction.js =====
+
+import { ethers } from "ethers";
+import { getProvider } from "./wallet.js";
+
+export async function sendETH(wallet, to, amount) {
+  const provider = getProvider("sepolia");
+
+  const signer = wallet.connect(provider);
+
+  const tx = await signer.sendTransaction({
+    to,
+    value: ethers.parseEther(amount)
+  });
+
+  return tx.wait();
+}
+
+===== src/lib/config.js =====
+
+export const NETWORKS = {
+  sepolia: {
+    chainId: 11155111,
+    rpcUrl: `https://sepolia.infura.io/v3/${import.meta.env.VITE_INFURA_ID || ''}`
+  }
+};
+
+export const DEFAULT_NETWORK = 'sepolia';
+export const STORAGE_KEY = 'vaultify_wallet';
+export const SERVICE_FEE_PERCENT = 0.5;
+
+export const ONRAMP_PROVIDER = {
+  name: 'MoonPay',
+  apiKey: import.meta.env.VITE_MOONPAY_API_KEY || '',
+  widgetUrl: 'https://buy.moonpay.com'
+};
+
+===== src/styles.css =====
+
+:root {
+  --bg-main: #0b0e14;
+  --bg-panel: #151b23;
+  --bg-input: #010409;
+  --accent-green: #4ade80;
+  --accent-green-hover: #22c55e;
+  --text-main: #f0f6fc;
+  --text-muted: #8b949e;
+  --border: #30363d;
+  --error-bg: rgba(248, 81, 73, 0.1);
+  --error-text: #ff7b72;
+}
+
+body {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #1f2937;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-green);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-green);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-green);
+}
+
+.network-badge {
+  background-color: #1f2937;
+  color: var(--text-muted);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+/* Layout */
+.main-container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h1 {
+  font-size: 2.2rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+p.description {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Info Box */
+.info-box {
+  background-color: rgba(74, 222, 128, 0.05);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  padding: 1.25rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.info-box strong {
+  color: var(--accent-green);
+  font-weight: 500;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--accent-green);
+  color: #000;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-green-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.back-link {
+  color: var(--text-muted);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.back-link:hover {
+  color: var(--text-main);
+}
+
+/* Form Elements */
+.error-box {
+  background-color: var(--error-bg);
+  border: 1px solid var(--error-text);
+  color: var(--error-text);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.9rem;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.input-field {
+  width: 100%;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--accent-green);
+}
+
+===== src/components/SendCrypto.jsx =====
+
+import { useState } from "react";
+import { sendETH } from "../lib/transaction";
+
+export default function SendCrypto({wallet,onBack}){
+
+  const [address,setAddress]=useState("");
+  const [amount,setAmount]=useState("");
+  const [message,setMessage]=useState("");
+
+  async function send(){
+
+    try{
+
+      setMessage("Transaction en cours...");
+
+      await sendETH(
+        wallet,
+        address,
+        amount
+      );
+
+      setMessage("Transaction envoyée !");
+
+    }catch(e){
+
+      setMessage(e.message);
+
+    }
+
+  }
+
+
+  return (
+
+    <div className="main-container">
+
+      <h1>Envoyer ETH</h1>
+
+
+      <div className="input-group">
+
+        <label className="input-label">
+          ADRESSE DESTINATION
+        </label>
+
+        <input
+          className="input-field"
+          onChange={e=>setAddress(e.target.value)}
+          placeholder="0x..."
+        />
+
+      </div>
+
+
+      <div className="input-group">
+
+        <label className="input-label">
+          MONTANT ETH
+        </label>
+
+        <input
+          className="input-field"
+          onChange={e=>setAmount(e.target.value)}
+          placeholder="0.01"
+        />
+
+      </div>
+
+
+      {message && (
+        <div className="info-box">
+          {message}
+        </div>
+      )}
+
+
+      <button
+        className="btn-primary"
+        onClick={send}
+      >
+        Envoyer
+      </button>
+
+
+      <button
+        className="btn-secondary"
+        onClick={onBack}
+      >
+        Retour
+      </button>
+
+
+    </div>
+
+  );
+
+}
+
+===== src/components/WalletSetup.jsx =====
+
+import { useState } from 'react';
+import { createWallet, saveKeystore, importFromMnemonic } from '../lib/wallet';
+
+export default function WalletSetup({ onWalletCreated }) {
+  const [step, setStep] = useState('home'); // 'home' | 'password' | 'import'
+  const [action, setAction] = useState(null); // 'create' | 'import'
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [mnemonic, setMnemonic] = useState('');
+  const [error, setError] = useState('');
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleStartCreate = () => {
+    setAction('create');
+    setStep('password');
+    setError('');
+  };
+
+  const handleStartImport = () => {
+    setAction('import');
+    setStep('import');
+    setError('');
+  };
+
+  const handleSubmit = async () => {
+    setError('');
+    
+    if (action === 'create' || action === 'import') {
+      if (password !== confirmPassword) {
+        return setError("Les mots de passe ne correspondent pas.");
+      }
+      if (password.length < 8) {
+        return setError("Le mot de passe doit faire au moins 8 caractères.");
+      }
+    }
+
+    setIsProcessing(true);
+    try {
+      if (action === 'create') {
+        const { encryptedJson, mnemonic: m } = await createWallet(password);
+        saveKeystore(encryptedJson);
+        alert(`SAUVEGARDE REQUISE :\nVoici votre phrase secrète. Notez-la immédiatement.\n\n${m}`);
+        onWalletCreated();
+      } else if (action === 'import') {
+        if (!mnemonic) throw new Error("Veuillez entrer une phrase de récupération.");
+        const { encryptedJson } = await importFromMnemonic(mnemonic, password);
+        saveKeystore(encryptedJson);
+        onWalletCreated();
+      }
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  if (step === 'home') {
+    return (
+      <div className="main-container">
+        <h1>Ton coffre-fort crypto, sur ton appareil.</h1>
+        <p className="description">
+          Vaultify ne détient jamais tes fonds ni tes clés. Tout le chiffrement se fait ici, localement — aucune donnée sensible ne part sur un serveur.
+        </p>
+
+        <div className="info-box">
+          <strong>Comment ça marche :</strong> on génère une phrase de 12 mots (ta sauvegarde maîtresse) et une adresse. Tu choisis un mot de passe qui chiffre tout ça sur cet appareil. Perds la phrase = fonds perdus, personne ne peut les récupérer pour toi — pas même nous.
+        </div>
+
+        <button className="btn-primary" onClick={handleStartCreate}>Créer un nouveau wallet</button>
+        <button className="btn-secondary" onClick={handleStartImport}>J'ai déjà une phrase de récupération</button>
+      </div>
+    );
+  }
+
+  if (step === 'import') {
+    return (
+      <div className="main-container">
+        <span className="back-link" onClick={() => setStep('home')}>&larr; retour</span>
+        <h1>Importer un wallet</h1>
+        <p className="description">Entre ta phrase secrète de 12 mots et choisis un nouveau mot de passe pour la chiffrer sur cet appareil.</p>
+        
+        {error && <div className="error-box">{error}</div>}
+
+        <div className="input-group">
+          <label className="input-label">PHRASE DE RÉCUPÉRATION (12 MOTS)</label>
+          <textarea 
+            className="input-field" 
+            style={{ minHeight: '100px', resize: 'vertical' }}
+            onChange={(e) => setMnemonic(e.target.value)} 
+            placeholder="mot1 mot2 mot3..."
+          />
+        </div>
+
+        <div className="input-group">
+          <label className="input-label">NOUVEAU MOT DE PASSE</label>
+          <input type="password" className="input-field" onChange={(e) => setPassword(e.target.value)} />
+        </div>
+
+        <div className="input-group">
+          <label className="input-label">CONFIRME LE MOT DE PASSE</label>
+          <input type="password" className="input-field" onChange={(e) => setConfirmPassword(e.target.value)} />
+        </div>
+
+        <button className="btn-primary" onClick={handleSubmit} disabled={isProcessing}>
+          {isProcessing ? 'Importation...' : 'Restaurer le wallet'}
+        </button>
+      </div>
+    );
+  }
+
+  // Step === 'password' (Création)
+  return (
+    <div className="main-container">
+      <span className="back-link" onClick={() => setStep('home')}>&larr; retour</span>
+      <h1>Choisis un mot de passe</h1>
+      <p className="description">
+        Ce mot de passe chiffre ta clé sur cet appareil. Il n'est jamais envoyé nulle part — s'il est perdu, la phrase de récupération reste ton seul recours.
+      </p>
+
+      {error && <div className="error-box">{error}</div>}
+
+      <div className="input-group">
+        <label className="input-label">MOT DE PASSE</label>
+        <input 
+          type="password" 
+          className="input-field" 
+          placeholder="••••••••••••"
+          onChange={(e) => setPassword(e.target.value)} 
+        />
+      </div>
+
+      <div className="input-group">
+        <label className="input-label">CONFIRME LE MOT DE PASSE</label>
+        <input 
+          type="password" 
+          className="input-field" 
+          placeholder="••••••••••••"
+          onChange={(e) => setConfirmPassword(e.target.value)} 
+        />
+      </div>
+
+      <button className="btn-primary" onClick={handleSubmit} disabled={isProcessing}>
+        {isProcessing ? 'Génération en cours...' : 'Continuer'}
+      </button>
+    </div>
+  );
+}
+
+===== src/components/PriceCard.jsx =====
+
+export default function PriceCard({name, amount, price, change}) {
+  return (
+    <div className="info-box">
+      <h3>{name}</h3>
+
+      <p>
+        Quantité : {amount || "0"}
+      </p>
+
+      <p>
+        Prix : {Number(price || 0).toLocaleString("fr-CA", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })} CAD
+      </p>
+
+      <p>
+        24h : {Number(change || 0).toFixed(2)}%
+      </p>
+    </div>
+  );
+}
+
+===== src/components/Dashboard.jsx =====
+
+import { useState, useEffect } from "react";
+import { getBalance } from "../lib/wallet";
+import { getCryptoPrices } from "../lib/prices";
+import { openMoonPay } from "../lib/moonpay";
+import PriceCard from "./PriceCard";
+import SendCrypto from "./SendCrypto";
+
+export default function Dashboard({wallet, onLogout}) {
+
+  const [ethBalance,setEthBalance] = useState("0");
+  const [prices,setPrices] = useState({
+    ethereum:{cad:0,change:0},
+    bitcoin:{cad:0,change:0},
+    usdc:{cad:0,change:0}
+  });
+
+  const [sendMode,setSendMode] = useState(false);
+  const [updated,setUpdated] = useState("");
+
+  async function refresh(){
+
+    try{
+
+      const balance = await getBalance(wallet.address);
+      setEthBalance(balance);
+
+      const data = await getCryptoPrices();
+      setPrices(data);
+
+      setUpdated(new Date().toLocaleTimeString());
+
+    }catch(e){
+      console.error(e);
+    }
+
+  }
+
+
+  useEffect(()=>{
+
+    refresh();
+
+    const timer=setInterval(refresh,60000);
+
+    return()=>clearInterval(timer);
+
+  },[]);
+
+
+
+  if(sendMode){
+    return (
+      <SendCrypto
+        wallet={wallet}
+        onBack={()=>setSendMode(false)}
+      />
+    );
+  }
+
+
+  return (
+
+    <div className="main-container">
+
+      <h1>
+        Vaultify Wallet
+      </h1>
+
+
+      <div className="info-box">
+
+        <strong>Adresse</strong>
+
+        <p>
+          {wallet.address.slice(0,12)}...
+          {wallet.address.slice(-8)}
+        </p>
+
+      </div>
+
+
+      <div className="info-box">
+
+        <h3>Portfolio</h3>
+
+        <p>
+          ETH : {Number(ethBalance).toFixed(6)}
+        </p>
+
+        <p>
+          Valeur :
+          {" "}
+          {(Number(ethBalance) * prices.ethereum.cad)
+          .toLocaleString("fr-CA",
+          {
+            minimumFractionDigits:2
+          })}
+          CAD
+        </p>
+
+        <small>
+          Mise à jour : {updated}
+        </small>
+
+      </div>
+
+
+      <PriceCard
+        name="Ethereum"
+        amount={ethBalance}
+        price={prices.ethereum.cad}
+        change={prices.ethereum.change}
+      />
+
+
+      <PriceCard
+        name="Bitcoin"
+        amount="0"
+        price={prices.bitcoin.cad}
+        change={prices.bitcoin.change}
+      />
+
+
+      <PriceCard
+        name="USDC"
+        amount="0"
+        price={prices.usdc.cad}
+        change={prices.usdc.change}
+      />
+
+
+      <button
+        className="btn-primary"
+        onClick={()=>openMoonPay(wallet.address,"ETH")}
+      >
+        Acheter crypto
+      </button>
+
+
+      <button
+        className="btn-primary"
+        onClick={()=>setSendMode(true)}
+      >
+        Envoyer ETH
+      </button>
+
+
+      <button
+        className="btn-secondary"
+        onClick={refresh}
+      >
+        Actualiser
+      </button>
+
+
+      <button
+        className="btn-secondary"
+        onClick={onLogout}
+      >
+        Déconnexion
+      </button>
+
+
+    </div>
+
+  );
+
+}

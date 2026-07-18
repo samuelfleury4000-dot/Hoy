@@ -21,8 +21,15 @@ export default function App() {
   };
 
   const handleLogout = () => {
-    wipeWallet();
-    window.location.reload();
+    setWallet(null);
+    setIsLocked(true);
+  };
+
+  const handleDeleteWallet = () => {
+    if(confirm("Supprimer définitivement ce wallet local ?")) {
+      wipeWallet();
+      window.location.reload();
+    }
   };
 
   return (
@@ -52,12 +59,12 @@ export default function App() {
           </div>
           
           <button className="btn-primary" onClick={attemptUnlock}>Déverrouiller</button>
-          <button className="btn-secondary" style={{ marginTop: '1rem', borderColor: '#ef4444', color: '#ef4444' }} onClick={handleLogout}>Effacer le wallet de cet appareil</button>
+          <button className="btn-secondary" style={{ marginTop: '1rem', borderColor: '#ef4444', color: '#ef4444' }} onClick={handleDeleteWallet}>Effacer le wallet de cet appareil</button>
         </div>
       ) : !wallet ? (
         <WalletSetup onWalletCreated={() => window.location.reload()} />
       ) : (
-        <Dashboard wallet={wallet} onLogout={() => window.location.reload()} />
+        <Dashboard wallet={wallet} onLogout={handleLogout} />
       )}
     </div>
   );
