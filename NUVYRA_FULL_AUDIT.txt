@@ -1,0 +1,961 @@
+===== NUVYRA FULL PROJECT AUDIT =====
+
+DATE:
+Sat Jul 18 17:35:39 UTC 2026
+
+
+===== GIT STATUS =====
+ M nuvyra-wallet/.nuvyra/dashboard/data.json
+ M nuvyra-wallet/.nuvyra/history/audits.csv
+?? NUVYRA_FULL_AUDIT.txt
+?? package-lock.json
+
+
+===== GIT HISTORY =====
+* c5b7d82 (HEAD -> main, origin/main, origin/HEAD) NUVYRA full project sync audit wallet
+* 4d00f58 NUVYRA full A-Z project backup
+* 5f9ce2d Nuvyra wallet core hardening v1.0
+* 086f6cd NUVYRA security cleanup and hardening
+* da2b0e7 NUVYRA complete system update audit guardian optimization cleanup
+* 17c72ce NUVYRA cleanup security hardening
+* a0c48d8 Complete Nuvyra rebrand and security cleanup
+* 9ace084 Rebrand complete Vaultify to Nuvyra
+* 01736cd Tokens et valeur CAD ajoutés
+* bb13bf4 Dashboard stable avant multi network
+* 2b7667c Fix wallet dashboard prices and network loading
+* 5547d03 Dashboard prix crypto fonctionnel
+* 9e674a8 backup avant debug affichage prix crypto
+* 594279a feat: optimise architecture, ajoute support multi-token et sécurise l'environnement
+* b7d89ee Sauvegarde complète et sécurisée du code source
+* 68e3678 Initialisation du projet Vaultify
+* adbcb69 Initial commit
+
+
+===== PROJECT TREE =====
+.
+./.git
+./NUVYRA_FULL_AUDIT.txt
+./README.md
+./nuvyra-wallet
+./nuvyra-wallet/.backup
+./nuvyra-wallet/.backup/package.json
+./nuvyra-wallet/.backup/vite.config.js
+./nuvyra-wallet/.env
+./nuvyra-wallet/.env.example
+./nuvyra-wallet/.gitignore
+./nuvyra-wallet/.nuvyra
+./nuvyra-wallet/.nuvyra/NUVYRA_COMMAND_CENTER_V2.sh
+./nuvyra-wallet/.nuvyra/NUVYRA_FINAL_CLEANUP.sh
+./nuvyra-wallet/.nuvyra/NUVYRA_GRAND_FINAL_TEST.sh
+./nuvyra-wallet/.nuvyra/NUVYRA_INTELLIGENCE_ENGINE.sh
+./nuvyra-wallet/.nuvyra/NUVYRA_LAUNCH_READINESS.sh
+./nuvyra-wallet/.nuvyra/NUVYRA_LIVE_AUDIT_FINAL.sh
+./nuvyra-wallet/.nuvyra/NUVYRA_LIVE_DASHBOARD.sh
+./nuvyra-wallet/.nuvyra/NUVYRA_ONE_CLICK_AUDIT.sh
+./nuvyra-wallet/.nuvyra/NUVYRA_ONE_COMMAND.sh
+./nuvyra-wallet/.nuvyra/NUVYRA_REALITY_CHECK.sh
+./nuvyra-wallet/.nuvyra/NUVYRA_SYSTEM_UNIFIER.sh
+./nuvyra-wallet/.nuvyra/alert.sh
+./nuvyra-wallet/.nuvyra/alert_monitor.sh
+./nuvyra-wallet/.nuvyra/auto_monitor.sh
+./nuvyra-wallet/.nuvyra/backup_before_cleanup_20260718_144333
+./nuvyra-wallet/.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup
+./nuvyra-wallet/.nuvyra/cleanup.sh
+./nuvyra-wallet/.nuvyra/core
+./nuvyra-wallet/.nuvyra/core/analyzer.sh
+./nuvyra-wallet/.nuvyra/core/build.sh
+./nuvyra-wallet/.nuvyra/core/collector.sh
+./nuvyra-wallet/.nuvyra/core/engine.sh
+./nuvyra-wallet/.nuvyra/core/report.sh
+./nuvyra-wallet/.nuvyra/core/reporter.sh
+./nuvyra-wallet/.nuvyra/core/scorer.sh
+./nuvyra-wallet/.nuvyra/core/security.sh
+./nuvyra-wallet/.nuvyra/daemon.sh
+./nuvyra-wallet/.nuvyra/dashboard
+./nuvyra-wallet/.nuvyra/dashboard/data.json
+./nuvyra-wallet/.nuvyra/disk_guardian.sh
+./nuvyra-wallet/.nuvyra/final_backup
+./nuvyra-wallet/.nuvyra/final_backup/src_20260718_142419
+./nuvyra-wallet/.nuvyra/final_hardening.sh
+./nuvyra-wallet/.nuvyra/final_nuvyra_hardening.sh
+./nuvyra-wallet/.nuvyra/final_report_cleaner.sh
+./nuvyra-wallet/.nuvyra/git_final_clean.sh
+./nuvyra-wallet/.nuvyra/guardian.sh
+./nuvyra-wallet/.nuvyra/health_score.sh
+./nuvyra-wallet/.nuvyra/health_score_pro.sh
+./nuvyra-wallet/.nuvyra/history
+./nuvyra-wallet/.nuvyra/history/audits.csv
+./nuvyra-wallet/.nuvyra/inspector.sh
+./nuvyra-wallet/.nuvyra/market_intelligence.sh
+./nuvyra-wallet/.nuvyra/modules
+./nuvyra-wallet/.nuvyra/modules/auto_fix.sh
+./nuvyra-wallet/.nuvyra/modules/blockchain_monitor.sh
+./nuvyra-wallet/.nuvyra/modules/build.sh
+./nuvyra-wallet/.nuvyra/modules/cleanup.sh
+./nuvyra-wallet/.nuvyra/modules/code_doctor.sh
+./nuvyra-wallet/.nuvyra/modules/crypto_security.sh
+./nuvyra-wallet/.nuvyra/modules/dependencies.sh
+./nuvyra-wallet/.nuvyra/modules/error_analyzer.sh
+./nuvyra-wallet/.nuvyra/modules/git.sh
+./nuvyra-wallet/.nuvyra/modules/health_score.sh
+./nuvyra-wallet/.nuvyra/modules/performance.sh
+./nuvyra-wallet/.nuvyra/modules/predeploy_guardian.sh
+./nuvyra-wallet/.nuvyra/modules/react_quality.sh
+./nuvyra-wallet/.nuvyra/modules/security.sh
+./nuvyra-wallet/.nuvyra/modules/security_pro.sh
+./nuvyra-wallet/.nuvyra/modules/security_scan.sh
+./nuvyra-wallet/.nuvyra/modules/size.sh
+./nuvyra-wallet/.nuvyra/modules/system.sh
+./nuvyra-wallet/.nuvyra/nuvyra.sh
+./nuvyra-wallet/.nuvyra/nuvyra_24_7.sh
+./nuvyra-wallet/.nuvyra/nuvyra_cleanup_fix.sh
+./nuvyra-wallet/.nuvyra/nuvyra_cleanup_system.sh
+./nuvyra-wallet/.nuvyra/nuvyra_complete_guardian.sh
+./nuvyra-wallet/.nuvyra/nuvyra_core.sh
+./nuvyra-wallet/.nuvyra/nuvyra_daemon.lock
+./nuvyra-wallet/.nuvyra/nuvyra_daemon.sh
+./nuvyra-wallet/.nuvyra/nuvyra_guardian_daemon_v2.sh
+./nuvyra-wallet/.nuvyra/report_rotation.sh
+./nuvyra-wallet/.nuvyra/reports
+./nuvyra-wallet/.nuvyra/reports/NUVYRA_REPORT_20260718_163529.txt
+./nuvyra-wallet/.nuvyra/reports/NUVYRA_REPORT_20260718_173529.txt
+./nuvyra-wallet/.nuvyra/reports/STEP1_CLEAN_REPORT.txt
+./nuvyra-wallet/.nuvyra/reports/checks.json
+./nuvyra-wallet/.nuvyra/reports/latest.txt
+./nuvyra-wallet/.nuvyra/reports/score.txt
+./nuvyra-wallet/.nuvyra/reports/system.json
+./nuvyra-wallet/.nuvyra/run_guardian.sh
+./nuvyra-wallet/.nuvyra/runner.sh
+./nuvyra-wallet/.nuvyra/security_clean.sh
+./nuvyra-wallet/.nuvyra/security_upgrade.sh
+./nuvyra-wallet/.nuvyra/share_security_report.sh
+./nuvyra-wallet/CLEAN_REPORT.txt
+./nuvyra-wallet/NUVYRA_FINAL_CLEANUP.sh
+./nuvyra-wallet/NUVYRA_SYSTEM_CHECK.txt
+./nuvyra-wallet/NUVYRA_WALLET_CORE_FIX.sh
+./nuvyra-wallet/VAULTIFY_MIGRATION_CHECK.sh
+./nuvyra-wallet/auto_backup.py
+./nuvyra-wallet/dist
+./nuvyra-wallet/dist/assets
+./nuvyra-wallet/dist/assets/ethers-CkNTVCJe.js
+./nuvyra-wallet/dist/assets/index-BBNFZFrO.css
+./nuvyra-wallet/dist/assets/index-DWTrNEgP.js
+./nuvyra-wallet/dist/assets/vendor-C8w-UNLI.js
+./nuvyra-wallet/dist/index.html
+./nuvyra-wallet/dist/site.webmanifest
+./nuvyra-wallet/export_nuvyra_core.sh
+./nuvyra-wallet/export_source_clean.sh
+./nuvyra-wallet/index.html
+./nuvyra-wallet/node_modules
+./nuvyra-wallet/node_modules/.bin
+./nuvyra-wallet/node_modules/.bin/baseline-browser-mapping
+./nuvyra-wallet/node_modules/.bin/browserslist
+./nuvyra-wallet/node_modules/.bin/esbuild
+./nuvyra-wallet/node_modules/.bin/jsesc
+./nuvyra-wallet/node_modules/.bin/json5
+./nuvyra-wallet/node_modules/.bin/loose-envify
+./nuvyra-wallet/node_modules/.bin/nanoid
+./nuvyra-wallet/node_modules/.bin/parser
+./nuvyra-wallet/node_modules/.bin/prettier
+./nuvyra-wallet/node_modules/.bin/rollup
+./nuvyra-wallet/node_modules/.bin/semver
+./nuvyra-wallet/node_modules/.bin/update-browserslist-db
+./nuvyra-wallet/node_modules/.bin/vite
+./nuvyra-wallet/node_modules/.package-lock.json
+./nuvyra-wallet/node_modules/.vite
+./nuvyra-wallet/node_modules/.vite-temp
+./nuvyra-wallet/node_modules/.vite/deps
+./nuvyra-wallet/node_modules/@adraffy
+./nuvyra-wallet/node_modules/@adraffy/ens-normalize
+./nuvyra-wallet/node_modules/@babel
+./nuvyra-wallet/node_modules/@babel/code-frame
+./nuvyra-wallet/node_modules/@babel/compat-data
+./nuvyra-wallet/node_modules/@babel/core
+./nuvyra-wallet/node_modules/@babel/generator
+./nuvyra-wallet/node_modules/@babel/helper-compilation-targets
+./nuvyra-wallet/node_modules/@babel/helper-globals
+./nuvyra-wallet/node_modules/@babel/helper-module-imports
+./nuvyra-wallet/node_modules/@babel/helper-module-transforms
+./nuvyra-wallet/node_modules/@babel/helper-plugin-utils
+./nuvyra-wallet/node_modules/@babel/helper-string-parser
+./nuvyra-wallet/node_modules/@babel/helper-validator-identifier
+./nuvyra-wallet/node_modules/@babel/helper-validator-option
+./nuvyra-wallet/node_modules/@babel/helpers
+./nuvyra-wallet/node_modules/@babel/parser
+./nuvyra-wallet/node_modules/@babel/plugin-transform-react-jsx-self
+./nuvyra-wallet/node_modules/@babel/plugin-transform-react-jsx-source
+./nuvyra-wallet/node_modules/@babel/template
+./nuvyra-wallet/node_modules/@babel/traverse
+./nuvyra-wallet/node_modules/@babel/types
+./nuvyra-wallet/node_modules/@esbuild
+./nuvyra-wallet/node_modules/@esbuild/linux-x64
+./nuvyra-wallet/node_modules/@jridgewell
+./nuvyra-wallet/node_modules/@jridgewell/gen-mapping
+./nuvyra-wallet/node_modules/@jridgewell/remapping
+./nuvyra-wallet/node_modules/@jridgewell/resolve-uri
+./nuvyra-wallet/node_modules/@jridgewell/sourcemap-codec
+./nuvyra-wallet/node_modules/@jridgewell/trace-mapping
+./nuvyra-wallet/node_modules/@noble
+./nuvyra-wallet/node_modules/@noble/curves
+./nuvyra-wallet/node_modules/@noble/hashes
+./nuvyra-wallet/node_modules/@rolldown
+./nuvyra-wallet/node_modules/@rolldown/pluginutils
+./nuvyra-wallet/node_modules/@rollup
+./nuvyra-wallet/node_modules/@rollup/rollup-linux-x64-gnu
+./nuvyra-wallet/node_modules/@rollup/rollup-linux-x64-musl
+./nuvyra-wallet/node_modules/@types
+./nuvyra-wallet/node_modules/@types/babel__core
+./nuvyra-wallet/node_modules/@types/babel__generator
+./nuvyra-wallet/node_modules/@types/babel__template
+./nuvyra-wallet/node_modules/@types/babel__traverse
+./nuvyra-wallet/node_modules/@types/estree
+./nuvyra-wallet/node_modules/@types/node
+./nuvyra-wallet/node_modules/@vitejs
+./nuvyra-wallet/node_modules/@vitejs/plugin-react
+./nuvyra-wallet/node_modules/aes-js
+./nuvyra-wallet/node_modules/aes-js/LICENSE.txt
+./nuvyra-wallet/node_modules/aes-js/README.md
+./nuvyra-wallet/node_modules/aes-js/aes-js-4.0.0-beta.4.tgz
+./nuvyra-wallet/node_modules/aes-js/bower.json
+./nuvyra-wallet/node_modules/aes-js/index.js
+./nuvyra-wallet/node_modules/aes-js/lib.commonjs
+./nuvyra-wallet/node_modules/aes-js/lib.esm
+./nuvyra-wallet/node_modules/aes-js/misc
+./nuvyra-wallet/node_modules/aes-js/package-commonjs.json
+./nuvyra-wallet/node_modules/aes-js/package.json
+./nuvyra-wallet/node_modules/aes-js/src.ts
+./nuvyra-wallet/node_modules/aes-js/tsconfig.base.json
+./nuvyra-wallet/node_modules/aes-js/tsconfig.commonjs.json
+./nuvyra-wallet/node_modules/aes-js/tsconfig.esm.json
+./nuvyra-wallet/node_modules/baseline-browser-mapping
+./nuvyra-wallet/node_modules/baseline-browser-mapping/LICENSE.txt
+./nuvyra-wallet/node_modules/baseline-browser-mapping/README.md
+./nuvyra-wallet/node_modules/baseline-browser-mapping/dist
+./nuvyra-wallet/node_modules/baseline-browser-mapping/package.json
+./nuvyra-wallet/node_modules/browserslist
+./nuvyra-wallet/node_modules/browserslist/LICENSE
+./nuvyra-wallet/node_modules/browserslist/README.md
+./nuvyra-wallet/node_modules/browserslist/browser.js
+./nuvyra-wallet/node_modules/browserslist/cli.js
+./nuvyra-wallet/node_modules/browserslist/error.d.ts
+./nuvyra-wallet/node_modules/browserslist/error.js
+./nuvyra-wallet/node_modules/browserslist/index.d.ts
+./nuvyra-wallet/node_modules/browserslist/index.js
+./nuvyra-wallet/node_modules/browserslist/node.js
+./nuvyra-wallet/node_modules/browserslist/package.json
+./nuvyra-wallet/node_modules/browserslist/parse.js
+./nuvyra-wallet/node_modules/caniuse-lite
+./nuvyra-wallet/node_modules/caniuse-lite/LICENSE
+./nuvyra-wallet/node_modules/caniuse-lite/README.md
+./nuvyra-wallet/node_modules/caniuse-lite/data
+./nuvyra-wallet/node_modules/caniuse-lite/dist
+./nuvyra-wallet/node_modules/caniuse-lite/package.json
+./nuvyra-wallet/node_modules/convert-source-map
+./nuvyra-wallet/node_modules/convert-source-map/LICENSE
+./nuvyra-wallet/node_modules/convert-source-map/README.md
+./nuvyra-wallet/node_modules/convert-source-map/index.js
+./nuvyra-wallet/node_modules/convert-source-map/package.json
+./nuvyra-wallet/node_modules/debug
+./nuvyra-wallet/node_modules/debug/LICENSE
+./nuvyra-wallet/node_modules/debug/README.md
+./nuvyra-wallet/node_modules/debug/package.json
+./nuvyra-wallet/node_modules/debug/src
+./nuvyra-wallet/node_modules/electron-to-chromium
+./nuvyra-wallet/node_modules/electron-to-chromium/LICENSE
+./nuvyra-wallet/node_modules/electron-to-chromium/README.md
+./nuvyra-wallet/node_modules/electron-to-chromium/chromium-versions.js
+./nuvyra-wallet/node_modules/electron-to-chromium/chromium-versions.json
+./nuvyra-wallet/node_modules/electron-to-chromium/full-chromium-versions.js
+./nuvyra-wallet/node_modules/electron-to-chromium/full-chromium-versions.json
+./nuvyra-wallet/node_modules/electron-to-chromium/full-versions.js
+./nuvyra-wallet/node_modules/electron-to-chromium/full-versions.json
+./nuvyra-wallet/node_modules/electron-to-chromium/index.js
+./nuvyra-wallet/node_modules/electron-to-chromium/package.json
+./nuvyra-wallet/node_modules/electron-to-chromium/versions.js
+./nuvyra-wallet/node_modules/electron-to-chromium/versions.json
+./nuvyra-wallet/node_modules/esbuild
+./nuvyra-wallet/node_modules/esbuild/LICENSE.md
+./nuvyra-wallet/node_modules/esbuild/README.md
+./nuvyra-wallet/node_modules/esbuild/bin
+./nuvyra-wallet/node_modules/esbuild/install.js
+./nuvyra-wallet/node_modules/esbuild/lib
+./nuvyra-wallet/node_modules/esbuild/package.json
+./nuvyra-wallet/node_modules/escalade
+./nuvyra-wallet/node_modules/escalade/dist
+./nuvyra-wallet/node_modules/escalade/index.d.mts
+./nuvyra-wallet/node_modules/escalade/index.d.ts
+./nuvyra-wallet/node_modules/escalade/license
+./nuvyra-wallet/node_modules/escalade/package.json
+./nuvyra-wallet/node_modules/escalade/readme.md
+./nuvyra-wallet/node_modules/escalade/sync
+./nuvyra-wallet/node_modules/ethers
+./nuvyra-wallet/node_modules/ethers/CHANGELOG.md
+./nuvyra-wallet/node_modules/ethers/FUNDING.json
+./nuvyra-wallet/node_modules/ethers/LICENSE.md
+./nuvyra-wallet/node_modules/ethers/README.md
+./nuvyra-wallet/node_modules/ethers/SECURITY.md
+./nuvyra-wallet/node_modules/ethers/dist
+./nuvyra-wallet/node_modules/ethers/lib.commonjs
+./nuvyra-wallet/node_modules/ethers/lib.esm
+./nuvyra-wallet/node_modules/ethers/package.json
+./nuvyra-wallet/node_modules/ethers/rollup.config.mjs
+./nuvyra-wallet/node_modules/ethers/src.ts
+./nuvyra-wallet/node_modules/fdir
+./nuvyra-wallet/node_modules/fdir/LICENSE
+./nuvyra-wallet/node_modules/fdir/README.md
+./nuvyra-wallet/node_modules/fdir/dist
+./nuvyra-wallet/node_modules/fdir/package.json
+./nuvyra-wallet/node_modules/gensync
+./nuvyra-wallet/node_modules/gensync/LICENSE
+./nuvyra-wallet/node_modules/gensync/README.md
+./nuvyra-wallet/node_modules/gensync/index.js
+./nuvyra-wallet/node_modules/gensync/index.js.flow
+./nuvyra-wallet/node_modules/gensync/package.json
+./nuvyra-wallet/node_modules/gensync/test
+./nuvyra-wallet/node_modules/js-tokens
+./nuvyra-wallet/node_modules/js-tokens/CHANGELOG.md
+./nuvyra-wallet/node_modules/js-tokens/LICENSE
+./nuvyra-wallet/node_modules/js-tokens/README.md
+./nuvyra-wallet/node_modules/js-tokens/index.js
+./nuvyra-wallet/node_modules/js-tokens/package.json
+./nuvyra-wallet/node_modules/jsesc
+./nuvyra-wallet/node_modules/jsesc/LICENSE-MIT.txt
+./nuvyra-wallet/node_modules/jsesc/README.md
+./nuvyra-wallet/node_modules/jsesc/bin
+./nuvyra-wallet/node_modules/jsesc/jsesc.js
+./nuvyra-wallet/node_modules/jsesc/man
+./nuvyra-wallet/node_modules/jsesc/package.json
+./nuvyra-wallet/node_modules/json5
+./nuvyra-wallet/node_modules/json5/LICENSE.md
+./nuvyra-wallet/node_modules/json5/README.md
+./nuvyra-wallet/node_modules/json5/dist
+./nuvyra-wallet/node_modules/json5/lib
+./nuvyra-wallet/node_modules/json5/package.json
+./nuvyra-wallet/node_modules/loose-envify
+./nuvyra-wallet/node_modules/loose-envify/LICENSE
+./nuvyra-wallet/node_modules/loose-envify/README.md
+./nuvyra-wallet/node_modules/loose-envify/cli.js
+./nuvyra-wallet/node_modules/loose-envify/custom.js
+./nuvyra-wallet/node_modules/loose-envify/index.js
+./nuvyra-wallet/node_modules/loose-envify/loose-envify.js
+./nuvyra-wallet/node_modules/loose-envify/package.json
+./nuvyra-wallet/node_modules/loose-envify/replace.js
+./nuvyra-wallet/node_modules/lru-cache
+./nuvyra-wallet/node_modules/lru-cache/LICENSE
+./nuvyra-wallet/node_modules/lru-cache/README.md
+./nuvyra-wallet/node_modules/lru-cache/index.js
+./nuvyra-wallet/node_modules/lru-cache/package.json
+./nuvyra-wallet/node_modules/ms
+./nuvyra-wallet/node_modules/ms/index.js
+./nuvyra-wallet/node_modules/ms/license.md
+./nuvyra-wallet/node_modules/ms/package.json
+./nuvyra-wallet/node_modules/ms/readme.md
+./nuvyra-wallet/node_modules/nanoid
+./nuvyra-wallet/node_modules/nanoid/LICENSE
+./nuvyra-wallet/node_modules/nanoid/README.md
+./nuvyra-wallet/node_modules/nanoid/async
+./nuvyra-wallet/node_modules/nanoid/bin
+./nuvyra-wallet/node_modules/nanoid/index.browser.cjs
+./nuvyra-wallet/node_modules/nanoid/index.browser.js
+./nuvyra-wallet/node_modules/nanoid/index.cjs
+./nuvyra-wallet/node_modules/nanoid/index.d.cts
+./nuvyra-wallet/node_modules/nanoid/index.d.ts
+./nuvyra-wallet/node_modules/nanoid/index.js
+./nuvyra-wallet/node_modules/nanoid/nanoid.js
+./nuvyra-wallet/node_modules/nanoid/non-secure
+./nuvyra-wallet/node_modules/nanoid/package.json
+./nuvyra-wallet/node_modules/nanoid/url-alphabet
+./nuvyra-wallet/node_modules/node-releases
+./nuvyra-wallet/node_modules/node-releases/LICENSE
+./nuvyra-wallet/node_modules/node-releases/README.md
+./nuvyra-wallet/node_modules/node-releases/data
+./nuvyra-wallet/node_modules/node-releases/package.json
+./nuvyra-wallet/node_modules/picocolors
+./nuvyra-wallet/node_modules/picocolors/LICENSE
+./nuvyra-wallet/node_modules/picocolors/README.md
+./nuvyra-wallet/node_modules/picocolors/package.json
+./nuvyra-wallet/node_modules/picocolors/picocolors.browser.js
+./nuvyra-wallet/node_modules/picocolors/picocolors.d.ts
+./nuvyra-wallet/node_modules/picocolors/picocolors.js
+./nuvyra-wallet/node_modules/picocolors/types.d.ts
+./nuvyra-wallet/node_modules/picomatch
+./nuvyra-wallet/node_modules/picomatch/LICENSE
+./nuvyra-wallet/node_modules/picomatch/README.md
+./nuvyra-wallet/node_modules/picomatch/index.js
+./nuvyra-wallet/node_modules/picomatch/lib
+./nuvyra-wallet/node_modules/picomatch/package.json
+./nuvyra-wallet/node_modules/picomatch/posix.js
+./nuvyra-wallet/node_modules/postcss
+./nuvyra-wallet/node_modules/postcss/LICENSE
+./nuvyra-wallet/node_modules/postcss/README.md
+./nuvyra-wallet/node_modules/postcss/lib
+./nuvyra-wallet/node_modules/postcss/package.json
+./nuvyra-wallet/node_modules/prettier
+./nuvyra-wallet/node_modules/prettier/LICENSE
+./nuvyra-wallet/node_modules/prettier/README.md
+./nuvyra-wallet/node_modules/prettier/THIRD-PARTY-NOTICES.md
+./nuvyra-wallet/node_modules/prettier/bin
+./nuvyra-wallet/node_modules/prettier/doc.d.ts
+./nuvyra-wallet/node_modules/prettier/doc.js
+./nuvyra-wallet/node_modules/prettier/doc.mjs
+./nuvyra-wallet/node_modules/prettier/index.cjs
+./nuvyra-wallet/node_modules/prettier/index.d.ts
+./nuvyra-wallet/node_modules/prettier/index.mjs
+./nuvyra-wallet/node_modules/prettier/internal
+./nuvyra-wallet/node_modules/prettier/package.json
+./nuvyra-wallet/node_modules/prettier/plugins
+./nuvyra-wallet/node_modules/prettier/standalone.d.ts
+./nuvyra-wallet/node_modules/prettier/standalone.js
+./nuvyra-wallet/node_modules/prettier/standalone.mjs
+./nuvyra-wallet/node_modules/qrcode.react
+./nuvyra-wallet/node_modules/qrcode.react/LICENSE
+./nuvyra-wallet/node_modules/qrcode.react/README.md
+./nuvyra-wallet/node_modules/qrcode.react/lib
+./nuvyra-wallet/node_modules/qrcode.react/package.json
+./nuvyra-wallet/node_modules/react
+./nuvyra-wallet/node_modules/react-dom
+./nuvyra-wallet/node_modules/react-dom/LICENSE
+./nuvyra-wallet/node_modules/react-dom/README.md
+./nuvyra-wallet/node_modules/react-dom/cjs
+./nuvyra-wallet/node_modules/react-dom/client.js
+./nuvyra-wallet/node_modules/react-dom/index.js
+./nuvyra-wallet/node_modules/react-dom/package.json
+./nuvyra-wallet/node_modules/react-dom/profiling.js
+./nuvyra-wallet/node_modules/react-dom/server.browser.js
+./nuvyra-wallet/node_modules/react-dom/server.js
+./nuvyra-wallet/node_modules/react-dom/server.node.js
+./nuvyra-wallet/node_modules/react-dom/test-utils.js
+./nuvyra-wallet/node_modules/react-dom/umd
+./nuvyra-wallet/node_modules/react-refresh
+./nuvyra-wallet/node_modules/react-refresh/LICENSE
+./nuvyra-wallet/node_modules/react-refresh/README.md
+./nuvyra-wallet/node_modules/react-refresh/babel.js
+./nuvyra-wallet/node_modules/react-refresh/cjs
+./nuvyra-wallet/node_modules/react-refresh/package.json
+./nuvyra-wallet/node_modules/react-refresh/runtime.js
+./nuvyra-wallet/node_modules/react/LICENSE
+./nuvyra-wallet/node_modules/react/README.md
+./nuvyra-wallet/node_modules/react/cjs
+./nuvyra-wallet/node_modules/react/index.js
+./nuvyra-wallet/node_modules/react/jsx-dev-runtime.js
+./nuvyra-wallet/node_modules/react/jsx-runtime.js
+./nuvyra-wallet/node_modules/react/package.json
+./nuvyra-wallet/node_modules/react/react.shared-subset.js
+./nuvyra-wallet/node_modules/react/umd
+./nuvyra-wallet/node_modules/rollup
+./nuvyra-wallet/node_modules/rollup/LICENSE.md
+./nuvyra-wallet/node_modules/rollup/README.md
+./nuvyra-wallet/node_modules/rollup/dist
+./nuvyra-wallet/node_modules/rollup/package.json
+./nuvyra-wallet/node_modules/scheduler
+./nuvyra-wallet/node_modules/scheduler/LICENSE
+./nuvyra-wallet/node_modules/scheduler/README.md
+./nuvyra-wallet/node_modules/scheduler/cjs
+./nuvyra-wallet/node_modules/scheduler/index.js
+./nuvyra-wallet/node_modules/scheduler/package.json
+./nuvyra-wallet/node_modules/scheduler/umd
+./nuvyra-wallet/node_modules/scheduler/unstable_mock.js
+./nuvyra-wallet/node_modules/scheduler/unstable_post_task.js
+./nuvyra-wallet/node_modules/semver
+./nuvyra-wallet/node_modules/semver/LICENSE
+./nuvyra-wallet/node_modules/semver/README.md
+./nuvyra-wallet/node_modules/semver/bin
+./nuvyra-wallet/node_modules/semver/package.json
+./nuvyra-wallet/node_modules/semver/range.bnf
+./nuvyra-wallet/node_modules/semver/semver.js
+./nuvyra-wallet/node_modules/source-map-js
+./nuvyra-wallet/node_modules/source-map-js/LICENSE
+./nuvyra-wallet/node_modules/source-map-js/README.md
+./nuvyra-wallet/node_modules/source-map-js/lib
+./nuvyra-wallet/node_modules/source-map-js/package.json
+./nuvyra-wallet/node_modules/source-map-js/source-map.d.ts
+./nuvyra-wallet/node_modules/source-map-js/source-map.js
+./nuvyra-wallet/node_modules/tinyglobby
+./nuvyra-wallet/node_modules/tinyglobby/LICENSE
+./nuvyra-wallet/node_modules/tinyglobby/README.md
+./nuvyra-wallet/node_modules/tinyglobby/dist
+./nuvyra-wallet/node_modules/tinyglobby/package.json
+./nuvyra-wallet/node_modules/tslib
+./nuvyra-wallet/node_modules/tslib/CopyrightNotice.txt
+./nuvyra-wallet/node_modules/tslib/LICENSE.txt
+./nuvyra-wallet/node_modules/tslib/README.md
+./nuvyra-wallet/node_modules/tslib/SECURITY.md
+./nuvyra-wallet/node_modules/tslib/modules
+./nuvyra-wallet/node_modules/tslib/package.json
+./nuvyra-wallet/node_modules/tslib/tslib.d.ts
+./nuvyra-wallet/node_modules/tslib/tslib.es6.html
+./nuvyra-wallet/node_modules/tslib/tslib.es6.js
+./nuvyra-wallet/node_modules/tslib/tslib.es6.mjs
+./nuvyra-wallet/node_modules/tslib/tslib.html
+./nuvyra-wallet/node_modules/tslib/tslib.js
+./nuvyra-wallet/node_modules/undici-types
+./nuvyra-wallet/node_modules/undici-types/LICENSE
+./nuvyra-wallet/node_modules/undici-types/README.md
+./nuvyra-wallet/node_modules/undici-types/agent.d.ts
+./nuvyra-wallet/node_modules/undici-types/api.d.ts
+./nuvyra-wallet/node_modules/undici-types/balanced-pool.d.ts
+./nuvyra-wallet/node_modules/undici-types/cache.d.ts
+./nuvyra-wallet/node_modules/undici-types/client.d.ts
+./nuvyra-wallet/node_modules/undici-types/connector.d.ts
+./nuvyra-wallet/node_modules/undici-types/content-type.d.ts
+./nuvyra-wallet/node_modules/undici-types/cookies.d.ts
+./nuvyra-wallet/node_modules/undici-types/diagnostics-channel.d.ts
+./nuvyra-wallet/node_modules/undici-types/dispatcher.d.ts
+./nuvyra-wallet/node_modules/undici-types/env-http-proxy-agent.d.ts
+./nuvyra-wallet/node_modules/undici-types/errors.d.ts
+./nuvyra-wallet/node_modules/undici-types/eventsource.d.ts
+./nuvyra-wallet/node_modules/undici-types/fetch.d.ts
+./nuvyra-wallet/node_modules/undici-types/file.d.ts
+./nuvyra-wallet/node_modules/undici-types/filereader.d.ts
+./nuvyra-wallet/node_modules/undici-types/formdata.d.ts
+./nuvyra-wallet/node_modules/undici-types/global-dispatcher.d.ts
+./nuvyra-wallet/node_modules/undici-types/global-origin.d.ts
+./nuvyra-wallet/node_modules/undici-types/handlers.d.ts
+./nuvyra-wallet/node_modules/undici-types/header.d.ts
+./nuvyra-wallet/node_modules/undici-types/index.d.ts
+./nuvyra-wallet/node_modules/undici-types/interceptors.d.ts
+./nuvyra-wallet/node_modules/undici-types/mock-agent.d.ts
+./nuvyra-wallet/node_modules/undici-types/mock-client.d.ts
+./nuvyra-wallet/node_modules/undici-types/mock-errors.d.ts
+./nuvyra-wallet/node_modules/undici-types/mock-interceptor.d.ts
+./nuvyra-wallet/node_modules/undici-types/mock-pool.d.ts
+./nuvyra-wallet/node_modules/undici-types/package.json
+./nuvyra-wallet/node_modules/undici-types/patch.d.ts
+./nuvyra-wallet/node_modules/undici-types/pool-stats.d.ts
+./nuvyra-wallet/node_modules/undici-types/pool.d.ts
+./nuvyra-wallet/node_modules/undici-types/proxy-agent.d.ts
+./nuvyra-wallet/node_modules/undici-types/readable.d.ts
+./nuvyra-wallet/node_modules/undici-types/retry-agent.d.ts
+./nuvyra-wallet/node_modules/undici-types/retry-handler.d.ts
+./nuvyra-wallet/node_modules/undici-types/util.d.ts
+./nuvyra-wallet/node_modules/undici-types/webidl.d.ts
+./nuvyra-wallet/node_modules/undici-types/websocket.d.ts
+./nuvyra-wallet/node_modules/update-browserslist-db
+./nuvyra-wallet/node_modules/update-browserslist-db/LICENSE
+./nuvyra-wallet/node_modules/update-browserslist-db/README.md
+./nuvyra-wallet/node_modules/update-browserslist-db/check-npm-version.js
+./nuvyra-wallet/node_modules/update-browserslist-db/cli.js
+./nuvyra-wallet/node_modules/update-browserslist-db/index.d.ts
+./nuvyra-wallet/node_modules/update-browserslist-db/index.js
+./nuvyra-wallet/node_modules/update-browserslist-db/package.json
+./nuvyra-wallet/node_modules/update-browserslist-db/utils.js
+./nuvyra-wallet/node_modules/vite
+./nuvyra-wallet/node_modules/vite/LICENSE.md
+./nuvyra-wallet/node_modules/vite/README.md
+./nuvyra-wallet/node_modules/vite/bin
+./nuvyra-wallet/node_modules/vite/client.d.ts
+./nuvyra-wallet/node_modules/vite/dist
+./nuvyra-wallet/node_modules/vite/index.cjs
+./nuvyra-wallet/node_modules/vite/index.d.cts
+./nuvyra-wallet/node_modules/vite/misc
+./nuvyra-wallet/node_modules/vite/package.json
+./nuvyra-wallet/node_modules/vite/types
+./nuvyra-wallet/node_modules/ws
+./nuvyra-wallet/node_modules/ws/LICENSE
+./nuvyra-wallet/node_modules/ws/README.md
+./nuvyra-wallet/node_modules/ws/browser.js
+./nuvyra-wallet/node_modules/ws/index.js
+./nuvyra-wallet/node_modules/ws/lib
+./nuvyra-wallet/node_modules/ws/package.json
+./nuvyra-wallet/node_modules/ws/wrapper.mjs
+./nuvyra-wallet/node_modules/yallist
+./nuvyra-wallet/node_modules/yallist/LICENSE
+./nuvyra-wallet/node_modules/yallist/README.md
+./nuvyra-wallet/node_modules/yallist/iterator.js
+./nuvyra-wallet/node_modules/yallist/package.json
+./nuvyra-wallet/node_modules/yallist/yallist.js
+./nuvyra-wallet/nohup.out
+./nuvyra-wallet/nuvyra_files.txt
+./nuvyra-wallet/nuvyra_source_txt
+./nuvyra-wallet/nuvyra_source_txt/files_part_aa
+./nuvyra-wallet/nuvyra_source_txt/files_part_aa.txt
+./nuvyra-wallet/package-lock.json
+./nuvyra-wallet/package.json
+./nuvyra-wallet/public
+./nuvyra-wallet/public/site.webmanifest
+./nuvyra-wallet/scripts
+./nuvyra-wallet/scripts/clean-reports.sh
+./nuvyra-wallet/scripts/error-monitor.sh
+./nuvyra-wallet/scripts/nuvyra-hardening.sh
+./nuvyra-wallet/securite_nuvyra.sh
+./nuvyra-wallet/src
+./nuvyra-wallet/src/App.jsx
+./nuvyra-wallet/src/components
+./nuvyra-wallet/src/components/Dashboard.jsx
+./nuvyra-wallet/src/components/NetworkSelector.jsx
+./nuvyra-wallet/src/components/PriceCard.jsx
+./nuvyra-wallet/src/components/ReceiveCrypto.jsx
+./nuvyra-wallet/src/components/SeedBackup.jsx
+./nuvyra-wallet/src/components/SendCrypto.jsx
+./nuvyra-wallet/src/components/UnlockWallet.jsx
+./nuvyra-wallet/src/components/WalletSetup.jsx
+./nuvyra-wallet/src/context
+./nuvyra-wallet/src/context/WalletContext.jsx
+./nuvyra-wallet/src/lib
+./nuvyra-wallet/src/lib/config.js
+./nuvyra-wallet/src/lib/fees.js
+./nuvyra-wallet/src/lib/history.js
+./nuvyra-wallet/src/lib/moonpay.js
+./nuvyra-wallet/src/lib/network.js
+./nuvyra-wallet/src/lib/prices.js
+./nuvyra-wallet/src/lib/security.js
+./nuvyra-wallet/src/lib/storage.js
+./nuvyra-wallet/src/lib/tokenList.js
+./nuvyra-wallet/src/lib/tokens.js
+./nuvyra-wallet/src/lib/transaction.js
+./nuvyra-wallet/src/lib/transactionGuard.js
+./nuvyra-wallet/src/lib/wallet.js
+./nuvyra-wallet/src/lib/walletSecurity.js
+./nuvyra-wallet/src/lib/walletStatus.js
+./nuvyra-wallet/src/main.jsx
+./nuvyra-wallet/src/security
+./nuvyra-wallet/src/security/constants.js
+./nuvyra-wallet/src/styles.css
+./nuvyra-wallet/vite.config.js
+./package-lock.json
+./vaultify-wallet
+./vaultify-wallet/.vite
+./vaultify-wallet/.vite/deps
+./vaultify-wallet/.vite/deps/_metadata.json
+./vaultify-wallet/.vite/deps/package.json
+
+
+===== PACKAGE JSON =====
+{
+  "name": "nuvyra-wallet",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "ethers": "^6.13.4",
+    "qrcode.react": "^4.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "prettier": "^3.9.5",
+    "vite": "^6.0.7"
+  }
+}
+
+
+===== NPM DEPENDENCIES =====
+nuvyra-wallet@1.0.0 /workspaces/Hoy/nuvyra-wallet
+├── @vitejs/plugin-react@4.7.0
+├── ethers@6.17.0
+├── prettier@3.9.5
+├── qrcode.react@4.2.0
+├── react-dom@18.3.1
+├── react@18.3.1
+└── vite@6.4.3
+
+
+
+===== BUILD TEST =====
+
+> nuvyra-wallet@1.0.0 build
+> vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 192 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   1.60 kB │ gzip:   0.75 kB
+dist/assets/index-BBNFZFrO.css    3.44 kB │ gzip:   1.09 kB
+dist/assets/index-DWTrNEgP.js    34.99 kB │ gzip:  12.58 kB
+dist/assets/vendor-C8w-UNLI.js  141.74 kB │ gzip:  45.48 kB
+dist/assets/ethers-CkNTVCJe.js  346.90 kB │ gzip: 132.88 kB
+✓ built in 2.76s
+
+
+===== SOURCE FILES =====
+src/App.jsx
+src/components/Dashboard.jsx
+src/components/NetworkSelector.jsx
+src/components/PriceCard.jsx
+src/components/ReceiveCrypto.jsx
+src/components/SeedBackup.jsx
+src/components/SendCrypto.jsx
+src/components/UnlockWallet.jsx
+src/components/WalletSetup.jsx
+src/context/WalletContext.jsx
+src/lib/config.js
+src/lib/fees.js
+src/lib/history.js
+src/lib/moonpay.js
+src/lib/network.js
+src/lib/prices.js
+src/lib/security.js
+src/lib/storage.js
+src/lib/tokenList.js
+src/lib/tokens.js
+src/lib/transaction.js
+src/lib/transactionGuard.js
+src/lib/wallet.js
+src/lib/walletSecurity.js
+src/lib/walletStatus.js
+src/main.jsx
+src/security/constants.js
+src/styles.css
+
+
+===== JAVASCRIPT ERRORS SEARCH =====
+src/App.jsx:45:  const [error, setError] = useState("");
+src/App.jsx:52:      setError("");
+src/App.jsx:54:      setError("Mot de passe incorrect ou erreur de déchiffrement.");
+src/App.jsx:90:          {error && <div className="error-box">{error}</div>}
+src/context/WalletContext.jsx:36:      console.error(e);
+src/lib/prices.js:15:  if (!r.ok) throw new Error("CoinGecko bloqué");
+src/lib/prices.js:43:  if (!r.ok) throw new Error("CoinCap bloqué");
+src/lib/prices.js:74:    console.error("Toutes les API prix échouent", e);
+src/lib/tokens.js:8:      throw new Error("Adresse token invalide");
+src/lib/tokens.js:22:  } catch (error) {
+src/lib/tokens.js:23:    console.error("Erreur token:", token.symbol, error);
+src/lib/wallet.js:11:    throw new Error("Réseau inconnu");
+src/lib/wallet.js:22:  throw new Error("Aucun RPC disponible");
+src/lib/wallet.js:27:    throw new Error("Mot de passe trop court");
+src/lib/wallet.js:43:    throw new Error("Phrase invalide");
+src/lib/wallet.js:68:    throw new Error("Aucun wallet trouvé");
+src/lib/walletSecurity.js:6:   throw new Error(
+src/lib/walletSecurity.js:12:   throw new Error(
+src/lib/walletSecurity.js:18:   throw new Error(
+src/lib/transaction.js:42:    throw new Error("Adresse destination invalide");
+src/lib/transaction.js:47:    throw new Error("Montant invalide");
+src/lib/transaction.js:73:    throw new Error(
+src/lib/transactionGuard.js:4:   throw new Error(
+src/lib/transactionGuard.js:11:   throw new Error(
+src/lib/history.js:42:  } catch (error) {
+src/lib/history.js:43:    console.error("Historique erreur:", error);
+src/styles.css:10:  --error-bg: rgba(248, 81, 73, 0.1);
+src/styles.css:11:  --error-text: #ff7b72;
+src/styles.css:147:.error-box {
+src/styles.css:148:  background-color: var(--error-bg);
+src/styles.css:149:  border: 1px solid var(--error-text);
+src/styles.css:150:  color: var(--error-text);
+src/components/UnlockWallet.jsx:9:  const [error,setError] = useState("");
+src/components/UnlockWallet.jsx:14:    setError("");
+src/components/UnlockWallet.jsx:19:      setError("Mot de passe incorrect");
+src/components/UnlockWallet.jsx:44:      {error &&
+src/components/UnlockWallet.jsx:45:        <p className="error">
+src/components/UnlockWallet.jsx:46:          {error}
+src/components/SeedBackup.jsx:27:      <div className="error-box">
+src/components/SendCrypto.jsx:15:const [error,setError]=useState("");
+src/components/SendCrypto.jsx:24:throw new Error("Adresse invalide");
+src/components/SendCrypto.jsx:28:throw new Error("Montant invalide");
+src/components/WalletSetup.jsx:10:  const [error, setError] = useState("");
+src/components/WalletSetup.jsx:17:    setError("");
+src/components/WalletSetup.jsx:23:    setError("");
+src/components/WalletSetup.jsx:27:    setError("");
+src/components/WalletSetup.jsx:31:        return setError("Les mots de passe ne correspondent pas.");
+src/components/WalletSetup.jsx:34:        return setError("Le mot de passe doit faire au moins 12 caractères.");
+src/components/WalletSetup.jsx:49:          throw new Error("Veuillez entrer une phrase de récupération.");
+src/components/WalletSetup.jsx:55:      setError(e.message);
+src/components/WalletSetup.jsx:99:        {error && <div className="error-box">{error}</div>}
+src/components/WalletSetup.jsx:155:      {error && <div className="error-box">{error}</div>}
+src/components/Dashboard.jsx:19:  const [error, setError] = useState("");
+src/components/Dashboard.jsx:32:      setError("");
+src/components/Dashboard.jsx:58:      console.error("Dashboard:", e);
+src/components/Dashboard.jsx:60:      setError("Impossible de charger les données réseau.");
+src/components/Dashboard.jsx:130:      {error && <div className="error-box">{error}</div>}
+
+
+===== SECURITY SEARCH =====
+src/security/constants.js:3:  MIN_PASSWORD_LENGTH: 12,
+src/App.jsx:25:    window.addEventListener("keydown",activity);
+src/App.jsx:30:      window.removeEventListener("keydown",activity);
+src/App.jsx:44:  const [password, setPassword] = useState("");
+src/App.jsx:49:      const w = await unlockWallet(password);
+src/App.jsx:95:              type="password"
+src/App.jsx:97:              onChange={(e) => setPassword(e.target.value)}
+src/context/WalletContext.jsx:23:  async function unlock(password) {
+src/context/WalletContext.jsx:27:      const w = await unlockWallet(password);
+src/lib/moonpay.js:6:    `?apiKey=${ONRAMP_PROVIDER.apiKey}` +
+src/lib/wallet.js:2:import { NETWORKS, DEFAULT_NETWORK, STORAGE_KEY } from "./config.js";
+src/lib/wallet.js:5:export function getProvider(networkKey = null) {
+src/lib/wallet.js:7:  networkKey = networkKey || getSavedNetwork();
+src/lib/wallet.js:8:  const net = NETWORKS[networkKey];
+src/lib/wallet.js:25:export async function createWallet(password) {
+src/lib/wallet.js:26:  if (!password || password.length < 8) {
+src/lib/wallet.js:32:  const encryptedJson = await wallet.encrypt(password);
+src/lib/wallet.js:35:    encryptedJson,
+src/lib/wallet.js:36:    mnemonic: wallet.mnemonic.phrase,
+src/lib/wallet.js:41:export async function importFromMnemonic(mnemonic, password) {
+src/lib/wallet.js:42:  if (!mnemonic || mnemonic.trim().split(" ").length < 12) {
+src/lib/wallet.js:46:  const wallet = ethers.Wallet.fromPhrase(mnemonic.trim());
+src/lib/wallet.js:48:  const encryptedJson = await wallet.encrypt(password);
+src/lib/wallet.js:51:    encryptedJson,
+src/lib/wallet.js:56:export function saveKeystore(keystore) {
+src/lib/wallet.js:57:  localStorage.setItem(STORAGE_KEY, keystore);
+src/lib/wallet.js:61:  return Boolean(localStorage.getItem(STORAGE_KEY));
+src/lib/wallet.js:64:export async function unlockWallet(password) {
+src/lib/wallet.js:65:  const keystore = localStorage.getItem(STORAGE_KEY);
+src/lib/wallet.js:67:  if (!keystore) {
+src/lib/wallet.js:71:  return await ethers.Wallet.fromEncryptedJson(keystore, password);
+src/lib/wallet.js:83:  localStorage.removeItem(STORAGE_KEY);
+src/lib/network.js:1:const KEY="nuvyra_network";
+src/lib/network.js:4:localStorage.setItem(KEY,network);
+src/lib/network.js:8:return localStorage.getItem(KEY) || "sepolia";
+src/lib/walletSecurity.js:1:const MIN_PASSWORD = 12;
+src/lib/walletSecurity.js:3:export function validatePassword(password){
+src/lib/walletSecurity.js:5: if(!password || password.length < MIN_PASSWORD){
+src/lib/walletSecurity.js:11: if(!/[A-Z]/.test(password)){
+src/lib/walletSecurity.js:17: if(!/[0-9]/.test(password)){
+src/lib/config.js:36:export const STORAGE_KEY = "nuvyra_wallet";
+src/lib/config.js:42:  apiKey: import.meta.env.VITE_MOONPAY_API_KEY || "",
+src/lib/history.js:3:    const apiKey = import.meta.env.VITE_ETHERSCAN_KEY || "";
+src/lib/history.js:5:    if (!apiKey) {
+src/lib/history.js:21:      `&apikey=${apiKey}`;
+src/lib/security.js:39:export function preventSeedCapture() {
+src/lib/storage.js:1:const KEY="nuvyra_wallet";
+src/lib/storage.js:4: localStorage.setItem(
+src/lib/storage.js:5:  KEY,
+src/lib/storage.js:14: localStorage.getItem(KEY);
+src/lib/storage.js:23: localStorage.removeItem(KEY);
+src/lib/storage.js:30: return !!localStorage.getItem(KEY);
+src/lib/walletStatus.js:11:privateKey:"PROTECTED",
+src/components/UnlockWallet.jsx:8:  const [password,setPassword] = useState("");
+src/components/UnlockWallet.jsx:16:    const ok = await unlock(password);
+src/components/UnlockWallet.jsx:32:          type="password"
+src/components/UnlockWallet.jsx:34:          value={password}
+src/components/UnlockWallet.jsx:35:          onChange={e=>setPassword(e.target.value)}
+src/components/SeedBackup.jsx:3:export default function SeedBackup({seed,onConfirm}){
+src/components/SeedBackup.jsx:12:    await navigator.clipboard.writeText(seed);
+src/components/SeedBackup.jsx:35:        {visible ? seed : "•••• •••• •••• •••• •••• •••• •••• •••• •••• •••• •••• ••••"}
+src/components/NetworkSelector.jsx:13:{Object.entries(NETWORKS).map(([key,value])=>(
+src/components/NetworkSelector.jsx:15:<option key={key} value={key}>
+src/components/WalletSetup.jsx:2:import { createWallet, saveKeystore, importFromMnemonic } from "../lib/wallet";
+src/components/WalletSetup.jsx:5:  const [step, setStep] = useState("home"); // 'home' | 'password' | 'import'
+src/components/WalletSetup.jsx:7:  const [password, setPassword] = useState("");
+src/components/WalletSetup.jsx:8:  const [confirmPassword, setConfirmPassword] = useState("");
+src/components/WalletSetup.jsx:9:  const [mnemonic, setMnemonic] = useState("");
+src/components/WalletSetup.jsx:12:  const [generatedSeed,setGeneratedSeed] = useState(null);
+src/components/WalletSetup.jsx:16:    setStep("password");
+src/components/WalletSetup.jsx:30:      if (password !== confirmPassword) {
+src/components/WalletSetup.jsx:33:      if (password.length < 12) {
+src/components/WalletSetup.jsx:41:        const { encryptedJson, mnemonic: m } = await createWallet(password);
+src/components/WalletSetup.jsx:42:        saveKeystore(encryptedJson);
+src/components/WalletSetup.jsx:48:        if (!mnemonic)
+src/components/WalletSetup.jsx:50:        const { encryptedJson } = await importFromMnemonic(mnemonic, password);
+src/components/WalletSetup.jsx:51:        saveKeystore(encryptedJson);
+src/components/WalletSetup.jsx:108:            onChange={(e) => setMnemonic(e.target.value)}
+src/components/WalletSetup.jsx:116:            type="password"
+src/components/WalletSetup.jsx:118:            onChange={(e) => setPassword(e.target.value)}
+src/components/WalletSetup.jsx:125:            type="password"
+src/components/WalletSetup.jsx:127:            onChange={(e) => setConfirmPassword(e.target.value)}
+src/components/WalletSetup.jsx:142:  // Step === 'password' (Création)
+src/components/WalletSetup.jsx:160:          type="password"
+src/components/WalletSetup.jsx:163:          onChange={(e) => setPassword(e.target.value)}
+src/components/WalletSetup.jsx:170:          type="password"
+src/components/WalletSetup.jsx:173:          onChange={(e) => setConfirmPassword(e.target.value)}
+src/components/Dashboard.jsx:154:            <p key={index}>
+src/components/Dashboard.jsx:200:            <div key={index}>
+
+
+===== LARGE FILES =====
+2.1M	.
+892K	./.nuvyra
+536K	./dist
+524K	./dist/assets
+444K	./.nuvyra/backup_before_cleanup_20260718_144333
+440K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup
+340K	./dist/assets/ethers-CkNTVCJe.js
+324K	./nuvyra_source_txt
+312K	./nuvyra_source_txt/files_part_aa.txt
+144K	./src
+140K	./dist/assets/vendor-C8w-UNLI.js
+120K	./.nuvyra/final_backup
+120K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup
+116K	./.nuvyra/final_backup/src_20260718_142419
+116K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419
+76K	./.nuvyra/modules
+76K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/modules
+64K	./src/lib
+64K	./package-lock.json
+64K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final
+48K	./.nuvyra/final_backup/src_20260718_142419/lib
+48K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/lib
+44K	./src/components
+40K	./.nuvyra/final_backup/src_20260718_142419/components
+40K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/components
+36K	./dist/assets/index-DWTrNEgP.js
+36K	./.nuvyra/core
+32K	./.nuvyra/reports
+24K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/logs
+24K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive_old_audits
+20K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive_cleanup_20260718_141855
+16K	./scripts
+16K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive
+12K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/archive_final/archive_cleanup_20260718_141855/scripts
+12K	./.backup
+8.0K	./src/styles.css
+8.0K	./src/security
+8.0K	./src/context
+8.0K	./src/components/WalletSetup.jsx
+8.0K	./src/components/Dashboard.jsx
+8.0K	./public
+8.0K	./nuvyra_source_txt/files_part_aa
+8.0K	./nuvyra_files.txt
+8.0K	./.nuvyra/history
+8.0K	./.nuvyra/final_backup/src_20260718_142419/styles.css
+8.0K	./.nuvyra/final_backup/src_20260718_142419/security
+8.0K	./.nuvyra/final_backup/src_20260718_142419/components/WalletSetup.jsx
+8.0K	./.nuvyra/final_backup/src_20260718_142419/components/Dashboard.jsx
+8.0K	./.nuvyra/dashboard
+8.0K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/styles.css
+8.0K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/security
+8.0K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/components/WalletSetup.jsx
+8.0K	./.nuvyra/backup_before_cleanup_20260718_144333/nuvyra_backup/final_backup/src_20260718_142419/components/Dashboard.jsx
+4.0K	./vite.config.js
+4.0K	./src/security/constants.js
+4.0K	./src/main.jsx
+4.0K	./src/lib/walletStatus.js
+4.0K	./src/lib/walletSecurity.js
+4.0K	./src/lib/wallet.js
+4.0K	./src/lib/transactionGuard.js
+4.0K	./src/lib/transaction.js
+4.0K	./src/lib/tokens.js
+4.0K	./src/lib/tokenList.js
+4.0K	./src/lib/storage.js
+4.0K	./src/lib/security.js
+4.0K	./src/lib/prices.js
+4.0K	./src/lib/network.js
+4.0K	./src/lib/moonpay.js
+4.0K	./src/lib/history.js
+4.0K	./src/lib/fees.js
+4.0K	./src/lib/config.js
+4.0K	./src/context/WalletContext.jsx
+4.0K	./src/components/UnlockWallet.jsx
+4.0K	./src/components/SendCrypto.jsx
+4.0K	./src/components/SeedBackup.jsx
+4.0K	./src/components/ReceiveCrypto.jsx
+4.0K	./src/components/PriceCard.jsx
+4.0K	./src/components/NetworkSelector.jsx
+4.0K	./src/App.jsx
+4.0K	./securite_nuvyra.sh
+4.0K	./scripts/nuvyra-hardening.sh
+4.0K	./scripts/error-monitor.sh
+4.0K	./scripts/clean-reports.sh
+4.0K	./public/site.webmanifest
+4.0K	./package.json
+4.0K	./nohup.out
+4.0K	./index.html
+4.0K	./export_source_clean.sh
+4.0K	./export_nuvyra_core.sh
+4.0K	./dist/site.webmanifest
+4.0K	./dist/index.html
+4.0K	./dist/assets/index-BBNFZFrO.css
+4.0K	./auto_backup.py
+4.0K	./VAULTIFY_MIGRATION_CHECK.sh
+4.0K	./NUVYRA_WALLET_CORE_FIX.sh
+4.0K	./NUVYRA_SYSTEM_CHECK.txt
+4.0K	./NUVYRA_FINAL_CLEANUP.sh
+4.0K	./CLEAN_REPORT.txt
+4.0K	./.nuvyra/share_security_report.sh
+4.0K	./.nuvyra/security_upgrade.sh

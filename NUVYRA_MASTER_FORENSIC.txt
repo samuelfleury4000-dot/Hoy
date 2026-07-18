@@ -1,0 +1,2245 @@
+===== NUVYRA MASTER FORENSIC AUDIT =====
+Sat Jul 18 17:38:22 UTC 2026
+
+===== GIT DIFF =====
+diff --git a/nuvyra-wallet/.nuvyra/dashboard/data.json b/nuvyra-wallet/.nuvyra/dashboard/data.json
+index 675d76e..db3977e 100644
+--- a/nuvyra-wallet/.nuvyra/dashboard/data.json
++++ b/nuvyra-wallet/.nuvyra/dashboard/data.json
+@@ -1,7 +1,7 @@
+ {
+-"date":"Sat Jul 18 15:50:27 UTC 2026",
++"date":"Sat Jul 18 17:36:09 UTC 2026",
+ "score":100,
+ "history":[
+-{"date":"Sat Jul 18 15:50:27 UTC 2026","score":100}
++{"date":"Sat Jul 18 17:36:09 UTC 2026","score":100}
+ ]
+ }
+diff --git a/nuvyra-wallet/.nuvyra/history/audits.csv b/nuvyra-wallet/.nuvyra/history/audits.csv
+index b69fc97..772504b 100644
+--- a/nuvyra-wallet/.nuvyra/history/audits.csv
++++ b/nuvyra-wallet/.nuvyra/history/audits.csv
+@@ -10,3 +10,5 @@ Sat Jul 18 15:35:16 UTC 2026,100
+ Sat Jul 18 15:40:20 UTC 2026,100
+ Sat Jul 18 15:45:23 UTC 2026,100
+ Sat Jul 18 15:50:27 UTC 2026,100
++Sat Jul 18 17:31:06 UTC 2026,100
++Sat Jul 18 17:36:09 UTC 2026,100
+
+===== COMMITS RECENTS =====
+c5b7d82 NUVYRA full project sync audit wallet
+4d00f58 NUVYRA full A-Z project backup
+5f9ce2d Nuvyra wallet core hardening v1.0
+086f6cd NUVYRA security cleanup and hardening
+da2b0e7 NUVYRA complete system update audit guardian optimization cleanup
+17c72ce NUVYRA cleanup security hardening
+a0c48d8 Complete Nuvyra rebrand and security cleanup
+9ace084 Rebrand complete Vaultify to Nuvyra
+01736cd Tokens et valeur CAD ajoutés
+bb13bf4 Dashboard stable avant multi network
+2b7667c Fix wallet dashboard prices and network loading
+5547d03 Dashboard prix crypto fonctionnel
+9e674a8 backup avant debug affichage prix crypto
+594279a feat: optimise architecture, ajoute support multi-token et sécurise l'environnement
+b7d89ee Sauvegarde complète et sécurisée du code source
+
+===== SOURCE FILE LIST =====
+nuvyra-wallet/src/App.jsx
+nuvyra-wallet/src/components/Dashboard.jsx
+nuvyra-wallet/src/components/NetworkSelector.jsx
+nuvyra-wallet/src/components/PriceCard.jsx
+nuvyra-wallet/src/components/ReceiveCrypto.jsx
+nuvyra-wallet/src/components/SeedBackup.jsx
+nuvyra-wallet/src/components/SendCrypto.jsx
+nuvyra-wallet/src/components/UnlockWallet.jsx
+nuvyra-wallet/src/components/WalletSetup.jsx
+nuvyra-wallet/src/context/WalletContext.jsx
+nuvyra-wallet/src/lib/config.js
+nuvyra-wallet/src/lib/fees.js
+nuvyra-wallet/src/lib/history.js
+nuvyra-wallet/src/lib/moonpay.js
+nuvyra-wallet/src/lib/network.js
+nuvyra-wallet/src/lib/prices.js
+nuvyra-wallet/src/lib/security.js
+nuvyra-wallet/src/lib/storage.js
+nuvyra-wallet/src/lib/tokenList.js
+nuvyra-wallet/src/lib/tokens.js
+nuvyra-wallet/src/lib/transaction.js
+nuvyra-wallet/src/lib/transactionGuard.js
+nuvyra-wallet/src/lib/wallet.js
+nuvyra-wallet/src/lib/walletSecurity.js
+nuvyra-wallet/src/lib/walletStatus.js
+nuvyra-wallet/src/main.jsx
+nuvyra-wallet/src/security/constants.js
+nuvyra-wallet/src/styles.css
+
+===== FILE SIZES =====
+4.0K	nuvyra-wallet/src/App.jsx
+4.0K	nuvyra-wallet/src/main.jsx
+8.0K	nuvyra-wallet/src/context
+8.0K	nuvyra-wallet/src/security
+8.0K	nuvyra-wallet/src/styles.css
+44K	nuvyra-wallet/src/components
+64K	nuvyra-wallet/src/lib
+
+===== UNUSED IMPORT SEARCH =====
+nuvyra-wallet/src/App.jsx:import { useState, useEffect } from "react";
+nuvyra-wallet/src/App.jsx:import NetworkSelector from "./components/NetworkSelector";
+nuvyra-wallet/src/App.jsx:import { saveNetwork, getSavedNetwork } from "./lib/network";
+nuvyra-wallet/src/App.jsx:import { startSecurityTimer, resetSecurityTimer, clearSecurityTimer } from "./lib/security";
+nuvyra-wallet/src/App.jsx:import WalletSetup from "./components/WalletSetup";
+nuvyra-wallet/src/App.jsx:import Dashboard from "./components/Dashboard";
+nuvyra-wallet/src/App.jsx:import { hasStoredWallet, unlockWallet, wipeWallet } from "./lib/wallet";
+nuvyra-wallet/src/context/WalletContext.jsx:import { createContext, useContext, useEffect, useState } from "react";
+nuvyra-wallet/src/context/WalletContext.jsx:import {
+nuvyra-wallet/src/main.jsx:import React from "react";
+nuvyra-wallet/src/main.jsx:import ReactDOM from "react-dom/client";
+nuvyra-wallet/src/main.jsx:import App from "./App.jsx";
+nuvyra-wallet/src/main.jsx:import { WalletProvider } from "./context/WalletContext.jsx";
+nuvyra-wallet/src/main.jsx:import "./styles.css";
+nuvyra-wallet/src/lib/moonpay.js:import { ONRAMP_PROVIDER } from "./config.js";
+nuvyra-wallet/src/lib/tokens.js:import { ethers } from "ethers";
+nuvyra-wallet/src/lib/wallet.js:import { ethers } from "ethers";
+nuvyra-wallet/src/lib/wallet.js:import { NETWORKS, DEFAULT_NETWORK, STORAGE_KEY } from "./config.js";
+nuvyra-wallet/src/lib/wallet.js:import { getSavedNetwork } from "./network.js";
+nuvyra-wallet/src/lib/wallet.js:export async function importFromMnemonic(mnemonic, password) {
+nuvyra-wallet/src/lib/transaction.js:import { ethers } from "ethers";
+nuvyra-wallet/src/lib/transaction.js:import { getProvider } from "./wallet.js";
+nuvyra-wallet/src/lib/config.js:  apiKey: import.meta.env.VITE_MOONPAY_API_KEY || "",
+nuvyra-wallet/src/lib/history.js:    const apiKey = import.meta.env.VITE_ETHERSCAN_KEY || "";
+nuvyra-wallet/src/components/ReceiveCrypto.jsx:import { QRCodeSVG } from "qrcode.react";
+nuvyra-wallet/src/components/UnlockWallet.jsx:import { useState } from "react";
+nuvyra-wallet/src/components/UnlockWallet.jsx:import { useWallet } from "../context/WalletContext";
+nuvyra-wallet/src/components/SeedBackup.jsx:import { useState } from "react";
+nuvyra-wallet/src/components/NetworkSelector.jsx:import { NETWORKS } from "../lib/config";
+nuvyra-wallet/src/components/SendCrypto.jsx:import { useState } from "react";
+nuvyra-wallet/src/components/SendCrypto.jsx:import { ethers } from "ethers";
+nuvyra-wallet/src/components/SendCrypto.jsx:import { sendETH, estimateETHFee } from "../lib/transaction";
+nuvyra-wallet/src/components/WalletSetup.jsx:import { useState } from "react";
+nuvyra-wallet/src/components/WalletSetup.jsx:import { createWallet, saveKeystore, importFromMnemonic } from "../lib/wallet";
+nuvyra-wallet/src/components/WalletSetup.jsx:  const [step, setStep] = useState("home"); // 'home' | 'password' | 'import'
+nuvyra-wallet/src/components/WalletSetup.jsx:  const [action, setAction] = useState(null); // 'create' | 'import'
+nuvyra-wallet/src/components/WalletSetup.jsx:    setAction("import");
+nuvyra-wallet/src/components/WalletSetup.jsx:    setStep("import");
+nuvyra-wallet/src/components/WalletSetup.jsx:    if (action === "create" || action === "import") {
+nuvyra-wallet/src/components/WalletSetup.jsx:      } else if (action === "import") {
+nuvyra-wallet/src/components/WalletSetup.jsx:        const { encryptedJson } = await importFromMnemonic(mnemonic, password);
+nuvyra-wallet/src/components/WalletSetup.jsx:  if (step === "import") {
+nuvyra-wallet/src/components/Dashboard.jsx:import { useState, useEffect } from "react";
+nuvyra-wallet/src/components/Dashboard.jsx:import { getBalance } from "../lib/wallet";
+nuvyra-wallet/src/components/Dashboard.jsx:import { getCryptoPrices } from "../lib/prices";
+nuvyra-wallet/src/components/Dashboard.jsx:import { openMoonPay } from "../lib/moonpay";
+nuvyra-wallet/src/components/Dashboard.jsx:import { getProvider } from "../lib/wallet";
+nuvyra-wallet/src/components/Dashboard.jsx:import { getSavedNetwork } from "../lib/network";
+nuvyra-wallet/src/components/Dashboard.jsx:import { getTokenBalance } from "../lib/tokens";
+nuvyra-wallet/src/components/Dashboard.jsx:import { TOKENS } from "../lib/tokenList";
+nuvyra-wallet/src/components/Dashboard.jsx:import { getTransactionHistory } from "../lib/history";
+nuvyra-wallet/src/components/Dashboard.jsx:import PriceCard from "./PriceCard";
+nuvyra-wallet/src/components/Dashboard.jsx:import ReceiveCrypto from "./ReceiveCrypto";
+nuvyra-wallet/src/components/Dashboard.jsx:import SendCrypto from "./SendCrypto";
+nuvyra-wallet/src/components/Dashboard.jsx:import { QRCodeSVG } from "qrcode.react";
+
+===== SECURITY PATTERNS =====
+nuvyra-wallet/src/security/constants.js:3:  MIN_PASSWORD_LENGTH: 12,
+nuvyra-wallet/src/App.jsx:44:  const [password, setPassword] = useState("");
+nuvyra-wallet/src/App.jsx:49:      const w = await unlockWallet(password);
+nuvyra-wallet/src/App.jsx:95:              type="password"
+nuvyra-wallet/src/App.jsx:97:              onChange={(e) => setPassword(e.target.value)}
+nuvyra-wallet/src/context/WalletContext.jsx:23:  async function unlock(password) {
+nuvyra-wallet/src/context/WalletContext.jsx:27:      const w = await unlockWallet(password);
+nuvyra-wallet/src/lib/moonpay.js:6:    `?apiKey=${ONRAMP_PROVIDER.apiKey}` +
+nuvyra-wallet/src/lib/wallet.js:25:export async function createWallet(password) {
+nuvyra-wallet/src/lib/wallet.js:26:  if (!password || password.length < 8) {
+nuvyra-wallet/src/lib/wallet.js:32:  const encryptedJson = await wallet.encrypt(password);
+nuvyra-wallet/src/lib/wallet.js:36:    mnemonic: wallet.mnemonic.phrase,
+nuvyra-wallet/src/lib/wallet.js:41:export async function importFromMnemonic(mnemonic, password) {
+nuvyra-wallet/src/lib/wallet.js:42:  if (!mnemonic || mnemonic.trim().split(" ").length < 12) {
+nuvyra-wallet/src/lib/wallet.js:46:  const wallet = ethers.Wallet.fromPhrase(mnemonic.trim());
+nuvyra-wallet/src/lib/wallet.js:48:  const encryptedJson = await wallet.encrypt(password);
+nuvyra-wallet/src/lib/wallet.js:57:  localStorage.setItem(STORAGE_KEY, keystore);
+nuvyra-wallet/src/lib/wallet.js:61:  return Boolean(localStorage.getItem(STORAGE_KEY));
+nuvyra-wallet/src/lib/wallet.js:64:export async function unlockWallet(password) {
+nuvyra-wallet/src/lib/wallet.js:65:  const keystore = localStorage.getItem(STORAGE_KEY);
+nuvyra-wallet/src/lib/wallet.js:71:  return await ethers.Wallet.fromEncryptedJson(keystore, password);
+nuvyra-wallet/src/lib/wallet.js:83:  localStorage.removeItem(STORAGE_KEY);
+nuvyra-wallet/src/lib/network.js:4:localStorage.setItem(KEY,network);
+nuvyra-wallet/src/lib/network.js:8:return localStorage.getItem(KEY) || "sepolia";
+nuvyra-wallet/src/lib/walletSecurity.js:1:const MIN_PASSWORD = 12;
+nuvyra-wallet/src/lib/walletSecurity.js:3:export function validatePassword(password){
+nuvyra-wallet/src/lib/walletSecurity.js:5: if(!password || password.length < MIN_PASSWORD){
+nuvyra-wallet/src/lib/walletSecurity.js:11: if(!/[A-Z]/.test(password)){
+nuvyra-wallet/src/lib/walletSecurity.js:17: if(!/[0-9]/.test(password)){
+nuvyra-wallet/src/lib/config.js:42:  apiKey: import.meta.env.VITE_MOONPAY_API_KEY || "",
+nuvyra-wallet/src/lib/history.js:3:    const apiKey = import.meta.env.VITE_ETHERSCAN_KEY || "";
+nuvyra-wallet/src/lib/history.js:5:    if (!apiKey) {
+nuvyra-wallet/src/lib/history.js:21:      `&apikey=${apiKey}`;
+nuvyra-wallet/src/lib/security.js:39:export function preventSeedCapture() {
+nuvyra-wallet/src/lib/storage.js:4: localStorage.setItem(
+nuvyra-wallet/src/lib/storage.js:14: localStorage.getItem(KEY);
+nuvyra-wallet/src/lib/storage.js:23: localStorage.removeItem(KEY);
+nuvyra-wallet/src/lib/storage.js:30: return !!localStorage.getItem(KEY);
+nuvyra-wallet/src/lib/walletStatus.js:11:privateKey:"PROTECTED",
+nuvyra-wallet/src/components/UnlockWallet.jsx:8:  const [password,setPassword] = useState("");
+nuvyra-wallet/src/components/UnlockWallet.jsx:16:    const ok = await unlock(password);
+nuvyra-wallet/src/components/UnlockWallet.jsx:32:          type="password"
+nuvyra-wallet/src/components/UnlockWallet.jsx:34:          value={password}
+nuvyra-wallet/src/components/UnlockWallet.jsx:35:          onChange={e=>setPassword(e.target.value)}
+nuvyra-wallet/src/components/SeedBackup.jsx:3:export default function SeedBackup({seed,onConfirm}){
+nuvyra-wallet/src/components/SeedBackup.jsx:12:    await navigator.clipboard.writeText(seed);
+nuvyra-wallet/src/components/SeedBackup.jsx:35:        {visible ? seed : "•••• •••• •••• •••• •••• •••• •••• •••• •••• •••• •••• ••••"}
+nuvyra-wallet/src/components/WalletSetup.jsx:2:import { createWallet, saveKeystore, importFromMnemonic } from "../lib/wallet";
+nuvyra-wallet/src/components/WalletSetup.jsx:5:  const [step, setStep] = useState("home"); // 'home' | 'password' | 'import'
+nuvyra-wallet/src/components/WalletSetup.jsx:7:  const [password, setPassword] = useState("");
+nuvyra-wallet/src/components/WalletSetup.jsx:8:  const [confirmPassword, setConfirmPassword] = useState("");
+nuvyra-wallet/src/components/WalletSetup.jsx:9:  const [mnemonic, setMnemonic] = useState("");
+nuvyra-wallet/src/components/WalletSetup.jsx:12:  const [generatedSeed,setGeneratedSeed] = useState(null);
+nuvyra-wallet/src/components/WalletSetup.jsx:16:    setStep("password");
+nuvyra-wallet/src/components/WalletSetup.jsx:30:      if (password !== confirmPassword) {
+nuvyra-wallet/src/components/WalletSetup.jsx:33:      if (password.length < 12) {
+nuvyra-wallet/src/components/WalletSetup.jsx:41:        const { encryptedJson, mnemonic: m } = await createWallet(password);
+nuvyra-wallet/src/components/WalletSetup.jsx:48:        if (!mnemonic)
+nuvyra-wallet/src/components/WalletSetup.jsx:50:        const { encryptedJson } = await importFromMnemonic(mnemonic, password);
+nuvyra-wallet/src/components/WalletSetup.jsx:108:            onChange={(e) => setMnemonic(e.target.value)}
+nuvyra-wallet/src/components/WalletSetup.jsx:116:            type="password"
+nuvyra-wallet/src/components/WalletSetup.jsx:118:            onChange={(e) => setPassword(e.target.value)}
+nuvyra-wallet/src/components/WalletSetup.jsx:125:            type="password"
+nuvyra-wallet/src/components/WalletSetup.jsx:127:            onChange={(e) => setConfirmPassword(e.target.value)}
+nuvyra-wallet/src/components/WalletSetup.jsx:142:  // Step === 'password' (Création)
+nuvyra-wallet/src/components/WalletSetup.jsx:160:          type="password"
+nuvyra-wallet/src/components/WalletSetup.jsx:163:          onChange={(e) => setPassword(e.target.value)}
+nuvyra-wallet/src/components/WalletSetup.jsx:170:          type="password"
+nuvyra-wallet/src/components/WalletSetup.jsx:173:          onChange={(e) => setConfirmPassword(e.target.value)}
+
+===== BUILD =====
+
+> nuvyra-wallet@1.0.0 build
+> vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 192 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   1.60 kB │ gzip:   0.75 kB
+dist/assets/index-BBNFZFrO.css    3.44 kB │ gzip:   1.09 kB
+dist/assets/index-DWTrNEgP.js    34.99 kB │ gzip:  12.58 kB
+dist/assets/vendor-C8w-UNLI.js  141.74 kB │ gzip:  45.48 kB
+dist/assets/ethers-CkNTVCJe.js  346.90 kB │ gzip: 132.88 kB
+✓ built in 3.29s
+
+===== PACKAGE =====
+{
+  "name": "nuvyra-wallet",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "ethers": "^6.13.4",
+    "qrcode.react": "^4.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "prettier": "^3.9.5",
+    "vite": "^6.0.7"
+  }
+}
+
+===== COMPLETE SOURCE EXPORT =====
+
+===== FILE: src/security/constants.js =====
+export const SECURITY = {
+  AUTO_LOCK_MINUTES: 10,
+  MIN_PASSWORD_LENGTH: 12,
+};
+
+===== FILE: src/App.jsx =====
+import { useState, useEffect } from "react";
+import NetworkSelector from "./components/NetworkSelector";
+import { saveNetwork, getSavedNetwork } from "./lib/network";
+import { startSecurityTimer, resetSecurityTimer, clearSecurityTimer } from "./lib/security";
+import WalletSetup from "./components/WalletSetup";
+import Dashboard from "./components/Dashboard";
+import { hasStoredWallet, unlockWallet, wipeWallet } from "./lib/wallet";
+
+export default function App() {
+
+  useEffect(()=>{
+
+    const expire=()=>{
+
+      setWallet(null);
+      setIsLocked(true);
+
+    };
+
+    startSecurityTimer(expire);
+
+    const activity=()=>resetSecurityTimer(expire);
+
+    window.addEventListener("click",activity);
+    window.addEventListener("keydown",activity);
+
+    return ()=>{
+
+      window.removeEventListener("click",activity);
+      window.removeEventListener("keydown",activity);
+
+    };
+
+  },[]);
+  const [network, setNetworkState] = useState(getSavedNetwork());
+
+const setNetwork = (n)=>{
+setNetworkState(n);
+saveNetwork(n);
+};
+
+  const [wallet, setWallet] = useState(null);
+  const [isLocked, setIsLocked] = useState(hasStoredWallet());
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const attemptUnlock = async () => {
+    try {
+      const w = await unlockWallet(password);
+      setWallet(w);
+      setIsLocked(false);
+      setError("");
+    } catch (e) {
+      setError("Mot de passe incorrect ou erreur de déchiffrement.");
+    }
+  };
+
+  const handleLogout = () => {
+    clearSecurityTimer();
+    setWallet(null);
+    setIsLocked(true);
+  };
+
+  const handleDeleteWallet = () => {
+    if (confirm("Supprimer définitivement ce wallet local ?")) {
+      wipeWallet();
+      window.location.reload();
+    }
+  };
+
+  return (
+    <div>
+      {/* HEADER GLOBAL COMPRIS SUR TOUTES LES PAGES */}
+      <header className="app-header">
+        <div className="logo-container">
+          <div className="status-dot"></div>
+          NUVYRA
+        </div>
+        <NetworkSelector network={network} setNetwork={setNetwork} />
+      </header>
+
+      {/* LOGIQUE DE ROUTAGE */}
+      {hasStoredWallet() && isLocked ? (
+        <div className="main-container">
+          <h1>Bon retour</h1>
+          <p className="description">
+            Entre ton mot de passe pour déverrouiller ton portefeuille local.
+          </p>
+
+          {error && <div className="error-box">{error}</div>}
+
+          <div className="input-group">
+            <label className="input-label">MOT DE PASSE</label>
+            <input
+              type="password"
+              className="input-field"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <button className="btn-primary" onClick={attemptUnlock}>
+            Déverrouiller
+          </button>
+          <button
+            className="btn-secondary"
+            style={{
+              marginTop: "1rem",
+              borderColor: "#ef4444",
+              color: "#ef4444",
+            }}
+            onClick={handleDeleteWallet}
+          >
+            Effacer le wallet de cet appareil
+          </button>
+        </div>
+      ) : !wallet ? (
+        <WalletSetup onWalletCreated={() => window.location.reload()} />
+      ) : (
+        <Dashboard wallet={wallet} onLogout={handleLogout} />
+      )}
+    </div>
+  );
+}
+
+===== FILE: src/context/WalletContext.jsx =====
+import { createContext, useContext, useEffect, useState } from "react";
+import {
+  hasStoredWallet,
+  unlockWallet,
+  wipeWallet
+} from "../lib/wallet";
+
+const WalletContext = createContext(null);
+
+export function WalletProvider({ children }) {
+
+  const [wallet, setWallet] = useState(null);
+  const [address, setAddress] = useState("");
+  const [locked, setLocked] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (hasStoredWallet()) {
+      setLocked(true);
+    }
+  }, []);
+
+  async function unlock(password) {
+    setLoading(true);
+
+    try {
+      const w = await unlockWallet(password);
+
+      setWallet(w);
+      setAddress(w.address);
+      setLocked(false);
+
+      return true;
+
+    } catch (e) {
+      console.error(e);
+      return false;
+
+    } finally {
+      setLoading(false);
+    }
+  }
+
+
+  function lock() {
+    setWallet(null);
+    setAddress("");
+    setLocked(true);
+  }
+
+
+  function removeWallet() {
+    wipeWallet();
+    lock();
+  }
+
+
+  return (
+    <WalletContext.Provider
+      value={{
+        wallet,
+        address,
+        locked,
+        loading,
+        unlock,
+        lock,
+        removeWallet
+      }}
+    >
+      {children}
+    </WalletContext.Provider>
+  );
+}
+
+
+export function useWallet(){
+  return useContext(WalletContext);
+}
+
+===== FILE: src/main.jsx =====
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import { WalletProvider } from "./context/WalletContext.jsx";
+import "./styles.css";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <WalletProvider><App /></WalletProvider>
+  </React.StrictMode>,
+);
+
+===== FILE: src/lib/moonpay.js =====
+import { ONRAMP_PROVIDER } from "./config.js";
+
+export function openMoonPay(walletAddress, currency = "ETH") {
+  const url =
+    `${ONRAMP_PROVIDER.widgetUrl}` +
+    `?apiKey=${ONRAMP_PROVIDER.apiKey}` +
+    `&walletAddress=${walletAddress}` +
+    `&currencyCode=${currency}`;
+
+  window.open(url, "_blank", "width=500,height=700");
+}
+
+===== FILE: src/lib/prices.js =====
+const EMPTY = {
+  ethereum: { cad: 0, change: 0 },
+  bitcoin: { cad: 0, change: 0 },
+  usdc: { cad: 0, change: 0 },
+};
+
+async function coinGecko() {
+  const r = await fetch(
+    "https://api.coingecko.com/api/v3/simple/price?ids=ethereum,bitcoin,usd-coin&vs_currencies=cad&include_24hr_change=true",
+    {
+      cache: "no-store",
+    },
+  );
+
+  if (!r.ok) throw new Error("CoinGecko bloqué");
+
+  const d = await r.json();
+
+  return {
+    ethereum: {
+      cad: Number(d.ethereum.cad),
+      change: Number(d.ethereum.cad_24h_change),
+    },
+    bitcoin: {
+      cad: Number(d.bitcoin.cad),
+      change: Number(d.bitcoin.cad_24h_change),
+    },
+    usdc: {
+      cad: Number(d["usd-coin"].cad),
+      change: Number(d["usd-coin"].cad_24h_change),
+    },
+  };
+}
+
+async function coinCap() {
+  const r = await fetch(
+    "https://api.coincap.io/v2/assets?ids=ethereum,bitcoin,usd-coin",
+    {
+      cache: "no-store",
+    },
+  );
+
+  if (!r.ok) throw new Error("CoinCap bloqué");
+
+  const d = await r.json();
+
+  const cad = 1.38;
+
+  const get = (id) => {
+    const x = d.data.find((a) => a.id === id);
+    return {
+      cad: Number(x.priceUsd) * cad,
+      change: Number(x.changePercent24Hr),
+    };
+  };
+
+  return {
+    ethereum: get("ethereum"),
+    bitcoin: get("bitcoin"),
+    usdc: get("usd-coin"),
+  };
+}
+
+export async function getCryptoPrices() {
+  try {
+    return await coinGecko();
+  } catch (e) {
+    console.warn("CoinGecko indisponible, essai CoinCap");
+  }
+
+  try {
+    return await coinCap();
+  } catch (e) {
+    console.error("Toutes les API prix échouent", e);
+    return EMPTY;
+  }
+}
+
+===== FILE: src/lib/tokens.js =====
+import { ethers } from "ethers";
+
+const ERC20_ABI = ["function balanceOf(address owner) view returns(uint256)"];
+
+export async function getTokenBalance(token, walletAddress, provider) {
+  try {
+    if (!ethers.isAddress(token.address)) {
+      throw new Error("Adresse token invalide");
+    }
+
+    const contract = new ethers.Contract(token.address, ERC20_ABI, provider);
+
+    const balance = await contract.balanceOf(walletAddress);
+
+    return {
+      symbol: token.symbol,
+
+      name: token.name,
+
+      balance: ethers.formatUnits(balance, token.decimals),
+    };
+  } catch (error) {
+    console.error("Erreur token:", token.symbol, error);
+
+    return {
+      symbol: token.symbol,
+
+      name: token.name,
+
+      balance: "0",
+    };
+  }
+}
+
+===== FILE: src/lib/wallet.js =====
+import { ethers } from "ethers";
+import { NETWORKS, DEFAULT_NETWORK, STORAGE_KEY } from "./config.js";
+import { getSavedNetwork } from "./network.js";
+
+export function getProvider(networkKey = null) {
+
+  networkKey = networkKey || getSavedNetwork();
+  const net = NETWORKS[networkKey];
+
+  if (!net) {
+    throw new Error("Réseau inconnu");
+  }
+
+  for (const rpc of net.rpcUrls) {
+    try {
+      return new ethers.JsonRpcProvider(rpc);
+    } catch (e) {
+      console.warn("RPC indisponible:", rpc);
+    }
+  }
+
+  throw new Error("Aucun RPC disponible");
+}
+
+export async function createWallet(password) {
+  if (!password || password.length < 8) {
+    throw new Error("Mot de passe trop court");
+  }
+
+  const wallet = ethers.Wallet.createRandom();
+
+  const encryptedJson = await wallet.encrypt(password);
+
+  return {
+    encryptedJson,
+    mnemonic: wallet.mnemonic.phrase,
+    address: wallet.address,
+  };
+}
+
+export async function importFromMnemonic(mnemonic, password) {
+  if (!mnemonic || mnemonic.trim().split(" ").length < 12) {
+    throw new Error("Phrase invalide");
+  }
+
+  const wallet = ethers.Wallet.fromPhrase(mnemonic.trim());
+
+  const encryptedJson = await wallet.encrypt(password);
+
+  return {
+    encryptedJson,
+    address: wallet.address,
+  };
+}
+
+export function saveKeystore(keystore) {
+  localStorage.setItem(STORAGE_KEY, keystore);
+}
+
+export function hasStoredWallet() {
+  return Boolean(localStorage.getItem(STORAGE_KEY));
+}
+
+export async function unlockWallet(password) {
+  const keystore = localStorage.getItem(STORAGE_KEY);
+
+  if (!keystore) {
+    throw new Error("Aucun wallet trouvé");
+  }
+
+  return await ethers.Wallet.fromEncryptedJson(keystore, password);
+}
+
+export async function getBalance(address) {
+  const provider = getProvider();
+
+  const balance = await provider.getBalance(address);
+
+  return ethers.formatEther(balance);
+}
+
+export function wipeWallet() {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+===== FILE: src/lib/tokenList.js =====
+export const TOKENS={
+
+sepolia:[
+{
+symbol:"USDC",
+name:"USD Coin",
+address:"0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238",
+decimals:6
+}
+],
+
+ethereum:[
+{
+symbol:"USDC",
+name:"USD Coin",
+address:"0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+decimals:6
+},
+{
+symbol:"USDT",
+name:"Tether",
+address:"0xdAC17F958D2ee523a2206206994597C13D831ec7",
+decimals:6
+}
+],
+
+polygon:[
+{
+symbol:"USDC",
+name:"USD Coin",
+address:"0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+decimals:6
+}
+],
+
+base:[
+{
+symbol:"USDC",
+name:"USD Coin",
+address:"0xd9aaec86b65d86f6a7b5b1b0c42ffa531710b6ca",
+decimals:6
+}
+]
+
+};
+
+===== FILE: src/lib/network.js =====
+const KEY="nuvyra_network";
+
+export function saveNetwork(network){
+localStorage.setItem(KEY,network);
+}
+
+export function getSavedNetwork(){
+return localStorage.getItem(KEY) || "sepolia";
+}
+
+===== FILE: src/lib/walletSecurity.js =====
+const MIN_PASSWORD = 12;
+
+export function validatePassword(password){
+
+ if(!password || password.length < MIN_PASSWORD){
+   throw new Error(
+    "Mot de passe minimum 12 caractères"
+   );
+ }
+
+ if(!/[A-Z]/.test(password)){
+   throw new Error(
+    "Ajoute une majuscule"
+   );
+ }
+
+ if(!/[0-9]/.test(password)){
+   throw new Error(
+    "Ajoute un chiffre"
+   );
+ }
+
+ return true;
+}
+
+
+export function clearSensitive(){
+
+ if(window.gc){
+   window.gc();
+ }
+
+}
+
+===== FILE: src/lib/fees.js =====
+export const FEE_CONFIG = {
+  percentage: 0.5,
+
+  collectors: {
+    ETH: "0xA29baAc46a97ae0Ba82D64BeD3591337B64b3670",
+
+    BTC: "bc1qw5rrqxruhdfrlmthapyctwmhzlwpxf8wje4md0",
+
+    BCH: "bitcoincash:qqpwwcuzhr0vqe2d6tezx0rwaaky9kzfyg06t39duq",
+
+    DASH: "DT3qzbQrZJvguSvQiqGu8PwMtbF1oik3jJ",
+
+    LTC: "ltc1q73ze433dvfynryrua4y3phmud49esered74vxd",
+
+    XRP: "rabh6WVfnFG7D1Xm9sZeMVDpo14aKBRcMa",
+  },
+};
+
+===== FILE: src/lib/transaction.js =====
+import { ethers } from "ethers";
+import { getProvider } from "./wallet.js";
+
+
+export async function estimateETHFee(to, amount){
+
+  const provider = getProvider();
+
+  const gasPrice = await provider.getFeeData();
+
+  const gasLimit = await provider.estimateGas({
+    to,
+    value: ethers.parseEther(amount)
+  });
+
+
+  const price =
+    gasPrice.gasPrice || 0;
+
+
+  const fee =
+    gasLimit * price;
+
+
+  return {
+    gasLimit: gasLimit.toString(),
+    gasPrice: ethers.formatUnits(price,"gwei"),
+    feeETH: ethers.formatEther(fee)
+  };
+
+}
+
+
+
+export async function sendETH(
+  wallet,
+  to,
+  amount
+){
+
+  if(!ethers.isAddress(to)){
+    throw new Error("Adresse destination invalide");
+  }
+
+
+  if(!amount || Number(amount)<=0){
+    throw new Error("Montant invalide");
+  }
+
+
+  const provider=getProvider("sepolia");
+
+
+  const balance =
+    await provider.getBalance(wallet.address);
+
+
+  const value =
+    ethers.parseEther(amount);
+
+
+  const fee =
+    await estimateETHFee(to,amount);
+
+
+  const total =
+    value +
+    ethers.parseEther(fee.feeETH);
+
+
+  if(total >= balance){
+
+    throw new Error(
+      "Solde insuffisant avec les frais réseau"
+    );
+
+  }
+
+
+  const signer =
+    wallet.connect(provider);
+
+
+  const tx =
+    await signer.sendTransaction({
+
+      to,
+      value,
+      gasLimit:fee.gasLimit
+
+    });
+
+
+  const receipt =
+    await tx.wait();
+
+
+  return {
+    hash:tx.hash,
+    receipt
+  };
+
+}
+
+===== FILE: src/lib/config.js =====
+export const NETWORKS = {
+  sepolia: {
+    name: "Sepolia Testnet",
+    chainId: 11155111,
+    symbol: "ETH",
+    rpcUrls: [
+      "https://ethereum-sepolia-rpc.publicnode.com",
+      "https://rpc.sepolia.org",
+    ],
+  },
+
+  ethereum: {
+    name: "Ethereum Mainnet",
+    chainId: 1,
+    symbol: "ETH",
+    rpcUrls: ["https://cloudflare-eth.com"],
+  },
+
+  polygon: {
+    name: "Polygon",
+    chainId: 137,
+    symbol: "POL",
+    rpcUrls: ["https://polygon-rpc.com"],
+  },
+
+  base: {
+    name: "Base",
+    chainId: 8453,
+    symbol: "ETH",
+    rpcUrls: ["https://mainnet.base.org"],
+  },
+};
+
+export const DEFAULT_NETWORK = "sepolia";
+
+export const STORAGE_KEY = "nuvyra_wallet";
+
+export const SERVICE_FEE_PERCENT = 0.5;
+
+export const ONRAMP_PROVIDER = {
+  name: "MoonPay",
+  apiKey: import.meta.env.VITE_MOONPAY_API_KEY || "",
+  widgetUrl: "https://buy.moonpay.com",
+};
+
+===== FILE: src/lib/transactionGuard.js =====
+export function validateTransaction(to,amount){
+
+ if(!to.startsWith("0x")){
+   throw new Error(
+    "Adresse Ethereum invalide"
+   );
+ }
+
+
+ if(Number(amount)<=0){
+   throw new Error(
+    "Montant invalide"
+   );
+ }
+
+
+ return true;
+
+}
+
+===== FILE: src/lib/history.js =====
+export async function getTransactionHistory(address) {
+  try {
+    const apiKey = import.meta.env.VITE_ETHERSCAN_KEY || "";
+
+    if (!apiKey) {
+      console.warn("Clé Etherscan absente");
+
+      return [];
+    }
+
+    const url =
+      `https://api-sepolia.etherscan.io/api` +
+      `?module=account` +
+      `&action=txlist` +
+      `&address=${address}` +
+      `&startblock=0` +
+      `&endblock=99999999` +
+      `&page=1` +
+      `&offset=10` +
+      `&sort=desc` +
+      `&apikey=${apiKey}`;
+
+    const response = await fetch(url);
+
+    const data = await response.json();
+
+    if (data.status !== "1") {
+      return [];
+    }
+
+    return data.result.map((tx) => ({
+      hash: tx.hash,
+
+      from: tx.from,
+
+      to: tx.to,
+
+      value: Number(tx.value) / 1e18,
+
+      date: new Date(Number(tx.timeStamp) * 1000).toLocaleString("fr-CA"),
+    }));
+  } catch (error) {
+    console.error("Historique erreur:", error);
+
+    return [];
+  }
+}
+
+===== FILE: src/lib/security.js =====
+let timer = null;
+
+const TIMEOUT = 5 * 60 * 1000;
+
+export function startSecurityTimer(callback) {
+  clearSecurityTimer();
+  timer = setTimeout(callback, TIMEOUT);
+}
+
+export function resetSecurityTimer(callback) {
+  startSecurityTimer(callback);
+}
+
+export function clearSecurityTimer() {
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
+}
+
+export function stopSecurityTimer() {
+  clearSecurityTimer();
+}
+
+export function wipeSensitive(value) {
+  return typeof value === "string"
+    ? "\0".repeat(value.length)
+    : null;
+}
+
+export function secureClipboardClear() {
+  if (navigator.clipboard) {
+    setTimeout(() => {
+      navigator.clipboard.writeText("");
+    }, 15000);
+  }
+}
+
+export function preventSeedCapture() {
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      console.warn("NUVYRA: écran masqué");
+    }
+  });
+}
+
+===== FILE: src/lib/storage.js =====
+const KEY="nuvyra_wallet";
+
+export function saveWallet(data){
+ localStorage.setItem(
+  KEY,
+  JSON.stringify(data)
+ );
+}
+
+
+export function loadWallet(){
+
+ const data=
+ localStorage.getItem(KEY);
+
+ return data ? JSON.parse(data):null;
+
+}
+
+
+export function deleteWallet(){
+
+ localStorage.removeItem(KEY);
+
+}
+
+
+export function walletExists(){
+
+ return !!localStorage.getItem(KEY);
+
+}
+
+===== FILE: src/lib/walletStatus.js =====
+export function walletStatus(){
+
+return {
+
+online:true,
+
+security:"ACTIVE",
+
+storage:"LOCAL",
+
+privateKey:"PROTECTED",
+
+network:"READY"
+
+};
+
+}
+
+===== FILE: src/styles.css =====
+:root {
+  --bg-main: #0b0e14;
+  --bg-panel: #151b23;
+  --bg-input: #010409;
+  --accent-green: #4ade80;
+  --accent-green-hover: #22c55e;
+  --text-main: #f0f6fc;
+  --text-muted: #8b949e;
+  --border: #30363d;
+  --error-bg: rgba(248, 81, 73, 0.1);
+  --error-text: #ff7b72;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #1f2937;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-green);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-green);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-green);
+}
+
+.network-badge {
+  background-color: #1f2937;
+  color: var(--text-muted);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+/* Layout */
+.main-container {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+h1 {
+  font-size: 2.2rem;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+p.description {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Info Box */
+.info-box {
+  background-color: rgba(74, 222, 128, 0.05);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  padding: 1.25rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.info-box strong {
+  color: var(--accent-green);
+  font-weight: 500;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--accent-green);
+  color: #000;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  font-family: "Space Grotesk", sans-serif;
+  transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-green-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  border-radius: 8px;
+  width: 100%;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: "Space Grotesk", sans-serif;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.back-link {
+  color: var(--text-muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.back-link:hover {
+  color: var(--text-main);
+}
+
+/* Form Elements */
+.error-box {
+  background-color: var(--error-bg);
+  border: 1px solid var(--error-text);
+  color: var(--error-text);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.9rem;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.input-field {
+  width: 100%;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--accent-green);
+}
+
+/* NUVYRA BRAND */
+.logo-container {
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.network-badge {
+  backdrop-filter: blur(10px);
+}
+
+.nuvyra-glow {
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.45);
+}
+
+/* NUVYRA BRAND */
+.logo-container {
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.network-badge {
+  backdrop-filter: blur(10px);
+}
+
+.nuvyra-glow {
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.45);
+}
+
+.balance-card {
+  background: linear-gradient(145deg, #151b23, #0b0e14);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.balance-header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.balance-card h2 {
+  font-size: 2.2rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.balance-card p {
+  color: var(--accent-green);
+  font-family: "IBM Plex Mono", monospace;
+}
+
+===== FILE: src/components/ReceiveCrypto.jsx =====
+import { QRCodeSVG } from "qrcode.react";
+
+export default function ReceiveCrypto({address,onBack}){
+
+return (
+
+<div className="main-container">
+
+<h1>Recevoir</h1>
+
+<div className="info-box">
+
+<QRCodeSVG
+value={address}
+size={220}
+/>
+
+<p style={{wordBreak:"break-all"}}>
+{address}
+</p>
+
+<button
+className="btn-secondary"
+onClick={()=>{
+navigator.clipboard.writeText(address)
+}}
+>
+Copier adresse
+</button>
+
+</div>
+
+
+<button
+className="btn-secondary"
+onClick={onBack}
+>
+Retour
+</button>
+
+
+</div>
+
+);
+
+}
+
+===== FILE: src/components/UnlockWallet.jsx =====
+import { useState } from "react";
+import { useWallet } from "../context/WalletContext";
+
+export default function UnlockWallet(){
+
+  const { unlock, loading } = useWallet();
+
+  const [password,setPassword] = useState("");
+  const [error,setError] = useState("");
+
+  async function submit(e){
+    e.preventDefault();
+
+    setError("");
+
+    const ok = await unlock(password);
+
+    if(!ok){
+      setError("Mot de passe incorrect");
+    }
+  }
+
+
+  return (
+    <div className="wallet-box">
+
+      <h2>🔐 Déverrouiller Nuvyra</h2>
+
+      <form onSubmit={submit}>
+
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          value={password}
+          onChange={e=>setPassword(e.target.value)}
+        />
+
+        <button disabled={loading}>
+          {loading ? "Déverrouillage..." : "Ouvrir Wallet"}
+        </button>
+
+      </form>
+
+      {error &&
+        <p className="error">
+          {error}
+        </p>
+      }
+
+    </div>
+  );
+}
+
+===== FILE: src/components/SeedBackup.jsx =====
+import { useState } from "react";
+
+export default function SeedBackup({seed,onConfirm}){
+
+  const [visible,setVisible]=useState(false);
+  const [copied,setCopied]=useState(false);
+  const [checked,setChecked]=useState(false);
+
+
+  async function copy(){
+
+    await navigator.clipboard.writeText(seed);
+
+    setCopied(true);
+
+    setTimeout(()=>setCopied(false),2000);
+
+  }
+
+
+  return (
+
+    <div className="main-container">
+
+      <h1>Sauvegarde requise</h1>
+
+      <div className="error-box">
+        Cette phrase est la seule sauvegarde de ton wallet.
+        Toute personne qui la possède contrôle les fonds.
+      </div>
+
+
+      <div className="info-box">
+
+        {visible ? seed : "•••• •••• •••• •••• •••• •••• •••• •••• •••• •••• •••• ••••"}
+
+      </div>
+
+
+      <button
+        className="btn-secondary"
+        onClick={()=>setVisible(!visible)}
+      >
+        {visible ? "Masquer" : "Afficher la phrase"}
+      </button>
+
+
+      <button
+        className="btn-secondary"
+        onClick={copy}
+      >
+        {copied ? "Copié ✓" : "Copier"}
+      </button>
+
+
+      <label style={{
+        display:"block",
+        margin:"1.5rem 0"
+      }}>
+
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={e=>setChecked(e.target.checked)}
+        />
+
+        {" "}
+        J'ai sauvegardé ma phrase secrète
+
+      </label>
+
+
+      <button
+        className="btn-primary"
+        disabled={!checked}
+        onClick={onConfirm}
+      >
+        Continuer
+      </button>
+
+    </div>
+
+  );
+
+}
+
+===== FILE: src/components/NetworkSelector.jsx =====
+import { NETWORKS } from "../lib/config";
+
+export default function NetworkSelector({network,setNetwork}){
+
+return (
+
+<select
+className="network-badge"
+value={network}
+onChange={(e)=>setNetwork(e.target.value)}
+>
+
+{Object.entries(NETWORKS).map(([key,value])=>(
+
+<option key={key} value={key}>
+{value.name}
+</option>
+
+))}
+
+</select>
+
+);
+
+}
+
+===== FILE: src/components/SendCrypto.jsx =====
+import { useState } from "react";
+import { ethers } from "ethers";
+import { sendETH, estimateETHFee } from "../lib/transaction";
+
+
+export default function SendCrypto({wallet,onBack}){
+
+const [address,setAddress]=useState("");
+const [amount,setAmount]=useState("");
+const [message,setMessage]=useState("");
+const [confirm,setConfirm]=useState(false);
+const [fee,setFee]=useState(null);
+const [sending,setSending]=useState(false);
+const [hash,setHash]=useState("");
+const [error,setError]=useState("");
+
+
+
+async function preview(){
+
+try{
+
+if(!ethers.isAddress(address)){
+throw new Error("Adresse invalide");
+}
+
+if(!amount || Number(amount)<=0){
+throw new Error("Montant invalide");
+}
+
+
+const estimated =
+await estimateETHFee(address,amount);
+
+
+setFee(estimated);
+setConfirm(true);
+
+
+}catch(e){
+
+setMessage(e.message);
+
+}
+
+}
+
+
+
+async function send(){
+
+if(sending) return;
+
+try{
+
+setSending(true);
+
+setMessage("Transaction en cours...");
+
+
+const result =
+await sendETH(
+wallet,
+address,
+amount
+);
+
+
+setHash(result.hash);
+
+setMessage(
+"Transaction confirmée"
+);
+
+
+}catch(e){
+
+setMessage(e.message);
+
+}finally{
+
+setSending(false);
+
+}
+
+}
+
+
+
+return (
+
+<div className="main-container">
+
+<h1>Envoyer ETH</h1>
+
+
+{!confirm ? (
+
+<>
+
+<input
+className="input-field"
+placeholder="0x..."
+value={address}
+onChange={e=>setAddress(e.target.value)}
+/>
+
+
+<input
+className="input-field"
+placeholder="0.01"
+value={amount}
+onChange={e=>setAmount(e.target.value)}
+/>
+
+
+<button
+className="btn-primary"
+onClick={preview}
+>
+Vérifier
+</button>
+
+</>
+
+):(
+
+
+<div className="info-box">
+
+<p>
+Destination :
+</p>
+
+<p style={{wordBreak:"break-all"}}>
+{address}
+</p>
+
+<p>
+Montant : {amount} ETH
+</p>
+
+
+{fee && (
+
+<p>
+Frais estimés :
+{fee.feeETH} ETH
+</p>
+
+)}
+
+
+<button
+className="btn-primary"
+disabled={sending}
+onClick={send}
+>
+{sending ? "Envoi..." : "Confirmer"}
+</button>
+
+
+</div>
+
+)}
+
+
+{hash && (
+
+<div className="info-box">
+
+Transaction :
+
+<a
+href={`https://sepolia.etherscan.io/tx/${hash}`}
+target="_blank"
+>
+Voir sur Etherscan
+</a>
+
+</div>
+
+)}
+
+
+{message &&
+
+<div className="info-box">
+{message}
+</div>
+}
+
+
+<button
+className="btn-secondary"
+onClick={onBack}
+>
+Retour
+</button>
+
+
+</div>
+
+);
+
+}
+
+===== FILE: src/components/WalletSetup.jsx =====
+import { useState } from "react";
+import { createWallet, saveKeystore, importFromMnemonic } from "../lib/wallet";
+
+export default function WalletSetup({ onWalletCreated }) {
+  const [step, setStep] = useState("home"); // 'home' | 'password' | 'import'
+  const [action, setAction] = useState(null); // 'create' | 'import'
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [mnemonic, setMnemonic] = useState("");
+  const [error, setError] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [generatedSeed,setGeneratedSeed] = useState(null);
+
+  const handleStartCreate = () => {
+    setAction("create");
+    setStep("password");
+    setError("");
+  };
+
+  const handleStartImport = () => {
+    setAction("import");
+    setStep("import");
+    setError("");
+  };
+
+  const handleSubmit = async () => {
+    setError("");
+
+    if (action === "create" || action === "import") {
+      if (password !== confirmPassword) {
+        return setError("Les mots de passe ne correspondent pas.");
+      }
+      if (password.length < 12) {
+        return setError("Le mot de passe doit faire au moins 12 caractères.");
+      }
+    }
+
+    setIsProcessing(true);
+    try {
+      if (action === "create") {
+        const { encryptedJson, mnemonic: m } = await createWallet(password);
+        saveKeystore(encryptedJson);
+        alert(
+          `SAUVEGARDE REQUISE :\nVoici votre phrase secrète. Notez-la immédiatement.\n\n${m}`,
+        );
+        onWalletCreated();
+      } else if (action === "import") {
+        if (!mnemonic)
+          throw new Error("Veuillez entrer une phrase de récupération.");
+        const { encryptedJson } = await importFromMnemonic(mnemonic, password);
+        saveKeystore(encryptedJson);
+        onWalletCreated();
+      }
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  if (step === "home") {
+    return (
+      <div className="main-container">
+        <h1>Ton coffre-fort crypto, sur ton appareil.</h1>
+        <p className="description">
+          Nuvyra ne détient jamais tes fonds ni tes clés. Tout le chiffrement se
+          fait ici, localement — aucune donnée sensible ne part sur un serveur.
+        </p>
+
+        <div className="info-box">
+          <strong>Comment ça marche :</strong> on génère une phrase de 12 mots
+          (ta sauvegarde maîtresse) et une adresse. Tu choisis un mot de passe
+          qui chiffre tout ça sur cet appareil. Perds la phrase = fonds perdus,
+          personne ne peut les récupérer pour toi — pas même nous.
+        </div>
+
+        <button className="btn-primary" onClick={handleStartCreate}>
+          Créer un nouveau wallet
+        </button>
+        <button className="btn-secondary" onClick={handleStartImport}>
+          J'ai déjà une phrase de récupération
+        </button>
+      </div>
+    );
+  }
+
+  if (step === "import") {
+    return (
+      <div className="main-container">
+        <span className="back-link" onClick={() => setStep("home")}>
+          &larr; retour
+        </span>
+        <h1>Importer un wallet</h1>
+        <p className="description">
+          Entre ta phrase secrète de 12 mots et choisis un nouveau mot de passe
+          pour la chiffrer sur cet appareil.
+        </p>
+
+        {error && <div className="error-box">{error}</div>}
+
+        <div className="input-group">
+          <label className="input-label">
+            PHRASE DE RÉCUPÉRATION (12 MOTS)
+          </label>
+          <textarea
+            className="input-field"
+            style={{ minHeight: "100px", resize: "vertical" }}
+            onChange={(e) => setMnemonic(e.target.value)}
+            placeholder="mot1 mot2 mot3..."
+          />
+        </div>
+
+        <div className="input-group">
+          <label className="input-label">NOUVEAU MOT DE PASSE</label>
+          <input
+            type="password"
+            className="input-field"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        <div className="input-group">
+          <label className="input-label">CONFIRME LE MOT DE PASSE</label>
+          <input
+            type="password"
+            className="input-field"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </div>
+
+        <button
+          className="btn-primary"
+          onClick={handleSubmit}
+          disabled={isProcessing}
+        >
+          {isProcessing ? "Importation..." : "Restaurer le wallet"}
+        </button>
+      </div>
+    );
+  }
+
+  // Step === 'password' (Création)
+  return (
+    <div className="main-container">
+      <span className="back-link" onClick={() => setStep("home")}>
+        &larr; retour
+      </span>
+      <h1>Choisis un mot de passe</h1>
+      <p className="description">
+        Ce mot de passe chiffre ta clé sur cet appareil. Il n'est jamais envoyé
+        nulle part — s'il est perdu, la phrase de récupération reste ton seul
+        recours.
+      </p>
+
+      {error && <div className="error-box">{error}</div>}
+
+      <div className="input-group">
+        <label className="input-label">MOT DE PASSE</label>
+        <input
+          type="password"
+          className="input-field"
+          placeholder="••••••••••••"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+
+      <div className="input-group">
+        <label className="input-label">CONFIRME LE MOT DE PASSE</label>
+        <input
+          type="password"
+          className="input-field"
+          placeholder="••••••••••••"
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+      </div>
+
+      <button
+        className="btn-primary"
+        onClick={handleSubmit}
+        disabled={isProcessing}
+      >
+        {isProcessing ? "Génération en cours..." : "Continuer"}
+      </button>
+    </div>
+  );
+}
+
+===== FILE: src/components/PriceCard.jsx =====
+export default function PriceCard({ name, amount, price, change }) {
+  return (
+    <div className="info-box">
+      <h3>{name}</h3>
+
+      <p>Quantité : {amount || "0"}</p>
+
+      <p>
+        Prix :{" "}
+        {Number(price || 0).toLocaleString("fr-CA", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })}{" "}
+        CAD
+      </p>
+
+      <p>24h : {Number(change || 0).toFixed(2)}%</p>
+    </div>
+  );
+}
+
+===== FILE: src/components/Dashboard.jsx =====
+import { useState, useEffect } from "react";
+import { getBalance } from "../lib/wallet";
+import { getCryptoPrices } from "../lib/prices";
+import { openMoonPay } from "../lib/moonpay";
+import { getProvider } from "../lib/wallet";
+import { getSavedNetwork } from "../lib/network";
+import { getTokenBalance } from "../lib/tokens";
+import { TOKENS } from "../lib/tokenList";
+import { getTransactionHistory } from "../lib/history";
+import PriceCard from "./PriceCard";
+import ReceiveCrypto from "./ReceiveCrypto";
+import SendCrypto from "./SendCrypto";
+import { QRCodeSVG } from "qrcode.react";
+
+export default function Dashboard({ wallet, onLogout }) {
+  const [ethBalance, setEthBalance] = useState("0");
+  const [prices, setPrices] = useState(null);
+  const [updated, setUpdated] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [sendMode, setSendMode] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [tokens, setTokens] = useState([]);
+  const [transactions, setTransactions] = useState([]);
+const [receiveMode,setReceiveMode]=useState(false);
+
+  async function refresh() {
+    if (loading) return;
+
+    try {
+      setLoading(true);
+      setError("");
+
+      const [balance, priceData] = await Promise.all([
+        getBalance(wallet.address),
+        getCryptoPrices(),
+      ]);
+
+      setEthBalance(balance);
+      setPrices(priceData);
+
+      const provider = getProvider(getSavedNetwork());
+
+      const tokenResults = await Promise.all(
+        (TOKENS.sepolia || []).map((token) =>
+          getTokenBalance(token, wallet.address, provider),
+        ),
+      );
+
+      setTokens(tokenResults);
+
+      const history = await getTransactionHistory(wallet.address);
+
+      setTransactions(history);
+
+      setUpdated(new Date().toLocaleTimeString("fr-CA"));
+    } catch (e) {
+      console.error("Dashboard:", e);
+
+      setError("Impossible de charger les données réseau.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function copyAddress() {
+    await navigator.clipboard.writeText(wallet.address);
+
+    setCopied(true);
+
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  }
+
+  useEffect(() => {
+    refresh();
+
+    const timer = setInterval(refresh, 60000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  if (sendMode) {
+    return <SendCrypto wallet={wallet} onBack={() => setSendMode(false)} />;
+  }
+
+  const ethValue = prices
+    ? Number(ethBalance) * Number(prices.ethereum.cad)
+    : 0;
+
+  const tokenValue = prices
+    ? tokens.reduce((total, token) => {
+        if (token.symbol === "USDC") {
+          return total + Number(token.balance) * Number(prices.usdc.cad);
+        }
+
+        return total;
+      }, 0)
+    : 0;
+
+  const totalValue = ethValue + tokenValue;
+
+  return (
+    <div className="main-container">
+      <h1>Nuvyra Wallet</h1>
+
+      <div className="info-box">
+        <h3>Valeur totale</h3>
+
+        <p>
+          {totalValue.toLocaleString("fr-CA", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+          {" CAD"}
+        </p>
+      </div>
+
+      <div className="info-box">
+        <strong>Adresse sécurisée</strong>
+
+        <p style={{ wordBreak: "break-all" }}>{wallet.address}</p>
+
+        <button className="btn-secondary" onClick={copyAddress}>
+          {copied ? "Copié ✓" : "Copier l'adresse"}
+        </button>
+      </div>
+
+      {error && <div className="error-box">{error}</div>}
+
+      <div className="info-box">
+        <h3>Solde du wallet</h3>
+
+        <p>ETH : {Number(ethBalance).toFixed(6)}</p>
+
+        <p>
+          Valeur totale :{" "}
+          {totalValue.toLocaleString("fr-CA", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+          CAD
+        </p>
+
+        <small>Dernière mise à jour : {updated || "en cours..."}</small>
+      </div>
+
+      {tokens.length > 0 && (
+        <div className="info-box">
+          <h3>Tokens</h3>
+
+          {tokens.map((token, index) => (
+            <p key={index}>
+              {token.symbol} : {Number(token.balance).toFixed(4)}
+              {" | "}
+              {token.symbol === "USDC"
+                ? (
+                    Number(token.balance) * Number(prices?.usdc?.cad || 0)
+                  ).toLocaleString("fr-CA", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  }) + " CAD"
+                : "0 CAD"}
+            </p>
+          ))}
+        </div>
+      )}
+
+      {prices && (
+        <>
+          <PriceCard
+            name="Ethereum"
+            amount={ethBalance}
+            price={prices.ethereum.cad}
+            change={prices.ethereum.change}
+          />
+
+          <PriceCard
+            name="Bitcoin"
+            amount="0"
+            price={prices.bitcoin.cad}
+            change={prices.bitcoin.change}
+          />
+
+          <PriceCard
+            name="USDC"
+            amount="0"
+            price={prices.usdc.cad}
+            change={prices.usdc.change}
+          />
+        </>
+      )}
+
+      {transactions.length > 0 && (
+        <div className="info-box">
+          <h3>Activité récente</h3>
+
+          {transactions.map((tx, index) => (
+            <div key={index}>
+              <p>
+                {tx.from.toLowerCase() === wallet.address.toLowerCase()
+                  ? "Sortie"
+                  : "Entrée"}
+
+                {" : "}
+
+                {Number(tx.value).toFixed(6)}
+                {" ETH"}
+              </p>
+
+              <small>{tx.date}</small>
+
+              <hr />
+            </div>
+          ))}
+        </div>
+      )}
+
+      <button
+        className="btn-primary"
+        onClick={() => openMoonPay(wallet.address, "ETH")}
+      >
+        Acheter crypto
+      </button>
+
+      <button className="btn-primary" onClick={() => setSendMode(true)}>
+        Envoyer ETH
+      </button>
+
+      <button className="btn-secondary" onClick={refresh} disabled={loading}>
+        {loading ? "Actualisation..." : "Actualiser"}
+      </button>
+
+      <button className="btn-secondary" onClick={onLogout}>
+        Déconnexion
+      </button>
+    </div>
+  );
+}

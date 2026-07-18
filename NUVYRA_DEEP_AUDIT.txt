@@ -1,0 +1,948 @@
+===== NUVYRA DEEP CODE AUDIT =====
+Sat Jul 18 17:36:59 UTC 2026
+
+===== GIT =====
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   nuvyra-wallet/.nuvyra/dashboard/data.json
+	modified:   nuvyra-wallet/.nuvyra/history/audits.csv
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	NUVYRA_DEEP_AUDIT.txt
+	NUVYRA_FULL_AUDIT.txt
+	package-lock.json
+
+no changes added to commit (use "git add" and/or "git commit -a")
+c5b7d82 NUVYRA full project sync audit wallet
+4d00f58 NUVYRA full A-Z project backup
+5f9ce2d Nuvyra wallet core hardening v1.0
+086f6cd NUVYRA security cleanup and hardening
+da2b0e7 NUVYRA complete system update audit guardian optimization cleanup
+17c72ce NUVYRA cleanup security hardening
+a0c48d8 Complete Nuvyra rebrand and security cleanup
+9ace084 Rebrand complete Vaultify to Nuvyra
+01736cd Tokens et valeur CAD ajoutés
+bb13bf4 Dashboard stable avant multi network
+2b7667c Fix wallet dashboard prices and network loading
+5547d03 Dashboard prix crypto fonctionnel
+9e674a8 backup avant debug affichage prix crypto
+594279a feat: optimise architecture, ajoute support multi-token et sécurise l'environnement
+b7d89ee Sauvegarde complète et sécurisée du code source
+68e3678 Initialisation du projet Vaultify
+adbcb69 Initial commit
+
+===== REAL SOURCE TREE =====
+nuvyra-wallet/src/App.jsx
+nuvyra-wallet/src/components/Dashboard.jsx
+nuvyra-wallet/src/components/NetworkSelector.jsx
+nuvyra-wallet/src/components/PriceCard.jsx
+nuvyra-wallet/src/components/ReceiveCrypto.jsx
+nuvyra-wallet/src/components/SeedBackup.jsx
+nuvyra-wallet/src/components/SendCrypto.jsx
+nuvyra-wallet/src/components/UnlockWallet.jsx
+nuvyra-wallet/src/components/WalletSetup.jsx
+nuvyra-wallet/src/context/WalletContext.jsx
+nuvyra-wallet/src/lib/config.js
+nuvyra-wallet/src/lib/fees.js
+nuvyra-wallet/src/lib/history.js
+nuvyra-wallet/src/lib/moonpay.js
+nuvyra-wallet/src/lib/network.js
+nuvyra-wallet/src/lib/prices.js
+nuvyra-wallet/src/lib/security.js
+nuvyra-wallet/src/lib/storage.js
+nuvyra-wallet/src/lib/tokenList.js
+nuvyra-wallet/src/lib/tokens.js
+nuvyra-wallet/src/lib/transaction.js
+nuvyra-wallet/src/lib/transactionGuard.js
+nuvyra-wallet/src/lib/wallet.js
+nuvyra-wallet/src/lib/walletSecurity.js
+nuvyra-wallet/src/lib/walletStatus.js
+nuvyra-wallet/src/main.jsx
+nuvyra-wallet/src/security/constants.js
+nuvyra-wallet/src/styles.css
+
+===== PACKAGE =====
+{
+  "name": "nuvyra-wallet",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "ethers": "^6.13.4",
+    "qrcode.react": "^4.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "prettier": "^3.9.5",
+    "vite": "^6.0.7"
+  }
+}
+
+===== DEPENDENCIES =====
+nuvyra-wallet@1.0.0 /workspaces/Hoy/nuvyra-wallet
+├── @vitejs/plugin-react@4.7.0
+├── ethers@6.17.0
+├── prettier@3.9.5
+├── qrcode.react@4.2.0
+├── react-dom@18.3.1
+├── react@18.3.1
+└── vite@6.4.3
+
+
+===== BUILD TEST =====
+
+> nuvyra-wallet@1.0.0 build
+> vite build
+
+vite v6.4.3 building for production...
+transforming...
+✓ 192 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   1.60 kB │ gzip:   0.75 kB
+dist/assets/index-BBNFZFrO.css    3.44 kB │ gzip:   1.09 kB
+dist/assets/index-DWTrNEgP.js    34.99 kB │ gzip:  12.58 kB
+dist/assets/vendor-C8w-UNLI.js  141.74 kB │ gzip:  45.48 kB
+dist/assets/ethers-CkNTVCJe.js  346.90 kB │ gzip: 132.88 kB
+✓ built in 3.08s
+
+===== SOURCE SIZE =====
+144K	src
+536K	dist
+892K	.nuvyra
+
+===== TODO BUG FIXME SEARCH =====
+src/context/WalletContext.jsx:36:      console.error(e);
+src/lib/prices.js:15:  if (!r.ok) throw new Error("CoinGecko bloqué");
+src/lib/prices.js:43:  if (!r.ok) throw new Error("CoinCap bloqué");
+src/lib/prices.js:74:    console.error("Toutes les API prix échouent", e);
+src/lib/tokens.js:8:      throw new Error("Adresse token invalide");
+src/lib/tokens.js:23:    console.error("Erreur token:", token.symbol, error);
+src/lib/wallet.js:11:    throw new Error("Réseau inconnu");
+src/lib/wallet.js:22:  throw new Error("Aucun RPC disponible");
+src/lib/wallet.js:27:    throw new Error("Mot de passe trop court");
+src/lib/wallet.js:43:    throw new Error("Phrase invalide");
+src/lib/wallet.js:68:    throw new Error("Aucun wallet trouvé");
+src/lib/walletSecurity.js:6:   throw new Error(
+src/lib/walletSecurity.js:12:   throw new Error(
+src/lib/walletSecurity.js:18:   throw new Error(
+src/lib/transaction.js:42:    throw new Error("Adresse destination invalide");
+src/lib/transaction.js:47:    throw new Error("Montant invalide");
+src/lib/transaction.js:73:    throw new Error(
+src/lib/transactionGuard.js:4:   throw new Error(
+src/lib/transactionGuard.js:11:   throw new Error(
+src/lib/history.js:43:    console.error("Historique erreur:", error);
+src/components/SendCrypto.jsx:24:throw new Error("Adresse invalide");
+src/components/SendCrypto.jsx:28:throw new Error("Montant invalide");
+src/components/WalletSetup.jsx:49:          throw new Error("Veuillez entrer une phrase de récupération.");
+src/components/Dashboard.jsx:58:      console.error("Dashboard:", e);
+
+===== SECURITY REVIEW =====
+src/App.jsx:44:  const [password, setPassword] = useState("");
+src/App.jsx:49:      const w = await unlockWallet(password);
+src/App.jsx:95:              type="password"
+src/context/WalletContext.jsx:23:  async function unlock(password) {
+src/context/WalletContext.jsx:27:      const w = await unlockWallet(password);
+src/lib/moonpay.js:6:    `?apiKey=${ONRAMP_PROVIDER.apiKey}` +
+src/lib/tokens.js:5:export async function getTokenBalance(token, walletAddress, provider) {
+src/lib/tokens.js:7:    if (!ethers.isAddress(token.address)) {
+src/lib/tokens.js:8:      throw new Error("Adresse token invalide");
+src/lib/tokens.js:11:    const contract = new ethers.Contract(token.address, ERC20_ABI, provider);
+src/lib/tokens.js:16:      symbol: token.symbol,
+src/lib/tokens.js:18:      name: token.name,
+src/lib/tokens.js:20:      balance: ethers.formatUnits(balance, token.decimals),
+src/lib/tokens.js:23:    console.error("Erreur token:", token.symbol, error);
+src/lib/tokens.js:26:      symbol: token.symbol,
+src/lib/tokens.js:28:      name: token.name,
+src/lib/wallet.js:25:export async function createWallet(password) {
+src/lib/wallet.js:26:  if (!password || password.length < 8) {
+src/lib/wallet.js:32:  const encryptedJson = await wallet.encrypt(password);
+src/lib/wallet.js:36:    mnemonic: wallet.mnemonic.phrase,
+src/lib/wallet.js:41:export async function importFromMnemonic(mnemonic, password) {
+src/lib/wallet.js:42:  if (!mnemonic || mnemonic.trim().split(" ").length < 12) {
+src/lib/wallet.js:46:  const wallet = ethers.Wallet.fromPhrase(mnemonic.trim());
+src/lib/wallet.js:48:  const encryptedJson = await wallet.encrypt(password);
+src/lib/wallet.js:57:  localStorage.setItem(STORAGE_KEY, keystore);
+src/lib/wallet.js:61:  return Boolean(localStorage.getItem(STORAGE_KEY));
+src/lib/wallet.js:64:export async function unlockWallet(password) {
+src/lib/wallet.js:65:  const keystore = localStorage.getItem(STORAGE_KEY);
+src/lib/wallet.js:71:  return await ethers.Wallet.fromEncryptedJson(keystore, password);
+src/lib/wallet.js:83:  localStorage.removeItem(STORAGE_KEY);
+src/lib/network.js:4:localStorage.setItem(KEY,network);
+src/lib/network.js:8:return localStorage.getItem(KEY) || "sepolia";
+src/lib/walletSecurity.js:3:export function validatePassword(password){
+src/lib/walletSecurity.js:5: if(!password || password.length < MIN_PASSWORD){
+src/lib/walletSecurity.js:11: if(!/[A-Z]/.test(password)){
+src/lib/walletSecurity.js:17: if(!/[0-9]/.test(password)){
+src/lib/config.js:42:  apiKey: import.meta.env.VITE_MOONPAY_API_KEY || "",
+src/lib/history.js:3:    const apiKey = import.meta.env.VITE_ETHERSCAN_KEY || "";
+src/lib/history.js:5:    if (!apiKey) {
+src/lib/history.js:21:      `&apikey=${apiKey}`;
+src/lib/storage.js:4: localStorage.setItem(
+src/lib/storage.js:14: localStorage.getItem(KEY);
+src/lib/storage.js:23: localStorage.removeItem(KEY);
+src/lib/storage.js:30: return !!localStorage.getItem(KEY);
+src/lib/walletStatus.js:11:privateKey:"PROTECTED",
+src/components/UnlockWallet.jsx:8:  const [password,setPassword] = useState("");
+src/components/UnlockWallet.jsx:16:    const ok = await unlock(password);
+src/components/UnlockWallet.jsx:32:          type="password"
+src/components/UnlockWallet.jsx:34:          value={password}
+src/components/SeedBackup.jsx:3:export default function SeedBackup({seed,onConfirm}){
+src/components/SeedBackup.jsx:12:    await navigator.clipboard.writeText(seed);
+src/components/SeedBackup.jsx:35:        {visible ? seed : "•••• •••• •••• •••• •••• •••• •••• •••• •••• •••• •••• ••••"}
+src/components/WalletSetup.jsx:5:  const [step, setStep] = useState("home"); // 'home' | 'password' | 'import'
+src/components/WalletSetup.jsx:7:  const [password, setPassword] = useState("");
+src/components/WalletSetup.jsx:9:  const [mnemonic, setMnemonic] = useState("");
+src/components/WalletSetup.jsx:16:    setStep("password");
+src/components/WalletSetup.jsx:30:      if (password !== confirmPassword) {
+src/components/WalletSetup.jsx:33:      if (password.length < 12) {
+src/components/WalletSetup.jsx:41:        const { encryptedJson, mnemonic: m } = await createWallet(password);
+src/components/WalletSetup.jsx:48:        if (!mnemonic)
+src/components/WalletSetup.jsx:50:        const { encryptedJson } = await importFromMnemonic(mnemonic, password);
+src/components/WalletSetup.jsx:116:            type="password"
+src/components/WalletSetup.jsx:125:            type="password"
+src/components/WalletSetup.jsx:142:  // Step === 'password' (Création)
+src/components/WalletSetup.jsx:160:          type="password"
+src/components/WalletSetup.jsx:170:          type="password"
+src/components/Dashboard.jsx:7:import { getTokenBalance } from "../lib/tokens";
+src/components/Dashboard.jsx:8:import { TOKENS } from "../lib/tokenList";
+src/components/Dashboard.jsx:23:  const [tokens, setTokens] = useState([]);
+src/components/Dashboard.jsx:44:      const tokenResults = await Promise.all(
+src/components/Dashboard.jsx:45:        (TOKENS.sepolia || []).map((token) =>
+src/components/Dashboard.jsx:46:          getTokenBalance(token, wallet.address, provider),
+src/components/Dashboard.jsx:50:      setTokens(tokenResults);
+src/components/Dashboard.jsx:92:  const tokenValue = prices
+src/components/Dashboard.jsx:93:    ? tokens.reduce((total, token) => {
+src/components/Dashboard.jsx:94:        if (token.symbol === "USDC") {
+src/components/Dashboard.jsx:95:          return total + Number(token.balance) * Number(prices.usdc.cad);
+src/components/Dashboard.jsx:102:  const totalValue = ethValue + tokenValue;
+src/components/Dashboard.jsx:149:      {tokens.length > 0 && (
+src/components/Dashboard.jsx:153:          {tokens.map((token, index) => (
+src/components/Dashboard.jsx:155:              {token.symbol} : {Number(token.balance).toFixed(4)}
+src/components/Dashboard.jsx:157:              {token.symbol === "USDC"
+src/components/Dashboard.jsx:159:                    Number(token.balance) * Number(prices?.usdc?.cad || 0)
+
+===== IMPORT MAP =====
+src/App.jsx:1:import { useState, useEffect } from "react";
+src/App.jsx:2:import NetworkSelector from "./components/NetworkSelector";
+src/App.jsx:3:import { saveNetwork, getSavedNetwork } from "./lib/network";
+src/App.jsx:4:import { startSecurityTimer, resetSecurityTimer, clearSecurityTimer } from "./lib/security";
+src/App.jsx:5:import WalletSetup from "./components/WalletSetup";
+src/App.jsx:6:import Dashboard from "./components/Dashboard";
+src/App.jsx:7:import { hasStoredWallet, unlockWallet, wipeWallet } from "./lib/wallet";
+src/context/WalletContext.jsx:1:import { createContext, useContext, useEffect, useState } from "react";
+src/context/WalletContext.jsx:2:import {
+src/main.jsx:1:import React from "react";
+src/main.jsx:2:import ReactDOM from "react-dom/client";
+src/main.jsx:3:import App from "./App.jsx";
+src/main.jsx:4:import { WalletProvider } from "./context/WalletContext.jsx";
+src/main.jsx:5:import "./styles.css";
+src/lib/moonpay.js:1:import { ONRAMP_PROVIDER } from "./config.js";
+src/lib/tokens.js:1:import { ethers } from "ethers";
+src/lib/wallet.js:1:import { ethers } from "ethers";
+src/lib/wallet.js:2:import { NETWORKS, DEFAULT_NETWORK, STORAGE_KEY } from "./config.js";
+src/lib/wallet.js:3:import { getSavedNetwork } from "./network.js";
+src/lib/transaction.js:1:import { ethers } from "ethers";
+src/lib/transaction.js:2:import { getProvider } from "./wallet.js";
+src/components/ReceiveCrypto.jsx:1:import { QRCodeSVG } from "qrcode.react";
+src/components/UnlockWallet.jsx:1:import { useState } from "react";
+src/components/UnlockWallet.jsx:2:import { useWallet } from "../context/WalletContext";
+src/components/SeedBackup.jsx:1:import { useState } from "react";
+src/components/NetworkSelector.jsx:1:import { NETWORKS } from "../lib/config";
+src/components/SendCrypto.jsx:1:import { useState } from "react";
+src/components/SendCrypto.jsx:2:import { ethers } from "ethers";
+src/components/SendCrypto.jsx:3:import { sendETH, estimateETHFee } from "../lib/transaction";
+src/components/WalletSetup.jsx:1:import { useState } from "react";
+src/components/WalletSetup.jsx:2:import { createWallet, saveKeystore, importFromMnemonic } from "../lib/wallet";
+src/components/Dashboard.jsx:1:import { useState, useEffect } from "react";
+src/components/Dashboard.jsx:2:import { getBalance } from "../lib/wallet";
+src/components/Dashboard.jsx:3:import { getCryptoPrices } from "../lib/prices";
+src/components/Dashboard.jsx:4:import { openMoonPay } from "../lib/moonpay";
+src/components/Dashboard.jsx:5:import { getProvider } from "../lib/wallet";
+src/components/Dashboard.jsx:6:import { getSavedNetwork } from "../lib/network";
+src/components/Dashboard.jsx:7:import { getTokenBalance } from "../lib/tokens";
+src/components/Dashboard.jsx:8:import { TOKENS } from "../lib/tokenList";
+src/components/Dashboard.jsx:9:import { getTransactionHistory } from "../lib/history";
+src/components/Dashboard.jsx:10:import PriceCard from "./PriceCard";
+src/components/Dashboard.jsx:11:import ReceiveCrypto from "./ReceiveCrypto";
+src/components/Dashboard.jsx:12:import SendCrypto from "./SendCrypto";
+src/components/Dashboard.jsx:13:import { QRCodeSVG } from "qrcode.react";
+
+===== FILE CONTENT SNAPSHOT =====
+
+===== src/App.jsx =====
+import { useState, useEffect } from "react";
+import NetworkSelector from "./components/NetworkSelector";
+import { saveNetwork, getSavedNetwork } from "./lib/network";
+import { startSecurityTimer, resetSecurityTimer, clearSecurityTimer } from "./lib/security";
+import WalletSetup from "./components/WalletSetup";
+import Dashboard from "./components/Dashboard";
+import { hasStoredWallet, unlockWallet, wipeWallet } from "./lib/wallet";
+
+export default function App() {
+
+  useEffect(()=>{
+
+    const expire=()=>{
+
+      setWallet(null);
+      setIsLocked(true);
+
+    };
+
+    startSecurityTimer(expire);
+
+    const activity=()=>resetSecurityTimer(expire);
+
+    window.addEventListener("click",activity);
+    window.addEventListener("keydown",activity);
+
+    return ()=>{
+
+      window.removeEventListener("click",activity);
+      window.removeEventListener("keydown",activity);
+
+    };
+
+  },[]);
+  const [network, setNetworkState] = useState(getSavedNetwork());
+
+const setNetwork = (n)=>{
+setNetworkState(n);
+saveNetwork(n);
+};
+
+  const [wallet, setWallet] = useState(null);
+  const [isLocked, setIsLocked] = useState(hasStoredWallet());
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const attemptUnlock = async () => {
+    try {
+      const w = await unlockWallet(password);
+      setWallet(w);
+      setIsLocked(false);
+      setError("");
+    } catch (e) {
+      setError("Mot de passe incorrect ou erreur de déchiffrement.");
+    }
+  };
+
+  const handleLogout = () => {
+    clearSecurityTimer();
+    setWallet(null);
+    setIsLocked(true);
+  };
+
+  const handleDeleteWallet = () => {
+    if (confirm("Supprimer définitivement ce wallet local ?")) {
+      wipeWallet();
+      window.location.reload();
+    }
+  };
+
+  return (
+    <div>
+      {/* HEADER GLOBAL COMPRIS SUR TOUTES LES PAGES */}
+      <header className="app-header">
+        <div className="logo-container">
+          <div className="status-dot"></div>
+          NUVYRA
+        </div>
+        <NetworkSelector network={network} setNetwork={setNetwork} />
+      </header>
+
+      {/* LOGIQUE DE ROUTAGE */}
+      {hasStoredWallet() && isLocked ? (
+        <div className="main-container">
+          <h1>Bon retour</h1>
+          <p className="description">
+            Entre ton mot de passe pour déverrouiller ton portefeuille local.
+          </p>
+
+          {error && <div className="error-box">{error}</div>}
+
+          <div className="input-group">
+            <label className="input-label">MOT DE PASSE</label>
+            <input
+              type="password"
+              className="input-field"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <button className="btn-primary" onClick={attemptUnlock}>
+            Déverrouiller
+          </button>
+          <button
+            className="btn-secondary"
+            style={{
+              marginTop: "1rem",
+              borderColor: "#ef4444",
+              color: "#ef4444",
+            }}
+            onClick={handleDeleteWallet}
+          >
+            Effacer le wallet de cet appareil
+          </button>
+        </div>
+      ) : !wallet ? (
+        <WalletSetup onWalletCreated={() => window.location.reload()} />
+      ) : (
+        <Dashboard wallet={wallet} onLogout={handleLogout} />
+      )}
+    </div>
+  );
+}
+
+===== src/context/WalletContext.jsx =====
+import { createContext, useContext, useEffect, useState } from "react";
+import {
+  hasStoredWallet,
+  unlockWallet,
+  wipeWallet
+} from "../lib/wallet";
+
+const WalletContext = createContext(null);
+
+export function WalletProvider({ children }) {
+
+  const [wallet, setWallet] = useState(null);
+  const [address, setAddress] = useState("");
+  const [locked, setLocked] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (hasStoredWallet()) {
+      setLocked(true);
+    }
+  }, []);
+
+  async function unlock(password) {
+    setLoading(true);
+
+    try {
+      const w = await unlockWallet(password);
+
+      setWallet(w);
+      setAddress(w.address);
+      setLocked(false);
+
+      return true;
+
+    } catch (e) {
+      console.error(e);
+      return false;
+
+    } finally {
+      setLoading(false);
+    }
+  }
+
+
+  function lock() {
+    setWallet(null);
+    setAddress("");
+    setLocked(true);
+  }
+
+
+  function removeWallet() {
+    wipeWallet();
+    lock();
+  }
+
+
+  return (
+    <WalletContext.Provider
+      value={{
+        wallet,
+        address,
+        locked,
+        loading,
+        unlock,
+        lock,
+        removeWallet
+      }}
+    >
+      {children}
+    </WalletContext.Provider>
+  );
+}
+
+
+export function useWallet(){
+  return useContext(WalletContext);
+}
+
+===== src/lib/wallet.js =====
+import { ethers } from "ethers";
+import { NETWORKS, DEFAULT_NETWORK, STORAGE_KEY } from "./config.js";
+import { getSavedNetwork } from "./network.js";
+
+export function getProvider(networkKey = null) {
+
+  networkKey = networkKey || getSavedNetwork();
+  const net = NETWORKS[networkKey];
+
+  if (!net) {
+    throw new Error("Réseau inconnu");
+  }
+
+  for (const rpc of net.rpcUrls) {
+    try {
+      return new ethers.JsonRpcProvider(rpc);
+    } catch (e) {
+      console.warn("RPC indisponible:", rpc);
+    }
+  }
+
+  throw new Error("Aucun RPC disponible");
+}
+
+export async function createWallet(password) {
+  if (!password || password.length < 8) {
+    throw new Error("Mot de passe trop court");
+  }
+
+  const wallet = ethers.Wallet.createRandom();
+
+  const encryptedJson = await wallet.encrypt(password);
+
+  return {
+    encryptedJson,
+    mnemonic: wallet.mnemonic.phrase,
+    address: wallet.address,
+  };
+}
+
+export async function importFromMnemonic(mnemonic, password) {
+  if (!mnemonic || mnemonic.trim().split(" ").length < 12) {
+    throw new Error("Phrase invalide");
+  }
+
+  const wallet = ethers.Wallet.fromPhrase(mnemonic.trim());
+
+  const encryptedJson = await wallet.encrypt(password);
+
+  return {
+    encryptedJson,
+    address: wallet.address,
+  };
+}
+
+export function saveKeystore(keystore) {
+  localStorage.setItem(STORAGE_KEY, keystore);
+}
+
+export function hasStoredWallet() {
+  return Boolean(localStorage.getItem(STORAGE_KEY));
+}
+
+export async function unlockWallet(password) {
+  const keystore = localStorage.getItem(STORAGE_KEY);
+
+  if (!keystore) {
+    throw new Error("Aucun wallet trouvé");
+  }
+
+  return await ethers.Wallet.fromEncryptedJson(keystore, password);
+}
+
+export async function getBalance(address) {
+  const provider = getProvider();
+
+  const balance = await provider.getBalance(address);
+
+  return ethers.formatEther(balance);
+}
+
+export function wipeWallet() {
+  localStorage.removeItem(STORAGE_KEY);
+}
+
+===== src/lib/security.js =====
+let timer = null;
+
+const TIMEOUT = 5 * 60 * 1000;
+
+export function startSecurityTimer(callback) {
+  clearSecurityTimer();
+  timer = setTimeout(callback, TIMEOUT);
+}
+
+export function resetSecurityTimer(callback) {
+  startSecurityTimer(callback);
+}
+
+export function clearSecurityTimer() {
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
+}
+
+export function stopSecurityTimer() {
+  clearSecurityTimer();
+}
+
+export function wipeSensitive(value) {
+  return typeof value === "string"
+    ? "\0".repeat(value.length)
+    : null;
+}
+
+export function secureClipboardClear() {
+  if (navigator.clipboard) {
+    setTimeout(() => {
+      navigator.clipboard.writeText("");
+    }, 15000);
+  }
+}
+
+export function preventSeedCapture() {
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      console.warn("NUVYRA: écran masqué");
+    }
+  });
+}
+
+===== src/lib/transaction.js =====
+import { ethers } from "ethers";
+import { getProvider } from "./wallet.js";
+
+
+export async function estimateETHFee(to, amount){
+
+  const provider = getProvider();
+
+  const gasPrice = await provider.getFeeData();
+
+  const gasLimit = await provider.estimateGas({
+    to,
+    value: ethers.parseEther(amount)
+  });
+
+
+  const price =
+    gasPrice.gasPrice || 0;
+
+
+  const fee =
+    gasLimit * price;
+
+
+  return {
+    gasLimit: gasLimit.toString(),
+    gasPrice: ethers.formatUnits(price,"gwei"),
+    feeETH: ethers.formatEther(fee)
+  };
+
+}
+
+
+
+export async function sendETH(
+  wallet,
+  to,
+  amount
+){
+
+  if(!ethers.isAddress(to)){
+    throw new Error("Adresse destination invalide");
+  }
+
+
+  if(!amount || Number(amount)<=0){
+    throw new Error("Montant invalide");
+  }
+
+
+  const provider=getProvider("sepolia");
+
+
+  const balance =
+    await provider.getBalance(wallet.address);
+
+
+  const value =
+    ethers.parseEther(amount);
+
+
+  const fee =
+    await estimateETHFee(to,amount);
+
+
+  const total =
+    value +
+    ethers.parseEther(fee.feeETH);
+
+
+  if(total >= balance){
+
+    throw new Error(
+      "Solde insuffisant avec les frais réseau"
+    );
+
+  }
+
+
+  const signer =
+    wallet.connect(provider);
+
+
+  const tx =
+    await signer.sendTransaction({
+
+      to,
+      value,
+      gasLimit:fee.gasLimit
+
+    });
+
+
+  const receipt =
+    await tx.wait();
+
+
+  return {
+    hash:tx.hash,
+    receipt
+  };
+
+}
+
+===== src/components/Dashboard.jsx =====
+import { useState, useEffect } from "react";
+import { getBalance } from "../lib/wallet";
+import { getCryptoPrices } from "../lib/prices";
+import { openMoonPay } from "../lib/moonpay";
+import { getProvider } from "../lib/wallet";
+import { getSavedNetwork } from "../lib/network";
+import { getTokenBalance } from "../lib/tokens";
+import { TOKENS } from "../lib/tokenList";
+import { getTransactionHistory } from "../lib/history";
+import PriceCard from "./PriceCard";
+import ReceiveCrypto from "./ReceiveCrypto";
+import SendCrypto from "./SendCrypto";
+import { QRCodeSVG } from "qrcode.react";
+
+export default function Dashboard({ wallet, onLogout }) {
+  const [ethBalance, setEthBalance] = useState("0");
+  const [prices, setPrices] = useState(null);
+  const [updated, setUpdated] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [sendMode, setSendMode] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [tokens, setTokens] = useState([]);
+  const [transactions, setTransactions] = useState([]);
+const [receiveMode,setReceiveMode]=useState(false);
+
+  async function refresh() {
+    if (loading) return;
+
+    try {
+      setLoading(true);
+      setError("");
+
+      const [balance, priceData] = await Promise.all([
+        getBalance(wallet.address),
+        getCryptoPrices(),
+      ]);
+
+      setEthBalance(balance);
+      setPrices(priceData);
+
+      const provider = getProvider(getSavedNetwork());
+
+      const tokenResults = await Promise.all(
+        (TOKENS.sepolia || []).map((token) =>
+          getTokenBalance(token, wallet.address, provider),
+        ),
+      );
+
+      setTokens(tokenResults);
+
+      const history = await getTransactionHistory(wallet.address);
+
+      setTransactions(history);
+
+      setUpdated(new Date().toLocaleTimeString("fr-CA"));
+    } catch (e) {
+      console.error("Dashboard:", e);
+
+      setError("Impossible de charger les données réseau.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function copyAddress() {
+    await navigator.clipboard.writeText(wallet.address);
+
+    setCopied(true);
+
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  }
+
+  useEffect(() => {
+    refresh();
+
+    const timer = setInterval(refresh, 60000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  if (sendMode) {
+    return <SendCrypto wallet={wallet} onBack={() => setSendMode(false)} />;
+  }
+
+  const ethValue = prices
+    ? Number(ethBalance) * Number(prices.ethereum.cad)
+    : 0;
+
+  const tokenValue = prices
+    ? tokens.reduce((total, token) => {
+        if (token.symbol === "USDC") {
+          return total + Number(token.balance) * Number(prices.usdc.cad);
+        }
+
+        return total;
+      }, 0)
+    : 0;
+
+  const totalValue = ethValue + tokenValue;
+
+  return (
+    <div className="main-container">
+      <h1>Nuvyra Wallet</h1>
+
+      <div className="info-box">
+        <h3>Valeur totale</h3>
+
+        <p>
+          {totalValue.toLocaleString("fr-CA", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+          {" CAD"}
+        </p>
+      </div>
+
+      <div className="info-box">
+        <strong>Adresse sécurisée</strong>
+
+        <p style={{ wordBreak: "break-all" }}>{wallet.address}</p>
+
+        <button className="btn-secondary" onClick={copyAddress}>
+          {copied ? "Copié ✓" : "Copier l'adresse"}
+        </button>
+      </div>
+
+      {error && <div className="error-box">{error}</div>}
+
+      <div className="info-box">
+        <h3>Solde du wallet</h3>
+
+        <p>ETH : {Number(ethBalance).toFixed(6)}</p>
+
+        <p>
+          Valeur totale :{" "}
+          {totalValue.toLocaleString("fr-CA", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+          CAD
+        </p>
+
+        <small>Dernière mise à jour : {updated || "en cours..."}</small>
+      </div>
+
+      {tokens.length > 0 && (
+        <div className="info-box">
+          <h3>Tokens</h3>
+
+          {tokens.map((token, index) => (
+            <p key={index}>
+              {token.symbol} : {Number(token.balance).toFixed(4)}
+              {" | "}
+              {token.symbol === "USDC"
+                ? (
+                    Number(token.balance) * Number(prices?.usdc?.cad || 0)
+                  ).toLocaleString("fr-CA", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  }) + " CAD"
+                : "0 CAD"}
+            </p>
+          ))}
+        </div>
+      )}
+
+      {prices && (
+        <>
+          <PriceCard
+            name="Ethereum"
+            amount={ethBalance}
+            price={prices.ethereum.cad}
+            change={prices.ethereum.change}
+          />
+
+          <PriceCard
+            name="Bitcoin"
+            amount="0"
+            price={prices.bitcoin.cad}
+            change={prices.bitcoin.change}
+          />
+
+          <PriceCard
+            name="USDC"
+            amount="0"
+            price={prices.usdc.cad}
+            change={prices.usdc.change}
+          />
+        </>
+      )}
+
+      {transactions.length > 0 && (
+        <div className="info-box">
+          <h3>Activité récente</h3>
+
+          {transactions.map((tx, index) => (
+            <div key={index}>
+              <p>
+                {tx.from.toLowerCase() === wallet.address.toLowerCase()
+                  ? "Sortie"
+                  : "Entrée"}
+
+                {" : "}
+
+                {Number(tx.value).toFixed(6)}
+                {" ETH"}
+              </p>
+
+              <small>{tx.date}</small>
+
+              <hr />
+            </div>
+          ))}
+        </div>
+      )}
+
+      <button
