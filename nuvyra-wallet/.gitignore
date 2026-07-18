@@ -41,3 +41,5 @@ dist/
 .nuvyra/reports/
 *.backup
 *.secret
+.nuvyra/reports/
+.nuvyra/reports/
