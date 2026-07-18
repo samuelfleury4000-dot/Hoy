@@ -67,3 +67,9 @@ echo "===== FINAL =====" >> "$REPORT"
 echo "NUVYRA ENGINE COMPLETE" >> "$REPORT"
 
 cat "$REPORT"
+
+
+# SCORE ENGINE
+if [ -f .nuvyra/core/scorer.sh ]; then
+    bash .nuvyra/core/scorer.sh
+fi
